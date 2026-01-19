@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Menu, X, ChevronDown, Phone, Search } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,11 +37,9 @@ export default function Header() {
               </button>
             </div>
 
-            <div className="relative group">
-              <button className="flex items-center text-gray-700 hover:text-[#6B7C3E] font-medium">
-                ABOUT <ChevronDown className="ml-1 h-4 w-4" />
-              </button>
-            </div>
+            <Link to="/about" className="text-gray-700 hover:text-[#6B7C3E] font-medium">
+              ABOUT
+            </Link>
 
             <div className="relative group">
               <button className="flex items-center text-gray-700 hover:text-[#6B7C3E] font-medium">
@@ -48,9 +47,9 @@ export default function Header() {
               </button>
             </div>
 
-            <a href="#contact" className="text-gray-700 hover:text-[#6B7C3E] font-medium">
+            <Link to="/contact" className="text-gray-700 hover:text-[#6B7C3E] font-medium">
               CONTACT
-            </a>
+            </Link>
           </nav>
 
           <div className="hidden lg:flex items-center space-x-4">
@@ -77,9 +76,9 @@ export default function Header() {
               <a href="#services" className="block text-gray-700 font-medium">SERVICES</a>
               <a href="#local" className="block text-gray-700 font-medium">LOCAL</a>
               <a href="#results" className="block text-gray-700 font-medium">RESULTS</a>
-              <a href="#about" className="block text-gray-700 font-medium">ABOUT</a>
+              <Link to="/about" className="block text-gray-700 font-medium">ABOUT</Link>
               <a href="#learn" className="block text-gray-700 font-medium">LEARN</a>
-              <a href="#contact" className="block text-gray-700 font-medium">CONTACT</a>
+              <Link to="/contact" className="block text-gray-700 font-medium">CONTACT</Link>
               <a href="tel:866-908-4748" className="flex items-center text-[#6B7C3E] font-semibold">
                 <Phone className="h-4 w-4 mr-2" />
                 866-908-4748

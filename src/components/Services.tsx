@@ -58,7 +58,24 @@ export default function Services() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
-            <div key={index} className="text-center group">
+            <div
+              key={index}
+              className="text-center group p-6 rounded-xl bg-white shadow-lg transition-all duration-500 cursor-pointer"
+              style={{
+                transform: 'perspective(1000px) rotateX(0deg)',
+                boxShadow: '0 8px 25px rgba(0,0,0,0.1)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'perspective(1000px) rotateX(10deg) translateY(-10px) scale(1.05)';
+                e.currentTarget.style.boxShadow = '0 25px 60px rgba(107, 123, 62, 0.3)';
+                e.currentTarget.style.background = 'linear-gradient(135deg, rgba(107, 123, 62, 0.05), rgba(255, 255, 255, 0.9))';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg)';
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
+                e.currentTarget.style.background = 'white';
+              }}
+            >
               <div className="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-[#6B7C3E] group-hover:text-white transition duration-300">
                 {service.icon}
               </div>

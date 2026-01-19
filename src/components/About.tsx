@@ -17,32 +17,88 @@ export default function About() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          <div className="bg-gray-100 rounded-lg overflow-hidden aspect-square">
+          <div
+            className="bg-gray-100 rounded-lg overflow-hidden aspect-square transition-all duration-500 cursor-pointer"
+            style={{
+              transform: 'perspective(1000px) rotateX(0deg)',
+              boxShadow: '0 8px 25px rgba(0,0,0,0.1)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'perspective(1000px) rotateX(10deg) translateY(-10px) scale(1.05)';
+              e.currentTarget.style.boxShadow = '0 25px 60px rgba(107, 123, 62, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg)';
+              e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
+            }}
+          >
             <img
               src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600"
               alt="Team collaboration"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-all duration-500 hover:scale-110"
             />
           </div>
-          <div className="bg-gray-100 rounded-lg overflow-hidden aspect-square">
+          <div
+            className="bg-gray-100 rounded-lg overflow-hidden aspect-square transition-all duration-500 cursor-pointer"
+            style={{
+              transform: 'perspective(1000px) rotateX(0deg)',
+              boxShadow: '0 8px 25px rgba(0,0,0,0.1)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'perspective(1000px) rotateX(10deg) translateY(-10px) scale(1.05)';
+              e.currentTarget.style.boxShadow = '0 25px 60px rgba(107, 123, 62, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg)';
+              e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
+            }}
+          >
             <img
               src="https://images.pexels.com/photos/2747449/pexels-photo-2747449.jpeg?auto=compress&cs=tinysrgb&w=600"
               alt="Presentation"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-all duration-500 hover:scale-110"
             />
           </div>
-          <div className="bg-gray-100 rounded-lg overflow-hidden aspect-square">
+          <div
+            className="bg-gray-100 rounded-lg overflow-hidden aspect-square transition-all duration-500 cursor-pointer"
+            style={{
+              transform: 'perspective(1000px) rotateX(0deg)',
+              boxShadow: '0 8px 25px rgba(0,0,0,0.1)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'perspective(1000px) rotateX(10deg) translateY(-10px) scale(1.05)';
+              e.currentTarget.style.boxShadow = '0 25px 60px rgba(107, 123, 62, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg)';
+              e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
+            }}
+          >
             <img
               src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600"
               alt="Team meeting"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-all duration-500 hover:scale-110"
             />
           </div>
-          <div className="bg-gray-100 rounded-lg overflow-hidden aspect-square">
+          <div
+            className="bg-gray-100 rounded-lg overflow-hidden aspect-square transition-all duration-500 cursor-pointer"
+            style={{
+              transform: 'perspective(1000px) rotateX(0deg)',
+              boxShadow: '0 8px 25px rgba(0,0,0,0.1)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'perspective(1000px) rotateX(10deg) translateY(-10px) scale(1.05)';
+              e.currentTarget.style.boxShadow = '0 25px 60px rgba(107, 123, 62, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg)';
+              e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
+            }}
+          >
             <img
               src="https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=600"
               alt="Team discussion"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-all duration-500 hover:scale-110"
             />
           </div>
         </div>
@@ -82,10 +138,43 @@ export default function About() {
           </div>
 
           <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-            <button className="bg-[#D97706] text-white font-bold px-8 py-4 rounded-full hover:bg-[#B45309] transition duration-300">
+            <button
+              className="bg-[#D97706] text-white font-bold px-8 py-4 rounded-full transition-all duration-500 transform hover:scale-105 hover:shadow-lg"
+              style={{
+                background: 'linear-gradient(135deg, #D97706 0%, #B45309 50%, #92400E 100%)',
+                backgroundSize: '200% 200%',
+                animation: 'gradientShift 4s ease infinite',
+                boxShadow: '0 15px 40px rgba(217, 119, 6, 0.4)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-5px) scale(1.1)';
+                e.currentTarget.style.boxShadow = '0 25px 60px rgba(217, 119, 6, 0.6)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = '0 15px 40px rgba(217, 119, 6, 0.4)';
+              }}
+            >
               OUR PORTFOLIO
             </button>
-            <button className="bg-white text-[#D97706] border-2 border-[#D97706] font-bold px-8 py-4 rounded-full hover:bg-[#D97706] hover:text-white transition duration-300">
+            <button
+              className="bg-white text-[#D97706] border-2 border-[#D97706] font-bold px-8 py-4 rounded-full transition-all duration-500 transform hover:scale-105 hover:shadow-lg"
+              style={{
+                boxShadow: '0 8px 25px rgba(217, 119, 6, 0.2)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-5px) scale(1.1)';
+                e.currentTarget.style.boxShadow = '0 20px 50px rgba(217, 119, 6, 0.4)';
+                e.currentTarget.style.background = '#D97706';
+                e.currentTarget.style.color = 'white';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(217, 119, 6, 0.2)';
+                e.currentTarget.style.background = 'white';
+                e.currentTarget.style.color = '#D97706';
+              }}
+            >
               CLIENT SUCCESS STORIES
             </button>
           </div>

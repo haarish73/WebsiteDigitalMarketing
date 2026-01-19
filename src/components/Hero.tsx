@@ -1,12 +1,14 @@
-import { TrendingUp, ArrowUpRight } from 'lucide-react';
-
 export default function Hero() {
   return (
     <section className="bg-[#6B7C3E] text-white py-16 lg:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight animate-pulse"
+                style={{
+                  animation: 'textGlow 3s ease-in-out infinite',
+                  filter: 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.3))'
+                }}>
               Experience Real Results
             </h1>
             <p className="text-xl mb-8 text-white/90">
@@ -14,7 +16,20 @@ export default function Hero() {
             </p>
 
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 space-y-6">
-              <div>
+              <div
+                className="transition-all duration-500 cursor-pointer hover:scale-105 hover:bg-white/20"
+                style={{
+                  transform: 'perspective(1000px) rotateX(0deg)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(5deg) translateY(-5px)';
+                  e.currentTarget.style.boxShadow = '0 15px 40px rgba(255, 215, 0, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-semibold">RecNation</span>
                   <span className="text-2xl font-bold text-[#FFD700]">+500%</span>
@@ -23,19 +38,49 @@ export default function Hero() {
               </div>
 
               <div className="border-t border-white/20 pt-4">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-semibold">Social Media Growth</span>
-                  <span className="text-2xl font-bold text-[#FFD700]">+60%</span>
+                <div
+                  className="transition-all duration-500 cursor-pointer hover:scale-105 hover:bg-white/20"
+                  style={{
+                    transform: 'perspective(1000px) rotateX(0deg)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(5deg) translateY(-5px)';
+                    e.currentTarget.style.boxShadow = '0 15px 40px rgba(255, 215, 0, 0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-semibold">Social Media Growth</span>
+                    <span className="text-2xl font-bold text-[#FFD700]">+60%</span>
+                  </div>
+                  <p className="text-sm text-white/80">New Followers</p>
                 </div>
-                <p className="text-sm text-white/80">New Followers</p>
               </div>
 
               <div className="border-t border-white/20 pt-4">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-semibold">Engagement</span>
-                  <span className="text-2xl font-bold text-[#FFD700]">+190%</span>
+                <div
+                  className="transition-all duration-500 cursor-pointer hover:scale-105 hover:bg-white/20"
+                  style={{
+                    transform: 'perspective(1000px) rotateX(0deg)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(5deg) translateY(-5px)';
+                    e.currentTarget.style.boxShadow = '0 15px 40px rgba(255, 215, 0, 0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'perspective(1000px) rotateX(0deg)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-semibold">Engagement</span>
+                    <span className="text-2xl font-bold text-[#FFD700]">+190%</span>
+                  </div>
+                  <p className="text-sm text-white/80">Engagement Rate</p>
                 </div>
-                <p className="text-sm text-white/80">Engagement Rate</p>
               </div>
             </div>
           </div>
