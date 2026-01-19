@@ -106,6 +106,7 @@ export default function AboutPage() {
         ctx.fill();
       });
 
+      // Rotating geometric shapes
       ctx.save();
       ctx.translate(width * 0.15, height * 0.25);
       ctx.rotate(time * 0.3);
@@ -159,8 +160,8 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen w-full relative overflow-hidden">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" style={{ background: '#0a0e27' }} />
-      
-      <div 
+
+      <div
         className="absolute pointer-events-none transition-all duration-500 z-10"
         style={{
           left: mousePosition.x,
@@ -176,7 +177,7 @@ export default function AboutPage() {
       <div className="relative z-20 container mx-auto px-4 py-16">
         {/* Hero Section */}
         <div className="text-center mb-20">
-          <div 
+          <div
             className="inline-block mb-8 relative"
             style={{
               transform: 'perspective(1200px) rotateY(0deg)',
@@ -189,7 +190,7 @@ export default function AboutPage() {
               e.currentTarget.style.transform = 'perspective(1200px) rotateY(0deg)';
             }}
           >
-            <div 
+            <div
               className="w-32 h-32 rounded-3xl mx-auto overflow-hidden relative"
               style={{
                 background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
@@ -200,7 +201,7 @@ export default function AboutPage() {
               <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent flex items-center justify-center">
                 <Zap className="w-16 h-16 text-white drop-shadow-2xl" />
               </div>
-              <div 
+              <div
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
                 style={{
                   animation: 'shine 4s infinite',
@@ -210,7 +211,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <h1 
+          <h1
             className="text-6xl md:text-7xl font-bold mb-6"
             style={{
               background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
@@ -230,7 +231,7 @@ export default function AboutPage() {
 
         {/* Our Story Section */}
         <div className="max-w-5xl mx-auto mb-20">
-          <div 
+          <div
             className="p-12 rounded-3xl"
             style={{
               background: 'rgba(255, 255, 255, 0.08)',
@@ -239,7 +240,7 @@ export default function AboutPage() {
               boxShadow: '0 8px 25px rgba(0,0,0,0.3)',
             }}
           >
-            <h2 
+            <h2
               className="text-4xl font-bold mb-6 text-center"
               style={{
                 background: 'linear-gradient(135deg, #FF6B6B, #4ECDC4)',
@@ -286,7 +287,7 @@ export default function AboutPage() {
                 }}
               >
                 <Icon className="w-12 h-12 mx-auto mb-4" style={{ color: stat.color, filter: `drop-shadow(0 0 10px ${stat.color})` }} />
-                <div 
+                <div
                   className="text-5xl font-bold mb-2"
                   style={{
                     background: `linear-gradient(135deg, ${stat.color}, ${stat.color}cc)`,
@@ -305,7 +306,7 @@ export default function AboutPage() {
 
         {/* Our Values */}
         <div className="mb-20">
-          <h2 
+          <h2
             className="text-5xl font-bold mb-12 text-center"
             style={{
               background: 'linear-gradient(135deg, #4ECDC4, #FFE66D)',
@@ -333,22 +334,22 @@ export default function AboutPage() {
                   onMouseEnter={() => setHoveredItem(value.title)}
                   onMouseLeave={() => setHoveredItem(null)}
                 >
-                  <div 
+                  <div
                     className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 transition-all duration-500 relative overflow-hidden"
                     style={{
-                      background: hoveredItem === value.title 
-                        ? `linear-gradient(135deg, ${value.color}, ${value.color}dd)` 
+                      background: hoveredItem === value.title
+                        ? `linear-gradient(135deg, ${value.color}, ${value.color}dd)`
                         : 'rgba(255, 255, 255, 0.1)',
                       backdropFilter: 'blur(10px)',
                       border: `2px solid ${hoveredItem === value.title ? value.color : 'rgba(255, 255, 255, 0.2)'}`,
-                      boxShadow: hoveredItem === value.title 
-                        ? `0 20px 50px ${value.color}80, 0 0 60px ${value.color}60` 
+                      boxShadow: hoveredItem === value.title
+                        ? `0 20px 50px ${value.color}80, 0 0 60px ${value.color}60`
                         : '0 8px 25px rgba(0,0,0,0.3)',
                       transform: hoveredItem === value.title ? 'translateY(-10px) rotateZ(8deg) scale(1.1)' : 'translateY(0)',
                     }}
                   >
-                    <Icon 
-                      size={28} 
+                    <Icon
+                      size={28}
                       style={{
                         color: hoveredItem === value.title ? '#fff' : value.color,
                         filter: `drop-shadow(0 0 10px ${value.color})`,
@@ -356,7 +357,7 @@ export default function AboutPage() {
                     />
                     {hoveredItem === value.title && (
                       <>
-                        <div 
+                        <div
                           className="absolute inset-0 rounded-2xl"
                           style={{
                             background: value.color,
@@ -364,7 +365,7 @@ export default function AboutPage() {
                             animation: 'pulse 1.5s infinite',
                           }}
                         />
-                        <div 
+                        <div
                           className="absolute inset-0 rounded-2xl border-2"
                           style={{
                             borderColor: value.color,
@@ -386,7 +387,7 @@ export default function AboutPage() {
 
         {/* Why Choose Us */}
         <div className="mb-20">
-          <h2 
+          <h2
             className="text-5xl font-bold mb-12 text-center"
             style={{
               background: 'linear-gradient(135deg, #FFE66D, #FF6B6B)',
@@ -435,7 +436,7 @@ export default function AboutPage() {
 
         {/* CTA */}
         <div className="text-center">
-          <button 
+          <button
             className="px-12 py-5 rounded-2xl font-bold text-xl transition-all duration-500 relative overflow-hidden group"
             style={{
               background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
@@ -464,12 +465,12 @@ export default function AboutPage() {
           0% { transform: translateX(-100%) skew(-20deg); }
           100% { transform: translateX(200%) skew(-20deg); }
         }
-        
+
         @keyframes pulse {
           0%, 100% { transform: scale(1); opacity: 0.3; }
           50% { transform: scale(1.15); opacity: 0.15; }
         }
-        
+
         @keyframes ping {
           0% { transform: scale(1); opacity: 1; }
           100% { transform: scale(1.8); opacity: 0; }
