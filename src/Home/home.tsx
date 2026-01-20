@@ -481,27 +481,27 @@ export default function DigitalMarketingHomepage() {
             {[
               {
                 title: "WordPress Website Development Services",
-                img: "/images/wordpress.jpg",
+                img: new URL('../image/WordPress .png', import.meta.url).href,
               },
               {
                 title: "Shopify Website Development Services",
-                img: "/images/shopify.jpg",
+                img: new URL('../image/Shopify.png', import.meta.url).href,
               },
               {
                 title: "E-Commerce Website Development Services",
-                img: "/images/ecommerce.jpg",
+                img: new URL('../image/E-Commerce Website.png', import.meta.url).href,
               },
               {
                 title: "Website Redesign & Revamp",
-                img: "/images/redesign.jpg",
+                img: new URL('../image/Development Services.png', import.meta.url).href,
               },
               {
                 title: "UI/UX Design",
-                img: "/images/uiux.jpg",
+                img: new URL('../image/uiux design.png', import.meta.url).href,
               },
               {
                 title: "Website Development Services",
-                img: "/images/webdev.jpg",
+                img: new URL('../image/Website.png', import.meta.url).href,
               },
             ].map((service, i) => (
               <div
