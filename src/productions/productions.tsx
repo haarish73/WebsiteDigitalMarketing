@@ -159,8 +159,8 @@ export default function ProductionStudio() {
   ];
 
   const testimonials = [
-    { name: 'Rajesh Kumar', role: 'CEO, TechCorp India', text: 'Outstanding production quality! They transformed our vision into reality.', rating: 5 },
-    { name: 'Priya Sharma', role: 'Marketing Director', text: 'Professional team, creative approach, and timely delivery. Highly recommended!', rating: 5 },
+    { name: 'suyansh reddy', role: 'CEO, Hillock Resort', text: 'We partnered with them for our resort’s marketing and sales growth, and the results were impressive. Their approach is strategic, transparent, and focused on real business outcomes. A reliable digital marketing partner.', rating: 5 },
+    { name: 'pocharaam  srinivas reddy', role: 'Marketing Director', text: 'Professional team, creative approach, and timely delivery. Highly recommended!', rating: 5 },
     { name: 'Amit Patel', role: 'Startup Founder', text: 'Best investment for our brand. The videos boosted our engagement by 300%.', rating: 5 }
   ];
 
