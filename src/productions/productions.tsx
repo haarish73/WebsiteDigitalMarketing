@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Video, Camera, Film, Mic, Music, Sparkles, Award, Users, Clock, CheckCircle, ArrowRight, Play, Star, TrendingUp } from 'lucide-react';
 
 export default function ProductionStudio() {
+  const navigate = useNavigate();
   const [hoveredOffering, setHoveredOffering] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [activeTestimonial, setActiveTestimonial] = useState(0);
@@ -239,6 +241,7 @@ export default function ProductionStudio() {
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <button
+                onClick={() => navigate('/start-project')}
                 className="px-12 py-6 rounded-2xl text-white text-lg font-bold transition-all duration-500 flex items-center gap-3"
                 style={{
                   background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',

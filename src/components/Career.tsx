@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import JoinTeamForm from './Form';
 
 export default function AnimatedPageTemplate() {
+  const navigate = useNavigate();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -187,7 +189,7 @@ export default function AnimatedPageTemplate() {
           </p>
 
           <div className="flex justify-center gap-6">
-            <button className="px-8 py-4 rounded-xl font-semibold bg-gradient-to-r from-red-400 to-cyan-400 text-black hover:scale-110 transition">
+            <button onClick={() => navigate('/career-openings')} className="px-8 py-4 rounded-xl font-semibold bg-gradient-to-r from-red-400 to-cyan-400 text-black hover:scale-110 transition">
               View Open Roles
             </button>
             <button className="px-8 py-4 rounded-xl border border-white/30 text-white hover:bg-white/10 transition">

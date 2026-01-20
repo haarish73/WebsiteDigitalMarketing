@@ -195,7 +195,7 @@ export default function ContactSection() {
             <div 
               className="w-40 h-40 rounded-3xl mx-auto overflow-hidden relative"
             >
-              <img src="../image/CompanyLogo.png" alt="Company Logo" className="w-full h-full object-cover" />
+              <img src={new URL('../image/CompanyLogo.png', import.meta.url).href} alt="Company Logo" className="w-full h-full object-cover" />
             </div>
           </div>
 
