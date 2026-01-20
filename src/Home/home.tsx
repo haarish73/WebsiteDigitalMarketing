@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Zap, Target, TrendingUp, Users, BarChart3, Rocket, ChevronRight, Play, Building, Heart, Home, DollarSign, GraduationCap, ShoppingCart, Plane, Code, icons } from 'lucide-react';
 import ConsultationForm from '../components/Consulation';
@@ -30,7 +29,6 @@ export default function DigitalMarketingHomepage() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -43,109 +41,47 @@ export default function DigitalMarketingHomepage() {
     };
     window.addEventListener('resize', handleResize);
 
-    // Create floating particles
-    const particles: Array<{x: number, y: number, vx: number, vy: number, size: number}> = [];
-    for (let i = 0; i < 80; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 3 + 1
-      });
-    }
-
     let time = 0;
     let animationId: number;
 
     const animate = () => {
-      time += 0.008;
-
-      // Dark gradient background
+      time += 0.004;
+      
       const gradient = ctx.createLinearGradient(0, 0, width, height);
-      gradient.addColorStop(0, '#0a0e27');
-      gradient.addColorStop(0.5, '#1a1f4d');
-      gradient.addColorStop(1, '#0f1729');
+      gradient.addColorStop(0, '#18181b');
+      gradient.addColorStop(0.5, '#27272a');
+      gradient.addColorStop(1, '#18181b');
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
 
-      // Animated waves (4 layers)
-      for (let layer = 0; layer < 4; layer++) {
-        ctx.beginPath();
-        const offset = time * (0.4 + layer * 0.15);
-        const amplitude = 80 + layer * 25;
-        const frequency = 0.002 - layer * 0.0003;
-
-        for (let x = 0; x <= width; x += 4) {
-          const y = height * (0.4 + layer * 0.15) +
-                    Math.sin(x * frequency + offset) * amplitude +
-                    Math.cos(x * frequency * 1.5 + offset * 1.3) * (amplitude * 0.6);
-          if (x === 0) {
-            ctx.moveTo(x, y);
-          } else {
-            ctx.lineTo(x, y);
-          }
+      // Dotted pattern
+      ctx.fillStyle = 'rgba(161, 161, 170, 0.1)';
+      for (let x = 0; x < width; x += 30) {
+        for (let y = 0; y < height; y += 30) {
+          ctx.beginPath();
+          ctx.arc(x, y, 1, 0, Math.PI * 2);
+          ctx.fill();
         }
-
-        ctx.lineTo(width, height);
-        ctx.lineTo(0, height);
-        ctx.closePath();
-
-        const colors = [
-          'rgba(102, 126, 234, 0.12)',
-          'rgba(118, 75, 162, 0.10)',
-          'rgba(78, 205, 196, 0.08)',
-          'rgba(255, 107, 107, 0.06)'
-        ];
-        ctx.fillStyle = colors[layer];
-        ctx.fill();
       }
 
-      // Floating particles with glow
-      ctx.fillStyle = 'rgba(102, 126, 234, 0.6)';
-      particles.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
+      // Animated gradient bands
+      for (let i = 0; i < 3; i++) {
+        const y = (height / 4) * (i + 1) + Math.sin(time + i) * 20;
+        const bandGradient = ctx.createLinearGradient(0, y - 40, 0, y + 40);
+        bandGradient.addColorStop(0, 'rgba(161, 161, 170, 0)');
+        bandGradient.addColorStop(0.5, 'rgba(161, 161, 170, 0.08)');
+        bandGradient.addColorStop(1, 'rgba(161, 161, 170, 0)');
+        ctx.fillStyle = bandGradient;
+        ctx.fillRect(0, y - 40, width, 80);
+      }
 
-        if (p.x < 0 || p.x > width) p.vx *= -1;
-        if (p.y < 0 || p.y > height) p.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Glow effect
-        const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 3);
-        glow.addColorStop(0, 'rgba(102, 126, 234, 0.3)');
-        glow.addColorStop(1, 'transparent');
-        ctx.fillStyle = glow;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      // Rotating geometric shapes
-      ctx.save();
-      ctx.translate(width * 0.15, height * 0.25);
-      ctx.rotate(time * 0.3);
-      ctx.strokeStyle = 'rgba(78, 205, 196, 0.2)';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(-60, -60, 120, 120);
-      ctx.restore();
-
-      ctx.save();
-      ctx.translate(width * 0.85, height * 0.7);
-      ctx.rotate(-time * 0.4);
-      ctx.strokeStyle = 'rgba(255, 107, 107, 0.2)';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.arc(0, 0, 50, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.restore();
+      // Corner accent
+      ctx.strokeStyle = 'rgba(212, 212, 216, 0.15)';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(60, 60, 100, 100);
 
       animationId = requestAnimationFrame(animate);
     };
-
     animate();
 
     return () => {
@@ -213,49 +149,41 @@ export default function DigitalMarketingHomepage() {
 
   return (
     <div className="min-h-screen w-full relative overflow-hidden">
-      {/* Animated Dark Background Canvas */}
-      <canvas
-        ref={canvasRef}
-        className="fixed inset-0 w-full h-full"
-        style={{ background: '#0a0e27' }}
-      />
-
-      {/* Dynamic mouse glow */}
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" style={{ background: '#18181b' }} />
+      
+      {/* Mouse glow effect */}
       <div 
-        className="fixed pointer-events-none transition-all duration-500 z-10"
+        className="absolute pointer-events-none transition-all duration-700 z-10"
         style={{
           left: mousePosition.x,
           top: mousePosition.y,
-          width: '600px',
-          height: '600px',
-          background: 'radial-gradient(circle, rgba(102, 126, 234, 0.25), transparent 60%)',
+          width: '380px',
+          height: '380px',
+          background: 'radial-gradient(circle, rgba(212, 212, 216, 0.1), transparent 70%)',
           transform: 'translate(-50%, -50%)',
-          filter: 'blur(40px)',
+          filter: 'blur(65px)',
         }}
       />
-
-      {/* Content Container */}
+      
+      {/* Content Area */}
       <div className="relative z-20">
 
         {/* Hero Section */}
         <section className="container mx-auto px-6 py-40 text-center">
-         
-          
           <h1 
             className="text-7xl font-bold mb-6 leading-tight"
             style={{
-              background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
+              background: 'linear-gradient(135deg, #a1a1aa 0%, #d4d4d8 50%, #e4e4e7 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              filter: 'drop-shadow(0 0 30px rgba(255, 107, 107, 0.5))',
-              animation: 'textGlow 3s ease-in-out infinite',
+              filter: 'drop-shadow(0 0 18px rgba(161, 161, 170, 0.25))',
             }}
           >
-            Smart Crafts Circle
+            Social Crafts Circle
           </h1>
           
-          <p className="text-xl text-white/70 max-w-2xl mx-auto mb-12 flex justify-center gap-2">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-12 flex justify-center gap-2">
             {"Crafting Brands Creating Impacts".split(" ").map((word, index) => (
               <span
                 key={index}
@@ -263,7 +191,7 @@ export default function DigitalMarketingHomepage() {
                 style={{
                   animation: `fadeInWord 0.5s ease-out forwards`,
                   animationDelay: `${index * 0.2}s`,
-                  opacity: 0, // Start as invisible
+                  opacity: 0,
                 }}
               >
                 {word}
@@ -318,7 +246,8 @@ export default function DigitalMarketingHomepage() {
         </section>
 
         {/* Industries Marquee */}
-        <div className="py-8 overflow-hidden whitespace-nowrap flex items-center"
+       <div className="mt-52 py-8 overflow-hidden whitespace-nowrap flex items-center"
+
           style={{
             background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
             backgroundSize: '200% 200%',
@@ -735,41 +664,52 @@ export default function DigitalMarketingHomepage() {
 
 function AboutSection() {
   return (
-    <section className="relative w-full py-24 px-6 md:px-16 bg-transparent">
-      <div className="max-w-6xl mx-auto">
-        
-        {/* Text Content */}
-        <p className="text-3xl md:text-5xl font-medium leading-snug text-white">
-          We are{" "}
-          <span className="text-cyan-500 font-semibold">
-            Smart Crafts Circle
-          </span>
-          . A creative digital marketing studio focused on building brands,
-          driving growth, and shaping powerful online identities. From{" "}
-          <span className="text-cyan-500 italic font-semibold">
-            strategic marketing
-          </span>{" "}
-          to high-impact digital experiences, we help businesses connect,
-          convert, and scale in the digital world.
+  <section className="relative w-full pt-52 pb-28 px-6 md:px-16 bg-transparent">
+
+  <div className="max-w-6xl mx-auto">
+
+    {/* Main Text */}
+    <p className="text-[1.65rem] md:text-[2.75rem] font-normal leading-[1.25] text-white/90">
+      We are{" "}
+      <span className="text-cyan-400 font-semibold">
+        Smart Crafts Circle
+      </span>
+      , a creative digital marketing studio focused on building brands,
+      driving growth, and shaping powerful online identities. From{" "}
+      <span className="text-cyan-400 italic font-medium">
+        strategic marketing
+      </span>{" "}
+      to high-impact digital experiences, we help businesses connect,
+      convert, and scale in the digital world.
+    </p>
+
+    {/* Divider */}
+    <div className="mt-16 h-px w-24 bg-cyan-500/40" />
+
+    {/* Stats */}
+    <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-16">
+      
+      <div>
+        <h2 className="text-6xl md:text-7xl font-semibold tracking-tight text-cyan-400">
+          100%
+        </h2>
+        <p className="mt-3 text-xs tracking-[0.3em] text-gray-400 uppercase">
+          Client Satisfaction
         </p>
-
-        {/* Stats */}
-        <div className="mt-16 flex flex-col sm:flex-row gap-16">
-          <div>
-            <h2 className="text-6xl font-bold text-cyan-500">100%</h2>
-            <p className="mt-2 tracking-widest text-sm text-gray-300">
-              CLIENT SATISFACTION
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-6xl font-bold text-cyan-500">360°</h2>
-            <p className="mt-2 tracking-widest text-sm text-gray-300">
-              DIGITAL MARKETING SOLUTIONS
-            </p>
-          </div>
-        </div>
       </div>
-    </section>
+
+      <div>
+        <h2 className="text-6xl md:text-7xl font-semibold tracking-tight text-cyan-400">
+          360°
+        </h2>
+        <p className="mt-3 text-xs tracking-[0.3em] text-gray-400 uppercase">
+          Digital Marketing Solutions
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
   );
 }
