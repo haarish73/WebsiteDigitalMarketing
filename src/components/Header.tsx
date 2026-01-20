@@ -294,13 +294,7 @@ export default function Header() {
               </div>
 
               {/* WORK */}
-              <Link
-                to="/productions"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-5xl font-bold text-black hover:text-[#4ECDC4] transition duration-300"
-              >
-                WORK
-              </Link>
+             
 
               {/* ABOUT */}
               <Link

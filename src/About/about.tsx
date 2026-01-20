@@ -222,7 +222,7 @@ export default function AboutPage() {
               animation: 'textGlow 3s ease-in-out infinite',
             }}
           >
-            About Thrive Digital
+            Social Craft Circle
           </h1>
           <p className="text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
             We are a passionate team of digital marketing experts dedicated to transforming businesses through innovative strategies, creative campaigns, and data-driven results.
@@ -252,7 +252,7 @@ export default function AboutPage() {
               Our Story
             </h2>
             <p className="text-xl text-gray-300 leading-relaxed mb-4">
-              Founded in 2010, Thrive Digital emerged from a simple vision: to help businesses harness the power of digital marketing to achieve extraordinary growth. What started as a small team of three passionate marketers has evolved into a full-service agency serving clients across the globe.
+              Founded in 2026, Social Craft Circle Digital emerged from a simple vision: to help businesses harness the power of digital marketing to achieve extraordinary growth. What started as a small team of three passionate marketers has evolved into a full-service agency serving clients across the globe.
             </p>
             <p className="text-xl text-gray-300 leading-relaxed">
               Today, we combine cutting-edge technology with creative excellence to deliver campaigns that don't just meet expectations—they shatter them. Our approach is built on collaboration, innovation, and an unwavering commitment to our clients' success.

@@ -140,10 +140,10 @@ export default function ContactSection() {
   }, []);
 
   const contactDetails = [
-    { icon: Mail, label: 'EMAIL', value: 'contact@thrivedigital.com', href: 'mailto:contact@thrivedigital.com', color: '#FF6B6B' },
+    { icon: Mail, label: 'EMAIL', value: 'contact@Social Craft Circledigital.com', href: 'mailto:contact@Social Craft Circledigital.com', color: '#FF6B6B' },
     { icon: Phone, label: 'PHONE', value: '866-908-4748', href: 'tel:8669084748', color: '#4ECDC4' },
     { icon: MapPin, label: 'LOCATION', value: 'United States', href: '#', color: '#FFE66D' },
-    { icon: Globe, label: 'WEBSITE', value: 'www.thrivedigital.com', href: 'https://thrivedigital.com', color: '#A8E6CF' },
+    { icon: Globe, label: 'WEBSITE', value: 'www.Social Craft Circledigital.com', href: 'https://Social Craft Circledigital.com', color: '#A8E6CF' },
   ];
 
   const socialMedia = [
@@ -191,35 +191,11 @@ export default function ContactSection() {
         <div className="text-center mb-16">
           <div 
             className="inline-block mb-8 relative"
-            style={{
-              transform: 'perspective(1200px) rotateY(0deg)',
-              transition: 'transform 0.6s',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'perspective(1200px) rotateY(15deg) translateZ(30px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'perspective(1200px) rotateY(0deg)';
-            }}
           >
             <div 
               className="w-40 h-40 rounded-3xl mx-auto overflow-hidden relative"
-              style={{
-                background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
-                boxShadow: '0 30px 80px rgba(255, 107, 107, 0.6), 0 0 100px rgba(78, 205, 196, 0.4)',
-                animation: 'glow 3s ease-in-out infinite',
-              }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent flex items-center justify-center">
-                <div className="text-7xl font-bold text-white drop-shadow-2xl">T</div>
-              </div>
-              <div 
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                style={{
-                  animation: 'shine 4s infinite',
-                  transform: 'translateX(-100%) skew(-20deg)',
-                }}
-              />
+              <img src="../image/CompanyLogo.png" alt="Company Logo" className="w-full h-full object-cover" />
             </div>
           </div>
 
@@ -234,7 +210,7 @@ export default function ContactSection() {
               animation: 'textGlow 3s ease-in-out infinite',
             }}
           >
-            Thrive Digital
+            Social Craft Circle
           </h1>
           <p className="text-3xl font-light text-gray-300 mb-4">
             Digital Marketing Agency

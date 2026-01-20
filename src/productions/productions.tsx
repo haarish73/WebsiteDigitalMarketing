@@ -159,8 +159,8 @@ export default function ProductionStudio() {
   ];
 
   const testimonials = [
-    { name: 'suyansh reddy', role: 'CEO, Hillock Resort', text: 'We partnered with them for our resort’s marketing and sales growth, and the results were impressive. Their approach is strategic, transparent, and focused on real business outcomes. A reliable digital marketing partner.', rating: 5 },
-    { name: 'pocharaam  srinivas reddy', role: 'Marketing Director', text: 'Professional team, creative approach, and timely delivery. Highly recommended!', rating: 5 },
+    { name: 'Suyansh Reddy', role: 'CEO, Hillock Resort', text: 'We partnered with them for our resort’s marketing and sales growth, and the results were impressive. Their approach is strategic, transparent, and focused on real business outcomes. A reliable digital marketing partner.', rating: 5 },
+    { name: 'Pocharaam  Srinivas Reddy', role: 'Marketing Director', text: 'Professional team, creative approach, and timely delivery. Highly recommended!', rating: 5 },
     { name: 'Amit Patel', role: 'Startup Founder', text: 'Best investment for our brand. The videos boosted our engagement by 300%.', rating: 5 }
   ];
 
@@ -214,7 +214,7 @@ export default function ProductionStudio() {
                   filter: 'drop-shadow(0 0 30px rgba(255, 107, 107, 0.5))',
                 }}
               >
-                Lights. Camera. Action!
+                Create. Capture. Convert.
               </h2>
             </div>
 
