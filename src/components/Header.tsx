@@ -204,57 +204,163 @@ export default function Header() {
 
         {/* MOBILE MENU */}
         {isMenuOpen && (
-          <div className="lg:hidden bg-[#0a0e27]/95 backdrop-blur-md rounded-xl p-6 mt-2 space-y-4">
-            {/* Services in mobile */}
-            <div>
-              <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="w-full flex justify-between items-center text-white/80">
-                Services <ChevronDown size={16} />
-              </button>
-              {mobileServicesOpen && (
-                <div className="mt-2 ml-4 space-y-2">
-                  <div>
-                    <button onClick={() => setMobileWebOpen(!mobileWebOpen)} className="w-full flex justify-between items-center text-white/80">
-                      Website Development <ChevronDown size={14} />
-                    </button>
-                    {mobileWebOpen && (
-                      <div className="mt-2 ml-4 space-y-2">
-                        <Link to="/wordpress" className="block text-white/80">WordPress</Link>
-                        <Link to="/EcommerceDevelopmentPage" className="block text-white/80">Ecommerce</Link>
-                        <Link to="/services/shopify" className="block text-white/80">Shopify</Link>
-                      </div>
-                    )}
-                  </div>
-                  <Link to="/services/seo" className="block text-white/80">SEO Services</Link>
-                  <Link to="/services/digital-marketing" className="block text-white/80">Digital Marketing</Link>
-                </div>
-              )}
-            </div>
+          <div className="fixed inset-0 lg:hidden bg-white/95 backdrop-blur-md z-40 flex flex-col items-center justify-center p-6">
+            {/* Close Button */}
+            <button
+              onClick={() => setIsMenuOpen(false)}
+              className="absolute top-8 right-6 text-black hover:text-gray-600 transition"
+            >
+              <X size={32} />
+            </button>
 
-            {/* Public Relations in mobile */}
-            <div>
-              <button onClick={() => setMobilePublicRelationsOpen(!mobilePublicRelationsOpen)} className="w-full flex justify-between items-center text-white/80">
-                Public Relations <ChevronDown size={16} />
-              </button>
-              {mobilePublicRelationsOpen && (
-                <div className="mt-2 ml-4 space-y-2">
-                  <Link to="/services/marketing-pr" className="block text-white/80">Marketing PR</Link>
-                  <Link to="/services/political-pr" className="block text-white/80">Political PR</Link>
-                </div>
-              )}
-            </div>
-            
-            <Link to="/productions" className="block text-white/80">
-              Productions
-            </Link>
-            <Link to="/careers" className="block text-white/80">
-              Careers
-            </Link>
-            <Link to="/about" className="block text-white/80">
-              About Us
-            </Link>
-            <Link to="/contact" className="block text-white/80">
-              Contact
-            </Link>
+            {/* Menu Items */}
+            <nav className="flex flex-col items-center justify-center space-y-8 text-center">
+              {/* HOME */}
+              <Link
+                to="/"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-5xl font-bold text-black hover:text-[#4ECDC4] transition duration-300"
+              >
+                HOME
+              </Link>
+
+              {/* SERVICES */}
+              <div className="flex flex-col items-center">
+                <button
+                  onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                  className="text-5xl font-bold text-black hover:text-[#4ECDC4] transition duration-300 flex items-center gap-2"
+                >
+                  SERVICES
+                  <ChevronDown
+                    size={24}
+                    className={`transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                {mobileServicesOpen && (
+                  <div className="mt-6 space-y-4">
+                    <div>
+                      <button
+                        onClick={() => setMobileWebOpen(!mobileWebOpen)}
+                        className="text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition flex items-center gap-2"
+                      >
+                        Website Development
+                        <ChevronDown
+                          size={16}
+                          className={`transition-transform ${mobileWebOpen ? 'rotate-180' : ''}`}
+                        />
+                      </button>
+                      {mobileWebOpen && (
+                        <div className="mt-3 ml-4 space-y-2">
+                          <Link
+                            to="/wordpress"
+                            onClick={() => setIsMenuOpen(false)}
+                            className="block text-gray-600 hover:text-[#4ECDC4] transition"
+                          >
+                            WordPress
+                          </Link>
+                          <Link
+                            to="/EcommerceDevelopmentPage"
+                            onClick={() => setIsMenuOpen(false)}
+                            className="block text-gray-600 hover:text-[#4ECDC4] transition"
+                          >
+                            Ecommerce
+                          </Link>
+                          <Link
+                            to="/services/shopify"
+                            onClick={() => setIsMenuOpen(false)}
+                            className="block text-gray-600 hover:text-[#4ECDC4] transition"
+                          >
+                            Shopify
+                          </Link>
+                        </div>
+                      )}
+                    </div>
+                    <Link
+                      to="/services/seo"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition"
+                    >
+                      SEO Services
+                    </Link>
+                    <Link
+                      to="/services/digital-marketing"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition"
+                    >
+                      Digital Marketing
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* WORK */}
+              <Link
+                to="/productions"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-5xl font-bold text-black hover:text-[#4ECDC4] transition duration-300"
+              >
+                WORK
+              </Link>
+
+              {/* ABOUT */}
+              <Link
+                to="/about"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-5xl font-bold text-black hover:text-[#4ECDC4] transition duration-300"
+              >
+                ABOUT
+              </Link>
+
+              {/* TEAM */}
+              <Link
+                to="/careers"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-5xl font-bold text-black hover:text-[#4ECDC4] transition duration-300"
+              >
+                TEAM
+              </Link>
+
+              {/* PUBLIC RELATIONS */}
+              <div className="flex flex-col items-center">
+                <button
+                  onClick={() => setMobilePublicRelationsOpen(!mobilePublicRelationsOpen)}
+                  className="text-5xl font-bold text-black hover:text-[#4ECDC4] transition duration-300 flex items-center gap-2"
+                >
+                  PR
+                  <ChevronDown
+                    size={24}
+                    className={`transition-transform ${mobilePublicRelationsOpen ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                {mobilePublicRelationsOpen && (
+                  <div className="mt-4 space-y-3">
+                    <Link
+                      to="/services/marketing-pr"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition"
+                    >
+                      Marketing PR
+                    </Link>
+                    <Link
+                      to="/services/political-pr"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition"
+                    >
+                      Political PR
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* CONTACT */}
+              <Link
+                to="/contact"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-5xl font-bold text-black hover:text-[#4ECDC4] transition duration-300"
+              >
+                CONTACT
+              </Link>
+            </nav>
           </div>
         )}
       </div>
