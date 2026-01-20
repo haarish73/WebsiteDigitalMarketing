@@ -384,24 +384,7 @@ export default function PoliticalPRPlatform() {
                 Start Campaign <ArrowRight />
               </button>
 
-              <button
-                className="px-10 py-5 rounded-2xl text-white text-lg font-semibold transition-all duration-300"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(10px)',
-                  border: '2px solid rgba(255, 255, 255, 0.2)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
-                  e.currentTarget.style.borderColor = 'rgba(78, 205, 196, 0.5)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-                }}
-              >
-                Watch Demo
-              </button>
+             
             </div>
 
             {/* Stats */}

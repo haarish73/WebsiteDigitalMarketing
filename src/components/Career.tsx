@@ -192,9 +192,7 @@ export default function AnimatedPageTemplate() {
             <button onClick={() => navigate('/career-openings')} className="px-8 py-4 rounded-xl font-semibold bg-gradient-to-r from-red-400 to-cyan-400 text-black hover:scale-110 transition">
               View Open Roles
             </button>
-            <button className="px-8 py-4 rounded-xl border border-white/30 text-white hover:bg-white/10 transition">
-              Apply Now
-            </button>
+           
           </div>
         </section>
 

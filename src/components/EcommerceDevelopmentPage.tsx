@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from "react-router-dom";
+
 import { 
   ShoppingBag, 
   CreditCard, 
@@ -256,12 +258,15 @@ export default function EcommerceDevelopmentPage() {
                     Ecommerce Solutions?
                 </span>
               </h2>
-              <button className="group flex items-center gap-4 bg-white/5 border border-white/10 hover:bg-[#a3ff12] transition-all duration-500 rounded-full pl-8 pr-2 py-2 text-white hover:text-black font-bold text-lg">
-                Contact Us
-                <div className="bg-[#a3ff12] group-hover:bg-black p-3 rounded-full transition-all">
-                  <ArrowUpRight className="w-5 h-5 group-hover:text-[#a3ff12] text-black" />
-                </div>
-              </button>
+            <Link to="/contact">
+  <button className="group flex items-center gap-4 bg-white/5 border border-white/10 hover:bg-[#a3ff12] transition-all duration-500 rounded-full pl-8 pr-2 py-2 text-white hover:text-black font-bold text-lg">
+    Contact Us
+    <div className="bg-[#a3ff12] group-hover:bg-black p-3 rounded-full transition-all">
+      <ArrowUpRight className="w-5 h-5 group-hover:text-[#a3ff12] text-black" />
+    </div>
+  </button>
+</Link>
+
             </div>
 
             <div className="relative pl-8 md:pl-12 border-l border-white/10">

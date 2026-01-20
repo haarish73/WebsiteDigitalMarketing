@@ -48,8 +48,8 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
 
           {/* LOGO */}
-          <Link to="/" className="text-2xl font-bold text-white tracking-wide">
-            Smart Crafts Circle
+          <Link to="/">
+            <img src="../image/CompanyLogo.png" alt="Company Logo" className="h-10" />
           </Link>
 
           {/* DESKTOP NAV */}

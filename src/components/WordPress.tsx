@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from "react-router-dom"
 import { Code, Zap, Shield, Rocket, CheckCircle, Users, TrendingUp, Award, ArrowRight, Phone, Mail, Star, Globe, ShoppingCart, Heart, GraduationCap, Building, DollarSign } from 'lucide-react';
 
 export default function WordPressDevelopmentPage() {
@@ -242,24 +243,7 @@ export default function WordPressDevelopmentPage() {
             </p>
 
             <div className="flex flex-wrap gap-6 justify-center">
-              <button 
-                className="px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-500 flex items-center gap-3"
-                style={{
-                  background: 'linear-gradient(135deg, #00ff7f 0%, #00c864 100%)',
-                  color: '#0a0e27',
-                  boxShadow: '0 25px 60px rgba(0, 255, 127, 0.4), 0 0 80px rgba(0, 255, 127, 0.2)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-8px) scale(1.05)';
-                  e.currentTarget.style.boxShadow = '0 35px 80px rgba(0, 255, 127, 0.6)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 25px 60px rgba(0, 255, 127, 0.4)';
-                }}>
-                Let's Create My Website
-                <ArrowRight size={20} />
-              </button>
+             
 
               <button 
                 className="px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-500 flex items-center gap-3"
@@ -733,44 +717,30 @@ export default function WordPressDevelopmentPage() {
             </p>
 
             <div className="flex flex-wrap gap-6 justify-center">
-              <button 
-                className="px-10 py-5 rounded-xl font-semibold text-xl transition-all duration-500 flex items-center gap-3"
-                style={{
-                  background: 'linear-gradient(135deg, #00ff7f 0%, #00c864 100%)',
-                  color: '#0a0e27',
-                  boxShadow: '0 25px 60px rgba(0, 255, 127, 0.5)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-8px) scale(1.1)';
-                  e.currentTarget.style.boxShadow = '0 35px 80px rgba(0, 255, 127, 0.7)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 25px 60px rgba(0, 255, 127, 0.5)';
-                }}>
-                Get Started Today
-                <Rocket size={24} />
-              </button>
+             
 
-              <button 
-                className="px-10 py-5 rounded-xl font-semibold text-xl transition-all duration-500 flex items-center gap-3"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.08)',
-                  border: '2px solid rgba(0, 255, 127, 0.4)',
-                  color: '#00ff7f',
-                  backdropFilter: 'blur(10px)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(0, 255, 127, 0.15)';
-                  e.currentTarget.style.transform = 'translateY(-8px) scale(1.1)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                }}>
-                <Mail size={24} />
-                Contact Us
-              </button>
+            <Link to="/contact">
+  <button 
+    className="px-10 py-5 rounded-xl font-semibold text-xl transition-all duration-500 flex items-center gap-3"
+    style={{
+      background: 'rgba(255, 255, 255, 0.08)',
+      border: '2px solid rgba(0, 255, 127, 0.4)',
+      color: '#00ff7f',
+      backdropFilter: 'blur(10px)',
+    }}
+    onMouseEnter={(e) => {
+      e.currentTarget.style.background = 'rgba(0, 255, 127, 0.15)';
+      e.currentTarget.style.transform = 'translateY(-8px) scale(1.1)';
+    }}
+    onMouseLeave={(e) => {
+      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
+      e.currentTarget.style.transform = 'translateY(0) scale(1)';
+    }}
+  >
+    <Mail size={24} />
+    Contact Us
+  </button>
+</Link>
             </div>
           </div>
         </div>

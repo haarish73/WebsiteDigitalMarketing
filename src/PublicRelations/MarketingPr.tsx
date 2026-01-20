@@ -239,7 +239,7 @@ const HeroSection = () => {
             
             <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
                 <NeonButton variant="primary">Get Free Consultation</NeonButton>
-                <NeonButton variant="secondary">View Our Work</NeonButton>
+                
             </div>
         </section>
     );

@@ -434,30 +434,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="text-center">
-          <button
-            className="px-12 py-5 rounded-2xl font-bold text-xl transition-all duration-500 relative overflow-hidden group"
-            style={{
-              background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
-              backgroundSize: '200% 200%',
-              color: '#fff',
-              boxShadow: '0 25px 60px rgba(255, 107, 107, 0.6), 0 0 80px rgba(78, 205, 196, 0.4)',
-              animation: 'gradientShift 4s ease infinite',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-8px) scale(1.1)';
-              e.currentTarget.style.boxShadow = '0 35px 80px rgba(255, 107, 107, 0.8), 0 0 120px rgba(78, 205, 196, 0.6)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0) scale(1)';
-              e.currentTarget.style.boxShadow = '0 25px 60px rgba(255, 107, 107, 0.6), 0 0 80px rgba(78, 205, 196, 0.4)';
-            }}
-          >
-            <span className="relative z-10 drop-shadow-lg">Let's Grow Together</span>
-            <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
-          </button>
-        </div>
+       
       </div>
 
       <style>{`
