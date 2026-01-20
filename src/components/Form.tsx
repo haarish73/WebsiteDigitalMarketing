@@ -1,6 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function JoinTeamForm() {
+  const [result, setResult] = React.useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setResult("Sending....");
+    
+    const formData = new FormData(event.currentTarget);
+    formData.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult("Form Submitted Successfully");
+        event.currentTarget.reset();
+      } else {
+        console.log("Error", data);
+        setResult(data.message);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setResult("Error submitting form. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <section className="w-full py-24">
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
@@ -46,43 +79,58 @@ export default function JoinTeamForm() {
             impactful campaigns.
           </p>
 
-          <form className="space-y-6">
+          <form onSubmit={onSubmit} className="space-y-6">
             <input
               type="text"
+              name="name"
               placeholder="Full Name"
+              required
               className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
 
             <input
               type="tel"
+              name="phone"
               placeholder="Phone Number"
               className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
 
             <input
               type="email"
+              name="email"
               placeholder="Email Address"
+              required
               className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
 
             <input
               type="text"
+              name="position"
               placeholder="Position / Subject"
               className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
 
             <textarea
+              name="message"
               placeholder="Tell us about yourself"
               rows={4}
+              required
               className="w-full px-6 py-4 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 resize-none"
             />
 
             <button
               type="submit"
-              className="w-full py-4 rounded-xl text-black font-semibold text-lg bg-gradient-to-r from-red-400 to-cyan-400 hover:scale-105 transition"
+              disabled={isSubmitting}
+              className="w-full py-4 rounded-xl text-black font-semibold text-lg bg-gradient-to-r from-red-400 to-cyan-400 hover:scale-105 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Send Message →
+              {isSubmitting ? 'Sending...' : 'Send Message →'}
             </button>
+            
+            {result && (
+              <div className="text-center text-white/80 mt-4">
+                <span>{result}</span>
+              </div>
+            )}
           </form>
         </div>
       </div>

@@ -11,9 +11,46 @@ export default function ConsultationForm({ onClose }: { onClose?: () => void }) 
     budget: '',
     goal: '',
   });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
 
   const next = () => setStep((s) => Math.min(s + 1, steps.length));
   const back = () => setStep((s) => Math.max(s - 1, 0));
+
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    setSubmitMessage('Sending...');
+
+    try {
+      const formData = new FormData();
+      formData.append('access_key', import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
+      formData.append('name', form.name);
+      formData.append('email', form.email);
+      formData.append('company', form.company);
+      formData.append('budget', form.budget);
+      formData.append('goal', form.goal);
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitMessage('✓ Form Submitted Successfully');
+        setTimeout(() => {
+          onClose?.();
+        }, 1500);
+      } else {
+        setSubmitMessage(`Error: ${data.message}`);
+      }
+    } catch (error) {
+      setSubmitMessage('Error submitting form. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-lg px-4">
@@ -131,9 +168,16 @@ export default function ConsultationForm({ onClose }: { onClose?: () => void }) 
               Our team will contact you within 24 hours.
             </p>
 
-            <button className="px-10 py-4 rounded-full font-semibold text-white bg-gradient-to-r from-[#FF6B6B] to-[#4ECDC4] hover:scale-105 transition">
-              Submit & Get a Call Back
+            <button 
+              onClick={handleSubmit}
+              disabled={submitting}
+              className="px-10 py-4 rounded-full font-semibold text-white bg-gradient-to-r from-[#FF6B6B] to-[#4ECDC4] hover:scale-105 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {submitting ? 'Submitting...' : 'Submit & Get a Call Back'}
             </button>
+            {submitMessage && (
+              <p className="mt-4 text-white/80">{submitMessage}</p>
+            )}
           </div>
         )}
 
