@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, Phone, Search, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, Circle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Header() {
@@ -7,7 +7,9 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [webOpen, setWebOpen] = useState(false);
+  const [publicRelationsOpen, setPublicRelationsOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
+  const publicRelationsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -21,6 +23,9 @@ export default function Header() {
       if (servicesRef.current && !servicesRef.current.contains(event.target as Node)) {
         setServicesOpen(false);
         setWebOpen(false);
+      }
+      if (publicRelationsRef.current && !publicRelationsRef.current.contains(event.target as Node)) {
+        setPublicRelationsOpen(false);
       }
     };
 
@@ -41,7 +46,7 @@ export default function Header() {
 
           {/* LOGO */}
           <Link to="/" className="text-2xl font-bold text-white tracking-wide">
-            thrive
+            Smart Crafts Circle
           </Link>
 
           {/* DESKTOP NAV */}
@@ -78,13 +83,13 @@ export default function Header() {
                     {webOpen && (
                       <div className="mt-3 ml-4 space-y-3">
                         <Link
-                          to="/services/wordpress"
+                          to="/wordpress"
                           className="block font-medium text-white/80 hover:text-[#4ECDC4] hover:underline transition-colors"
                         >
                           WordPress Website Development
                         </Link>
                         <Link
-                          to="/services/ecommerce"
+                          to="/EcommerceDevelopmentPage"
                           className="block font-medium text-white/80 hover:text-[#4ECDC4] hover:underline transition-colors"
                         >
                           Ecommerce Website Development
@@ -118,14 +123,42 @@ export default function Header() {
               )}
             </div>
 
-            {/* OTHER LINKS */}
-            <a
-              href="/#work"
-              className="text-white/80 hover:text-[#4ECDC4] font-medium"
+            {/* PUBLIC RELATIONS */}
+            <div
+              className="relative"
+              ref={publicRelationsRef}
             >
-              Work
-            </a>
+              <button 
+                onClick={() => setPublicRelationsOpen(!publicRelationsOpen)}
+                className="flex items-center gap-1 text-white/80 hover:text-[#4ECDC4] font-medium"
+              >
+                Public Relations <ChevronDown size={16} />
+              </button>
 
+              {publicRelationsOpen && (
+                <div 
+                  className="absolute left-0 mt-6 w-64 rounded-3xl bg-[#0a0e27]/95 backdrop-blur-xl p-6 shadow-2xl space-y-4 border border-white/10"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Link
+                    to="/services/marketing-pr"
+                    className="block font-semibold text-white hover:text-[#4ECDC4] hover:underline transition-colors"
+                  >
+                    Marketing PR
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* CAREER */}
+            <Link
+              to="/careers"
+              className="block text-white/80 hover:text-[#4ECDC4] font-medium"
+            >
+              Careers
+            </Link>
+
+            {/* OTHER LINKS */}
             <Link
               to="/about"
               className="text-white/80 hover:text-[#4ECDC4] font-medium"
@@ -140,21 +173,6 @@ export default function Header() {
               Contact
             </Link>
           </nav>
-
-          {/* RIGHT ACTIONS */}
-          <div className="hidden lg:flex items-center space-x-6">
-            <a
-              href="tel:866-908-4748"
-              className="flex items-center text-[#A8E6CF] font-semibold"
-            >
-              <Phone className="h-4 w-4 mr-2" />
-              866-908-4748
-            </a>
-
-            <button className="bg-white/10 hover:bg-white/20 text-white p-2 rounded-full transition">
-              <Search className="h-5 w-5" />
-            </button>
-          </div>
 
           {/* MOBILE BUTTON */}
           <button
@@ -171,23 +189,18 @@ export default function Header() {
             <Link to="/services" className="block text-white/80">
               Services
             </Link>
-            <a href="/#work" className="block text-white/80">
-              Work
-            </a>
+            <Link to="/public-relations" className="block text-white/80">
+              Public Relations
+            </Link>
+            <Link to="/careers" className="block text-white/80">
+              Careers
+            </Link>
             <Link to="/about" className="block text-white/80">
               About Us
             </Link>
             <Link to="/contact" className="block text-white/80">
               Contact
             </Link>
-
-            <a
-              href="tel:866-908-4748"
-              className="flex items-center text-[#A8E6CF] font-semibold pt-4"
-            >
-              <Phone className="h-4 w-4 mr-2" />
-              866-908-4748
-            </a>
           </div>
         )}
       </div>

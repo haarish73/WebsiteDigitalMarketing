@@ -156,7 +156,7 @@ export default function ContactSection() {
   const services = [
     'SEO Marketing',
     'Social Media Management',
-    'Content Strategy',
+    'Content Creation',
     'PPC Advertising',
     'Email Marketing',
     'Analytics & Reporting'

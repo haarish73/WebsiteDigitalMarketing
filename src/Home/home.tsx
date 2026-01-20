@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect, useRef } from 'react';
-import { Zap, Target, TrendingUp, Users, BarChart3, Rocket, ChevronRight, Play } from 'lucide-react';
+import { Zap, Target, TrendingUp, Users, BarChart3, Rocket, ChevronRight, Play, Building, Heart, Home, DollarSign, GraduationCap, ShoppingCart, Plane, Code, icons } from 'lucide-react';
 import ConsultationForm from '../components/Consulation';
 
 export default function DigitalMarketingHomepage() {
@@ -153,13 +154,15 @@ export default function DigitalMarketingHomepage() {
     };
   }, []);
 
-  const services = [
-    { icon: Zap, title: 'SEO Optimization', color: '#FF6B6B', desc: 'Dominate search rankings' },
-    { icon: Target, title: 'Paid Advertising', color: '#4ECDC4', desc: 'ROI-focused campaigns' },
-    { icon: TrendingUp, title: 'Social Media', color: '#FFE66D', desc: 'Viral content strategy' },
-    { icon: Users, title: 'Brand Strategy', color: '#A8E6CF', desc: 'Build lasting connections' },
-    { icon: BarChart3, title: 'Analytics', color: '#FF6B6B', desc: 'Data-driven insights' },
-    { icon: Rocket, title: 'Growth Hacking', color: '#4ECDC4', desc: 'Exponential scaling' },
+  const industries = [
+    {name: "Small Crafts Circle", icon: Code },
+    { name: "Local Small Businesses", icon: Building },
+    { name: "Healthcare & Medical", icon: Heart },
+    { name: "Real Estate & Property", icon: Home },
+    {name:"Digital Marketing", icon: Plane },
+    { name: "Education & eLearning", icon: GraduationCap },
+    { name: "Retail & E-Commerce", icon: ShoppingCart }
+  
   ];
 
   const stats = [
@@ -167,6 +170,45 @@ export default function DigitalMarketingHomepage() {
     { value: '250%', label: 'Avg ROI Increase' },
     { value: '50M+', label: 'Leads Generated' },
     { value: '98%', label: 'Client Satisfaction' },
+  ];
+
+  const services = [
+    {
+      title: 'Digital Marketing',
+      desc: 'Comprehensive digital marketing strategies to boost your online presence and drive targeted traffic.',
+      icon: Zap,
+      color: '#FF6B6B'
+    },
+    {
+      title: 'SEO Optimization',
+      desc: 'Improve your search engine rankings and visibility with our expert SEO services.',
+      icon: Target,
+      color: '#4ECDC4'
+    },
+    {
+      title: 'Social Media Marketing',
+      desc: 'Engage your audience and build brand loyalty through strategic social media campaigns.',
+      icon: TrendingUp,
+      color: '#FFE66D'
+    },
+    {
+      title: 'Content Creation',
+      desc: 'Create compelling content that resonates with your audience and drives conversions.',
+      icon: Users,
+      color: '#FF6B6B'
+    },
+    {
+      title: 'Analytics & Insights',
+      desc: 'Data-driven insights to optimize your marketing efforts and maximize ROI.',
+      icon: BarChart3,
+      color: '#4ECDC4'
+    },
+    {
+      title: 'Brand Strategy',
+      desc: 'Develop a strong brand identity that sets you apart from the competition.',
+      icon: Rocket,
+      color: '#FFE66D'
+    }
   ];
 
   return (
@@ -197,16 +239,7 @@ export default function DigitalMarketingHomepage() {
 
         {/* Hero Section */}
         <section className="container mx-auto px-6 py-20 text-center">
-          <div 
-            className="inline-block mb-6 px-6 py-2 rounded-full text-sm font-semibold text-white"
-            style={{
-              background: 'rgba(255, 255, 255, 0.08)',
-              backdropFilter: 'blur(15px)',
-              border: '2px solid rgba(255, 255, 255, 0.15)',
-            }}
-          >
-            🚀 Trusted by 500+ Growing Brands
-          </div>
+         
           
           <h1 
             className="text-7xl font-bold mb-6 leading-tight"
@@ -219,11 +252,11 @@ export default function DigitalMarketingHomepage() {
               animation: 'textGlow 3s ease-in-out infinite',
             }}
           >
-            Scale Your Business<br />with Data-Driven Marketing
+            Smart Crafts Circle
           </h1>
           
           <p className="text-xl text-white/70 max-w-2xl mx-auto mb-12">
-            We combine cutting-edge technology with creative strategy to deliver measurable results that transform your digital presence.
+            Crafting Brands Creating Impacts
           </p>
 
           <div className="flex gap-6 justify-center items-center">
@@ -271,6 +304,29 @@ export default function DigitalMarketingHomepage() {
             </button>
           </div>
         </section>
+
+        {/* Industries Marquee */}
+        <div className="py-8 overflow-hidden whitespace-nowrap flex items-center"
+          style={{
+            background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
+            backgroundSize: '200% 200%',
+            animation: 'gradientShift 8s ease infinite',
+          }}>
+          <div className="flex animate-marquee">
+            {[...industries, ...industries].map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <div key={i} className="flex items-center mx-12">
+                  <Icon className="w-8 h-8 text-white mr-4" />
+                  <span className="text-white text-xl font-bold uppercase tracking-wide">{item.name}</span>
+                  <span className="text-white mx-8 text-2xl">✱</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <AboutSection />
 
         {/* Stats Section */}
         <section className="container mx-auto px-6 py-16">
@@ -386,6 +442,156 @@ export default function DigitalMarketingHomepage() {
           </div>
         </section>
 
+        {/* SERVICES SECTION */}
+        <section id="services" className="container mx-auto px-6 py-24">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <p className="text-lime-400 font-semibold tracking-widest mb-2">
+              * OUR SERVICES
+            </p>
+            <h2 className="text-5xl font-bold text-white leading-tight">
+              <span className="text-lime-400">Digital Marketing</span> Services <br />
+              We Offer
+            </h2>
+          </div>
+
+          {/* Tabs */}
+          <div className="flex gap-4 flex-wrap mb-12">
+            {[
+              "Website Development Services",
+              
+              "Digital Marketing",
+            ].map((tab, i) => (
+              <button
+                key={i}
+                className={`px-6 py-3 rounded-full text-sm font-semibold transition
+                  ${
+                    i === 0
+                      ? "bg-lime-400 text-black"
+                      : "bg-white/10 text-white hover:bg-white/20"
+                  }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+
+          {/* Cards Grid */}
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "WordPress Website Development Services",
+                img: "/images/wordpress.jpg",
+              },
+              {
+                title: "Shopify Website Development Services",
+                img: "/images/shopify.jpg",
+              },
+              {
+                title: "E-Commerce Website Development Services",
+                img: "/images/ecommerce.jpg",
+              },
+              {
+                title: "Website Redesign & Revamp",
+                img: "/images/redesign.jpg",
+              },
+              {
+                title: "UI/UX Design",
+                img: "/images/uiux.jpg",
+              },
+              {
+                title: "Website Development Services",
+                img: "/images/webdev.jpg",
+              },
+            ].map((service, i) => (
+              <div
+                key={i}
+                className="group rounded-3xl overflow-hidden bg-white/5 border border-white/10 hover:border-lime-400/60 transition"
+              >
+                <div className="relative h-52 overflow-hidden">
+                  <img
+                    src={service.img}
+                    alt={service.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition" />
+                </div>
+
+                <div className="p-6">
+                  <h3 className="text-white font-semibold text-lg">
+                    {service.title}
+                  </h3>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* FREE QUOTE SECTION */}
+        <section className="container mx-auto px-6 py-24">
+          <h2 className="text-4xl font-light text-white mb-12 text-center">
+            Get a <span className="text-lime-400 font-semibold">Free Quote</span> Today!
+          </h2>
+
+          <div className="max-w-5xl mx-auto bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm">
+            <form>
+              {/* Name Fields */}
+              <div className="grid md:grid-cols-2 gap-6 mb-6">
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  className="w-full px-5 py-4 rounded-xl bg-transparent border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-lime-400 transition font-bold"
+                />
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  className="w-full px-5 py-4 rounded-xl bg-transparent border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-lime-400 transition font-bold"
+                />
+              </div>
+
+              {/* Phone */}
+              <div className="mb-6">
+                <input
+                  type="tel"
+                  placeholder="Phone No"
+                  className="w-full px-5 py-4 rounded-xl bg-transparent border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-lime-400 transition font-bold"
+                />
+              </div>
+
+              {/* Email */}
+              <div className="mb-6">
+                <input
+                  type="email"
+                  placeholder="E-mail"
+                  className="w-full px-5 py-4 rounded-xl bg-transparent border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-lime-400 transition font-bold"
+                />
+              </div>
+
+              {/* Message */}
+              <div className="mb-10">
+                <textarea
+                  rows={5}
+                  placeholder="Message"
+                  className="w-full px-5 py-4 rounded-xl bg-transparent border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-lime-400 transition resize-none font-bold"
+                />
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full py-4 rounded-xl bg-lime-400 text-black font-semibold tracking-wide hover:brightness-110 transition"
+              >
+                Submit Message
+              </button>
+
+              {/* Small Dot Indicator */}
+              <div className="flex justify-center mt-6">
+                <span className="w-2 h-2 rounded-full bg-lime-400" />
+              </div>
+            </form>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="container mx-auto px-6 py-24">
           <div 
@@ -489,7 +695,58 @@ export default function DigitalMarketingHomepage() {
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
+
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        .animate-marquee {
+          display: flex;
+          animation: marquee 40s linear infinite;
+        }
       `}</style>
     </div>
+  );
+}
+
+function AboutSection() {
+  return (
+    <section className="relative w-full py-24 px-6 md:px-16 bg-transparent">
+      <div className="max-w-6xl mx-auto">
+        
+        {/* Text Content */}
+        <p className="text-3xl md:text-5xl font-medium leading-snug text-white">
+          We are{" "}
+          <span className="text-cyan-500 font-semibold">
+            Smart Crafts Circle
+          </span>
+          . A creative digital marketing studio focused on building brands,
+          driving growth, and shaping powerful online identities. From{" "}
+          <span className="text-cyan-500 italic font-semibold">
+            strategic marketing
+          </span>{" "}
+          to high-impact digital experiences, we help businesses connect,
+          convert, and scale in the digital world.
+        </p>
+
+        {/* Stats */}
+        <div className="mt-16 flex flex-col sm:flex-row gap-16">
+          <div>
+            <h2 className="text-6xl font-bold text-cyan-500">100%</h2>
+            <p className="mt-2 tracking-widest text-sm text-gray-300">
+              CLIENT SATISFACTION
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-6xl font-bold text-cyan-500">360°</h2>
+            <p className="mt-2 tracking-widest text-sm text-gray-300">
+              DIGITAL MARKETING SOLUTIONS
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
