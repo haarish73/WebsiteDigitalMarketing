@@ -8,6 +8,9 @@ export default function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [webOpen, setWebOpen] = useState(false);
   const [publicRelationsOpen, setPublicRelationsOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileWebOpen, setMobileWebOpen] = useState(false);
+  const [mobilePublicRelationsOpen, setMobilePublicRelationsOpen] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
   const publicRelationsRef = useRef<HTMLDivElement>(null);
 
@@ -135,20 +138,36 @@ export default function Header() {
                 Public Relations <ChevronDown size={16} />
               </button>
 
-              {publicRelationsOpen && (
-                <div 
-                  className="absolute left-0 mt-6 w-64 rounded-3xl bg-[#0a0e27]/95 backdrop-blur-xl p-6 shadow-2xl space-y-4 border border-white/10"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <Link
-                    to="/services/marketing-pr"
-                    className="block font-semibold text-white hover:text-[#4ECDC4] hover:underline transition-colors"
-                  >
-                    Marketing PR
-                  </Link>
-                </div>
-              )}
+           {publicRelationsOpen && (
+  <div 
+    className="absolute left-0 mt-6 w-64 rounded-3xl bg-[#0a0e27]/95 backdrop-blur-xl p-6 shadow-2xl space-y-4 border border-white/10"
+    onClick={(e) => e.stopPropagation()}
+  >
+    <Link
+      to="/services/marketing-pr"
+      className="block font-semibold text-white hover:text-[#4ECDC4] hover:underline transition-colors"
+    >
+      Marketing PR
+    </Link>
+
+    <Link
+      to="/services/political-pr"
+      className="block font-semibold text-white hover:text-[#4ECDC4] hover:underline transition-colors"
+    >
+      Political PR
+    </Link>
+  </div>
+)}
+
             </div>
+
+            {/* PRODUCTIONS */}
+            <Link
+              to="/productions"
+              className="block text-white/80 hover:text-[#4ECDC4] font-medium"
+            >
+              Productions
+            </Link>
 
             {/* CAREER */}
             <Link
@@ -186,11 +205,46 @@ export default function Header() {
         {/* MOBILE MENU */}
         {isMenuOpen && (
           <div className="lg:hidden bg-[#0a0e27]/95 backdrop-blur-md rounded-xl p-6 mt-2 space-y-4">
-            <Link to="/services" className="block text-white/80">
-              Services
-            </Link>
-            <Link to="/public-relations" className="block text-white/80">
-              Public Relations
+            {/* Services in mobile */}
+            <div>
+              <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="w-full flex justify-between items-center text-white/80">
+                Services <ChevronDown size={16} />
+              </button>
+              {mobileServicesOpen && (
+                <div className="mt-2 ml-4 space-y-2">
+                  <div>
+                    <button onClick={() => setMobileWebOpen(!mobileWebOpen)} className="w-full flex justify-between items-center text-white/80">
+                      Website Development <ChevronDown size={14} />
+                    </button>
+                    {mobileWebOpen && (
+                      <div className="mt-2 ml-4 space-y-2">
+                        <Link to="/wordpress" className="block text-white/80">WordPress</Link>
+                        <Link to="/EcommerceDevelopmentPage" className="block text-white/80">Ecommerce</Link>
+                        <Link to="/services/shopify" className="block text-white/80">Shopify</Link>
+                      </div>
+                    )}
+                  </div>
+                  <Link to="/services/seo" className="block text-white/80">SEO Services</Link>
+                  <Link to="/services/digital-marketing" className="block text-white/80">Digital Marketing</Link>
+                </div>
+              )}
+            </div>
+
+            {/* Public Relations in mobile */}
+            <div>
+              <button onClick={() => setMobilePublicRelationsOpen(!mobilePublicRelationsOpen)} className="w-full flex justify-between items-center text-white/80">
+                Public Relations <ChevronDown size={16} />
+              </button>
+              {mobilePublicRelationsOpen && (
+                <div className="mt-2 ml-4 space-y-2">
+                  <Link to="/services/marketing-pr" className="block text-white/80">Marketing PR</Link>
+                  <Link to="/services/political-pr" className="block text-white/80">Political PR</Link>
+                </div>
+              )}
+            </div>
+            
+            <Link to="/productions" className="block text-white/80">
+              Productions
             </Link>
             <Link to="/careers" className="block text-white/80">
               Careers

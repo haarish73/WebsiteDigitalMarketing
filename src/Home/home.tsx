@@ -238,7 +238,7 @@ export default function DigitalMarketingHomepage() {
       <div className="relative z-20">
 
         {/* Hero Section */}
-        <section className="container mx-auto px-6 py-20 text-center">
+        <section className="container mx-auto px-6 py-40 text-center">
          
           
           <h1 
@@ -255,8 +255,20 @@ export default function DigitalMarketingHomepage() {
             Smart Crafts Circle
           </h1>
           
-          <p className="text-xl text-white/70 max-w-2xl mx-auto mb-12">
-            Crafting Brands Creating Impacts
+          <p className="text-xl text-white/70 max-w-2xl mx-auto mb-12 flex justify-center gap-2">
+            {"Crafting Brands Creating Impacts".split(" ").map((word, index) => (
+              <span
+                key={index}
+                className="inline-block"
+                style={{
+                  animation: `fadeInWord 0.5s ease-out forwards`,
+                  animationDelay: `${index * 0.2}s`,
+                  opacity: 0, // Start as invisible
+                }}
+              >
+                {word}
+              </span>
+            ))}
           </p>
 
           <div className="flex gap-6 justify-center items-center">
@@ -704,6 +716,17 @@ export default function DigitalMarketingHomepage() {
         .animate-marquee {
           display: flex;
           animation: marquee 40s linear infinite;
+        }
+        
+        @keyframes fadeInWord {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
       `}</style>
     </div>

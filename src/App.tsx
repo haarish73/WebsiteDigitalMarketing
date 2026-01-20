@@ -11,7 +11,8 @@ import Seo from './components/Seo';
 import DigitalMarketing from './components/DigitalMarketing';
 import Career from './components/Career';
 import MarketingPr from './PublicRelations/MarketingPr';
-// import PoliticalPr from './PublicRelations/PolitcalPr'; // This file is empty and causes the app to crash.
+import PoliticalPr from './PublicRelations/PolitcalPr';
+import ProductionsPage from './productions/productions';
 
 function App() {
   return (
@@ -28,9 +29,10 @@ function App() {
           <Route path="/services/shopify" element={<Shopify />} />
           <Route path="/services/seo" element={<Seo />} />
           <Route path="/services/digital-marketing" element={<DigitalMarketing />} />
+          <Route path="/productions" element={<ProductionsPage />} />
           <Route path="/careers" element={<Career />} />
           <Route path="/services/marketing-pr" element={<MarketingPr />} />
-          {/* <Route path="/services/political-pr" element={<PoliticalPr />} /> */}
+          <Route path="/services/political-pr" element={<PoliticalPr />} />
         </Routes>
       </div>
     </Router>
