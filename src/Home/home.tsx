@@ -1,6 +1,235 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Zap, Target, TrendingUp, Users, BarChart3, Rocket, ChevronRight, Play, Building, Heart, Home, DollarSign, GraduationCap, ShoppingCart, Plane, Code, icons, Landmark } from 'lucide-react';
 import ConsultationForm from '../components/Consulation';
+import * as THREE from "three";
+
+const HeroGlobe = () => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    let scene: THREE.Scene;
+    let camera: THREE.PerspectiveCamera;
+    let renderer: THREE.WebGLRenderer;
+    let globeGroup: THREE.Group;
+    const arcs: {
+      curve: THREE.QuadraticBezierCurve3;
+      pulse: THREE.Mesh;
+      offset: number;
+    }[] = [];
+
+    const init = () => {
+      scene = new THREE.Scene();
+
+      camera = new THREE.PerspectiveCamera(
+        45,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      camera.position.z = 9;
+
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+
+      containerRef.current!.appendChild(renderer.domElement);
+
+      globeGroup = new THREE.Group();
+      scene.add(globeGroup);
+
+      createWorldMap();
+      createConnections();
+
+      window.addEventListener("resize", onResize);
+      animate();
+    };
+
+    const createWorldMap = () => {
+      const radius = 3.5;
+
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d")!;
+      canvas.width = 200;
+      canvas.height = 100;
+
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src =
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Earth_map_dots.svg/1000px-Earth_map_dots.svg.png";
+
+      img.onload = () => {
+        ctx.drawImage(img, 0, 0, 200, 100);
+        const data = ctx.getImageData(0, 0, 200, 100).data;
+
+        const positions: number[] = [];
+
+        for (let y = 0; y < 100; y++) {
+          for (let x = 0; x < 200; x++) {
+            const alpha = data[(y * 200 + x) * 4 + 3];
+            if (alpha > 128) {
+              const phi = (1 - y / 100) * Math.PI;
+              const theta = (x / 200) * Math.PI * 2;
+
+              positions.push(
+                -radius * Math.sin(phi) * Math.cos(theta),
+                radius * Math.cos(phi),
+                radius * Math.sin(phi) * Math.sin(theta)
+              );
+            }
+          }
+        }
+
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute(
+          "position",
+          new THREE.Float32BufferAttribute(positions, 3)
+        );
+
+        const material = new THREE.PointsMaterial({
+          color: 0xd4af37,
+          size: 0.035,
+          transparent: true,
+          opacity: 0.7,
+          blending: THREE.AdditiveBlending,
+        });
+
+        globeGroup.add(new THREE.Points(geometry, material));
+      };
+
+      const glow = new THREE.Mesh(
+        new THREE.SphereGeometry(radius * 1.02, 32, 32),
+        new THREE.MeshBasicMaterial({
+          color: 0xd4af37,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.05,
+        })
+      );
+
+      globeGroup.add(glow);
+    };
+
+    const createConnections = () => {
+      const radius = 3.5;
+
+      const hubs = [
+        { lat: 40.7, lon: -74 },
+        { lat: 51.5, lon: 0 },
+        { lat: 35.6, lon: 139 },
+        { lat: -33.8, lon: 151 },
+        { lat: 25.2, lon: 55 },
+        { lat: -23.5, lon: -46 },
+      ];
+
+      hubs.forEach((start, i) => {
+        const end = hubs[(i + 1) % hubs.length];
+        createArc(start, end, radius);
+      });
+    };
+
+    const latLonToVector3 = (
+      lat: number,
+      lon: number,
+      radius: number
+    ): THREE.Vector3 => {
+      const phi = (90 - lat) * (Math.PI / 180);
+      const theta = (lon + 180) * (Math.PI / 180);
+
+      return new THREE.Vector3(
+        -radius * Math.sin(phi) * Math.cos(theta),
+        radius * Math.cos(phi),
+        radius * Math.sin(phi) * Math.sin(theta)
+      );
+    };
+
+    const createArc = (
+      startHub: { lat: number; lon: number },
+      endHub: { lat: number; lon: number },
+      radius: number
+    ) => {
+      const start = latLonToVector3(startHub.lat, startHub.lon, radius);
+      const end = latLonToVector3(endHub.lat, endHub.lon, radius);
+
+      const mid = start
+        .clone()
+        .lerp(end, 0.5)
+        .normalize()
+        .multiplyScalar(radius * 1.5);
+
+      const curve = new THREE.QuadraticBezierCurve3(start, mid, end);
+      const geometry = new THREE.BufferGeometry().setFromPoints(
+        curve.getPoints(50)
+      );
+
+      const line = new THREE.Line(
+        geometry,
+        new THREE.LineBasicMaterial({
+          color: 0xd4af37,
+          transparent: true,
+          opacity: 0.2,
+        })
+      );
+
+      globeGroup.add(line);
+
+      const pulse = new THREE.Mesh(
+        new THREE.SphereGeometry(0.03, 8, 8),
+        new THREE.MeshBasicMaterial({ color: 0xffffff })
+      );
+
+      globeGroup.add(pulse);
+      arcs.push({ curve, pulse, offset: Math.random() });
+    };
+
+    const animate = () => {
+      requestAnimationFrame(animate);
+
+      globeGroup.rotation.y += 0.001;
+
+      arcs.forEach((arc) => {
+        arc.offset += 0.005;
+        if (arc.offset > 1) arc.offset = 0;
+        arc.pulse.position.copy(arc.curve.getPointAt(arc.offset));
+        arc.pulse.scale.setScalar(Math.sin(arc.offset * Math.PI) * 2);
+      });
+
+      renderer.render(scene, camera);
+    };
+
+    const onResize = () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    };
+
+    init();
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      renderer.dispose();
+      containerRef.current?.removeChild(renderer.domElement);
+    };
+  }, []);
+
+  return (
+    <div className="relative w-full h-screen bg-[#010409] overflow-hidden mt-40">
+      <div ref={containerRef} className="absolute inset-0 z-[1]" />
+
+      <div className="relative z-20 flex items-center justify-center h-screen text-center pointer-events-none">
+        <div className="p-16 rounded-full bg-[radial-gradient(circle,rgba(1,4,9,0.9)_0%,transparent_80%)]">
+          <h1 className="text-5xl md:text-7xl font-extrabold uppercase bg-gradient-to-r from-white via-[#D4AF37] to-white bg-[length:200%] bg-clip-text text-transparent animate-[shine_6s_linear_infinite]">
+            Social Crafts Circle
+          </h1>
+          <p className="mt-4 text-sm tracking-[0.6em] text-[#D4AF37]">
+            CRAFTING BRANDS CREATING IMPACTS
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default function DigitalMarketingHomepage() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
@@ -136,7 +365,7 @@ export default function DigitalMarketingHomepage() {
   ];
 
   return (
-    <div className="min-h-screen w-full relative overflow-hidden">
+    <div className="min-h-screen w-full relative overflow-hidden bg-[#010409]">
 
       
       {/* Mouse glow effect */}
@@ -156,67 +385,8 @@ export default function DigitalMarketingHomepage() {
       {/* Content Area */}
       <div className="relative z-20">
 
-        {/* Hero Section */}
-        <section className="container mx-auto px-6 py-40 text-center">
-          <h1 
-            className="text-7xl font-bold mb-6 leading-tight"
-            style={{
-              background: 'linear-gradient(135deg, #a1a1aa 0%, #d4d4d8 50%, #e4e4e7 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              filter: 'drop-shadow(0 0 18px rgba(161, 161, 170, 0.25))',
-            }}
-          >
-            Social Crafts Circle
-          </h1>
-          
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-12 flex justify-center gap-2">
-            {"Crafting Brands Creating Impacts".split(" ").map((word, index) => (
-              <span
-                key={index}
-                className="inline-block"
-                style={{
-                  animation: `fadeInWord 0.5s ease-out forwards`,
-                  animationDelay: `${index * 0.2}s`,
-                  opacity: 0,
-                }}
-              >
-                {word}
-              </span>
-            ))}
-          </p>
-
-          <div className="flex gap-6 justify-center items-center">
-            <button 
-            onClick={() =>     window.open(
-      "https://wa.me/919030492596?text=Hello%2C%20Thanks%20for%20connecting%20with%20Social%20Craft%20Circle.%0AWe%20would%20love%20to%20understand%20your%20requirements%20and%20help%20you%20grow.",
-      '_blank',
-      'noopener,noreferrer'
-    )}
-              className="px-10 py-4 rounded-full text-white font-bold text-lg flex items-center gap-3"
-              style={{
-                background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
-                backgroundSize: '200% 200%',
-                boxShadow: '0 25px 60px rgba(255, 107, 107, 0.6), 0 0 80px rgba(78, 205, 196, 0.4)',
-                animation: 'gradientShift 4s ease infinite',
-                transition: 'all 0.5s',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-8px) scale(1.05)';
-                e.currentTarget.style.boxShadow = '0 35px 80px rgba(255, 107, 107, 0.8), 0 0 120px rgba(78, 205, 196, 0.6)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                e.currentTarget.style.boxShadow = '0 25px 60px rgba(255, 107, 107, 0.6), 0 0 80px rgba(78, 205, 196, 0.4)';
-              }}
-            >
-              Start Growing Today
-              <ChevronRight size={20} />
-            </button>
-
-          </div>
-        </section>
+        {/* HeroGlobe Section */}
+        <HeroGlobe />
 
         {/* Industries Marquee */}
        <div className="mt-52 py-8 overflow-hidden whitespace-nowrap flex items-center"
@@ -641,6 +811,15 @@ export default function DigitalMarketingHomepage() {
           to {
             opacity: 1;
             transform: translateY(0);
+          }
+        }
+
+        @keyframes shine {
+          0% {
+            background-position: -1000px 0;
+          }
+          100% {
+            background-position: 1000px 0;
           }
         }
       `}</style>
