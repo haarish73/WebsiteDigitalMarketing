@@ -798,6 +798,7 @@ export default function DigitalMarketingHomepage() {
             <p>© 2026 DigiBoost. Elevating brands through innovation.</p>
           </div>
         </footer>
+        
       </div>
 
       {/* Consultation Modal */}
