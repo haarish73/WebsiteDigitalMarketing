@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, ReactNode } from 'react';
+import {Link} from 'react-router-dom';
 
 // --- ICONS (Inline SVGs to avoid dependencies) ---
 const Icons = {
@@ -237,10 +238,14 @@ const HeroSection = () => {
                 Stop guessing. We translate complex data into actionable strategies that drive measurable revenue growth and market dominance.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
-                <NeonButton variant="primary">Get Free Consultation</NeonButton>
-                
-            </div>
+           <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
+  <Link to="/contact">
+    <NeonButton variant="primary">
+      Get Free Consultation
+    </NeonButton>
+  </Link>
+</div>
+
         </section>
     );
 };
@@ -284,9 +289,27 @@ const ServiceCard = ({ title, benefit, icon, color }: ServiceCardProps) => {
             <h3 className="text-2xl font-bold mb-4 text-white">{title}</h3>
             <p className="text-gray-400 mb-8 flex-grow text-lg">{benefit}</p>
 
-            <a href="#" className={`flex items-center gap-2 text-lg font-medium transition-colors duration-300`} style={{ color: isHovered ? color : 'white' }}>
-                Learn more <Icons.ArrowRight />
-            </a>
+           <a
+  href="/contact"
+  className="flex items-center gap-3 px-5 py-3 rounded-xl text-lg font-semibold transition-all duration-300"
+  style={{
+    color: 'white',
+    background: isHovered
+      ? color
+      : 'rgba(255,255,255,0.1)',
+    border: '2px solid rgba(255,255,255,0.2)',
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.transform = 'translateY(-2px)';
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform = 'translateY(0)';
+  }}
+>
+  Contact Now
+  <Icons.ArrowRight />
+</a>
+
         </div>
     );
 }
@@ -317,44 +340,44 @@ const ServicesSection = () => {
 };
 
 
-// 3. Testimonials Section
-const TestimonialsSection = () => {
-    const testimonials = [
-        { name: "Alex R.", company: "TechStart Inc.", quote: "They doubled our leads in 90 days. The data-driven approach is real.", rating: 5, color: "#FF6B6B" },
-        { name: "Sarah L.", company: "GrowthCo", quote: "Our CAC dropped by 40% while scaling ad spend. Phenomenal results.", rating: 5, color: "#4ECDC4" },
-        { name: "Marcus K.", company: "Apex Solutions", quote: "Finally an agency that understands revenue, not just vanity metrics.", rating: 5, color: "#FFE66D" },
-    ];
+// // 3. Testimonials Section
+// const TestimonialsSection = () => {
+//     const testimonials = [
+//         { name: "Alex R.", company: "TechStart Inc.", quote: "They doubled our leads in 90 days. The data-driven approach is real.", rating: 5, color: "#FF6B6B" },
+//         { name: "Sarah L.", company: "GrowthCo", quote: "Our CAC dropped by 40% while scaling ad spend. Phenomenal results.", rating: 5, color: "#4ECDC4" },
+//         { name: "Marcus K.", company: "Apex Solutions", quote: "Finally an agency that understands revenue, not just vanity metrics.", rating: 5, color: "#FFE66D" },
+//     ];
 
-    return (
-        <section className="container mx-auto px-4 py-24">
-             <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold mb-6"><GradientText>Trusted By Growth Brands</GradientText></h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {testimonials.map((item, index) => (
-                    <GlassCard key={index} className="hover:!border-opacity-30 transition-all duration-300">
-                        <div className="flex gap-1 mb-6">
-                            {[...Array(item.rating)].map((_, i) => <Icons.Star key={i} />)}
-                        </div>
-                        <p className="text-xl leading-relaxed text-gray-200 italic mb-8">"{item.quote}"</p>
-                        <div className="flex items-center">
-                             {/* Pattern 5 simplified: Glowing Avatar placeholder */}
-                            <div className="w-12 h-12 rounded-full mr-4 relative overflow-hidden" style={{ border: `2px solid ${item.color}` }}>
-                                 <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
-                                 {/* Placeholder for actual image */}
-                                 <div className="w-full h-full bg-[#ffffff10]"></div> 
-                            </div>
-                            <div>
-                                <h4 className="font-bold">{item.name}</h4>
-                                <p className="text-sm text-gray-400">{item.company}</p>
-                            </div>
-                        </div>
-                    </GlassCard>
-                ))}
-            </div>
-        </section>
-    );
-};
+    // return (
+        // <section className="container mx-auto px-4 py-24">
+        //      <div className="text-center mb-16">
+        //         <h2 className="text-4xl md:text-5xl font-bold mb-6"><GradientText>Trusted By Growth Brands</GradientText></h2>
+        //     </div>
+        //     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        //         {testimonials.map((item, index) => (
+        //             <GlassCard key={index} className="hover:!border-opacity-30 transition-all duration-300">
+        //                 <div className="flex gap-1 mb-6">
+        //                     {[...Array(item.rating)].map((_, i) => <Icons.Star key={i} />)}
+        //                 </div>
+        //                 <p className="text-xl leading-relaxed text-gray-200 italic mb-8">"{item.quote}"</p>
+        //                 <div className="flex items-center">
+        //                      {/* Pattern 5 simplified: Glowing Avatar placeholder */}
+        //                     <div className="w-12 h-12 rounded-full mr-4 relative overflow-hidden" style={{ border: `2px solid ${item.color}` }}>
+        //                          <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+        //                          {/* Placeholder for actual image */}
+        //                          <div className="w-full h-full bg-[#ffffff10]"></div> 
+        //                     </div>
+        //                     <div>
+        //                         <h4 className="font-bold">{item.name}</h4>
+        //                         <p className="text-sm text-gray-400">{item.company}</p>
+        //                     </div>
+        //                 </div>
+        //             </GlassCard>
+        //         ))}
+        //     </div>
+        // </section>
+//     );
+// };
 
 
 // ================= FINAL ASSEMBLED PAGE =================
@@ -363,7 +386,7 @@ export default function AgencyLandingPage() {
     <AnimatedPageWrapper>
       <HeroSection />
       <ServicesSection />
-      <TestimonialsSection />
+      
       
       {/* Simple Footer for completion */}
       <footer className="container mx-auto px-4 py-12 text-center text-gray-500 border-t border-white/10">

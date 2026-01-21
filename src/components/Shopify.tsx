@@ -225,25 +225,29 @@ export default function DigitalMarketingWebsite() {
               </p>
 
               <button 
-                className="px-12 py-5 text-xl font-bold text-white rounded-full relative overflow-hidden"
-                style={{
-                  background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
-                  backgroundSize: '200% 200%',
-                  boxShadow: '0 25px 60px rgba(255, 107, 107, 0.6), 0 0 80px rgba(78, 205, 196, 0.4)',
-                  animation: 'gradientShift 4s ease infinite',
-                  transition: 'all 0.5s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-8px) scale(1.1)';
-                  e.currentTarget.style.boxShadow = '0 35px 80px rgba(255, 107, 107, 0.8), 0 0 120px rgba(78, 205, 196, 0.6)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 25px 60px rgba(255, 107, 107, 0.6), 0 0 80px rgba(78, 205, 196, 0.4)';
-                }}
-              >
-                Start Your Journey
-              </button>
+  onClick={() => window.location.href = 'tel:9030492596'}
+  className="px-12 py-5 text-xl font-bold text-white rounded-full relative overflow-hidden"
+  style={{
+    background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
+    backgroundSize: '200% 200%',
+    boxShadow: '0 25px 60px rgba(255, 107, 107, 0.6), 0 0 80px rgba(78, 205, 196, 0.4)',
+    animation: 'gradientShift 4s ease infinite',
+    transition: 'all 0.5s',
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.transform = 'translateY(-8px) scale(1.1)';
+    e.currentTarget.style.boxShadow =
+      '0 35px 80px rgba(255, 107, 107, 0.8), 0 0 120px rgba(78, 205, 196, 0.6)';
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform = 'translateY(0) scale(1)';
+    e.currentTarget.style.boxShadow =
+      '0 25px 60px rgba(255, 107, 107, 0.6), 0 0 80px rgba(78, 205, 196, 0.4)';
+  }}
+>
+  Start Your Journey
+</button>
+
             </div>
           </div>
         </section>
@@ -398,7 +402,8 @@ export default function DigitalMarketingWebsite() {
             <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
               Let's create a winning strategy together. Schedule your free consultation today.
             </p>
-            <button 
+            <button
+              onClick={() => window.location.href = 'mailto:connect@socialcraftscircle.com'}
               className="px-12 py-5 text-xl font-bold text-white rounded-full"
               style={{
                 background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%)',

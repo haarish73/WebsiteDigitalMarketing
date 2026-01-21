@@ -181,7 +181,7 @@ export default function AnimatedPageTemplate() {
               WebkitTextFillColor: 'transparent',
             }}
           >
-            Careers in Smart Crafts Circle
+            Careers in Social Crafts Circle
           </h1>
 
           <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-10">

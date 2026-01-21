@@ -200,13 +200,7 @@ export default function EcommerceDevelopmentPage() {
               <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
                 Building high-performance digital storefronts that scale from first sale to global dominance.
               </p>
-              <button className="px-12 py-5 text-xl font-bold text-white rounded-full relative overflow-hidden transition-all duration-500 hover:scale-110"
-                style={{
-                  background: 'linear-gradient(135deg, #4ECDC4 0%, #667eea 100%)',
-                  boxShadow: '0 25px 60px rgba(78, 205, 196, 0.4)',
-                }}>
-                Build My Store
-              </button>
+             
             </div>
           </div>
         </section>
@@ -324,9 +318,13 @@ export default function EcommerceDevelopmentPage() {
         <section className="py-24 px-4 pb-48">
           <div className="container mx-auto text-center bg-gradient-to-br from-white/5 to-transparent p-16 rounded-[40px] border border-white/10">
             <h2 className="text-5xl font-bold mb-8">Ready to start selling?</h2>
-            <button className="px-10 py-4 bg-white text-black font-bold rounded-full flex items-center gap-2 mx-auto hover:bg-gray-200 transition-colors">
-              Schedule a Consultation <ArrowRight className="w-5 h-5" />
-            </button>
+          <button
+  onClick={() => window.location.href = 'tel:9030492596'}
+  className="px-10 py-4 bg-white text-black font-bold rounded-full flex items-center gap-2 mx-auto hover:bg-gray-200 transition-colors"
+>
+  Schedule a Consultation <ArrowRight className="w-5 h-5" />
+</button>
+
           </div>
         </section>
       </div>

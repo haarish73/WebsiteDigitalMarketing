@@ -183,7 +183,7 @@ export default function WordPressDevelopmentPage() {
     { title: 'Post-Launch Support', desc: 'Ongoing maintenance and updates', icon: '06' },
   ];
 
-  const technologies = ['WordPress', 'WooCommerce', 'Shopify', 'Magento', 'AWS'];
+  const technologies = ['MERN STACK', 'MEAN STACK', 'SQL', 'MONGODB', 'AWS', 'JAVASCRIPT', 'HTML', 'CSS',  'POSTGRE SQL'];
 
   const testimonials = [
     { name: 'Rajesh Kumar', company: 'HealthCare Plus', text: 'They delivered a stunning healthcare website that increased our patient inquiries by 200%!', rating: 5 },
@@ -246,24 +246,27 @@ export default function WordPressDevelopmentPage() {
              
 
               <button 
-                className="px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-500 flex items-center gap-3"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  border: '2px solid rgba(0, 255, 127, 0.3)',
-                  color: '#00ff7f',
-                  backdropFilter: 'blur(10px)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(0, 255, 127, 0.1)';
-                  e.currentTarget.style.transform = 'translateY(-8px) scale(1.05)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                }}>
-                <Phone size={20} />
-                Call Us Now
-              </button>
+  onClick={() => window.location.href = 'tel:9030492596'}
+  className="px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-500 flex items-center gap-3"
+  style={{
+    background: 'rgba(255, 255, 255, 0.05)',
+    border: '2px solid rgba(0, 255, 127, 0.3)',
+    color: '#00ff7f',
+    backdropFilter: 'blur(10px)',
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.background = 'rgba(0, 255, 127, 0.1)';
+    e.currentTarget.style.transform = 'translateY(-8px) scale(1.05)';
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+    e.currentTarget.style.transform = 'translateY(0) scale(1)';
+  }}
+>
+  <Phone size={20} />
+  Call Us Now
+</button>
+
             </div>
           </div>
         </div>
@@ -479,7 +482,8 @@ export default function WordPressDevelopmentPage() {
                     ))}
                   </ul>
 
-                  <button 
+                 <button 
+                  onclick={() => window.location.href = 'tel:9030492596'}
                     className="w-full py-4 rounded-xl font-semibold transition-all duration-300"
                     style={{
                       background: plan.popular || isHovered ? '#00ff7f' : 'rgba(0, 255, 127, 0.2)',
@@ -634,72 +638,7 @@ export default function WordPressDevelopmentPage() {
           </div>
         </div>
 
-        {/* Testimonials */}
-        <div className="container mx-auto px-4 py-20">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4" style={{ color: '#ffffff' }}>
-            Client Success Stories
-          </h2>
-          <p className="text-center mb-16 text-xl" style={{ color: '#a0aec0' }}>
-            Stories that inspire results and long-term partnerships
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {testimonials.map((testimonial, idx) => (
-              <div 
-                key={idx}
-                className="p-8 rounded-2xl transition-all duration-500"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  border: '2px solid rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(15px)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(0, 255, 127, 0.08)';
-                  e.currentTarget.style.borderColor = '#00ff7f';
-                  e.currentTarget.style.transform = 'translateY(-10px)';
-                  e.currentTarget.style.boxShadow = '0 20px 50px rgba(0, 255, 127, 0.3)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}>
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} size={20} fill="#00ff7f" style={{ color: '#00ff7f' }} />
-                  ))}
-                </div>
-                <p className="mb-6 text-lg" style={{ color: '#a0aec0' }}>"{testimonial.text}"</p>
-                <div>
-                  <p className="font-bold" style={{ color: '#ffffff' }}>{testimonial.name}</p>
-                  <p className="text-sm" style={{ color: '#00ff7f' }}>{testimonial.company}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <button 
-              className="px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-500"
-              style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '2px solid rgba(0, 255, 127, 0.3)',
-                color: '#00ff7f',
-                backdropFilter: 'blur(10px)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(0, 255, 127, 0.1)';
-                e.currentTarget.style.transform = 'scale(1.05)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                e.currentTarget.style.transform = 'scale(1)';
-              }}>
-              View All Testimonials
-            </button>
-          </div>
-        </div>
+       
 
         {/* Final CTA */}
         <div className="container mx-auto px-4 py-20">

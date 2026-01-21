@@ -160,14 +160,14 @@ export default function DigitalMarketingServicesPage() {
     { 
       id: 'content', 
       icon: Megaphone, 
-      title: 'Content Marketing', 
+      title: 'Content Creations', 
       description: 'Create compelling content that attracts, engages, and converts your audience',
       color: '#FFE66D' 
     },
     { 
       id: 'email', 
       icon: Mail, 
-      title: 'Email Marketing', 
+      title: 'WhatsApp Marketing', 
       description: 'Nurture leads and boost sales with personalized email campaigns',
       color: '#A8E6CF' 
     },
@@ -279,27 +279,7 @@ export default function DigitalMarketingServicesPage() {
                 Transform your online presence with comprehensive digital marketing strategies that drive real results
               </p>
 
-              <button 
-                className="px-12 py-5 text-xl font-bold text-white rounded-full relative overflow-hidden"
-                style={{
-                  background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
-                  backgroundSize: '200% 200%',
-                  boxShadow: '0 25px 60px rgba(255, 107, 107, 0.6), 0 0 80px rgba(78, 205, 196, 0.4)',
-                  animation: 'gradientShift 4s ease infinite',
-                  transition: 'all 0.5s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-8px) scale(1.1)';
-                  e.currentTarget.style.boxShadow = '0 35px 80px rgba(255, 107, 107, 0.8), 0 0 120px rgba(78, 205, 196, 0.6)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 25px 60px rgba(255, 107, 107, 0.6), 0 0 80px rgba(78, 205, 196, 0.4)';
-                }}
-              >
-                Get Free Strategy Session
-              </button>
-            </div>
+                         </div>
           </div>
         </section>
 
@@ -580,25 +560,28 @@ export default function DigitalMarketingServicesPage() {
               <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
                 Let's build a comprehensive digital marketing strategy that drives growth, engagement, and revenue for your business.
               </p>
-              <button 
-                className="px-12 py-5 text-xl font-bold text-white rounded-full inline-flex items-center gap-3"
-                style={{
-                  background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%)',
-                  boxShadow: '0 25px 60px rgba(255, 107, 107, 0.6)',
-                  transition: 'all 0.5s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-8px) scale(1.1)';
-                  e.currentTarget.style.boxShadow = '0 35px 80px rgba(255, 107, 107, 0.8)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 25px 60px rgba(255, 107, 107, 0.6)';
-                }}
-              >
-                Launch Your Campaign
-                <ArrowRight className="w-6 h-6" />
-              </button>
+              <a href="tel:9030492596">
+  <button 
+    className="px-12 py-5 text-xl font-bold text-white rounded-full inline-flex items-center gap-3"
+    style={{
+      background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%)',
+      boxShadow: '0 25px 60px rgba(255, 107, 107, 0.6)',
+      transition: 'all 0.5s',
+    }}
+    onMouseEnter={(e) => {
+      e.currentTarget.style.transform = 'translateY(-8px) scale(1.1)';
+      e.currentTarget.style.boxShadow = '0 35px 80px rgba(255, 107, 107, 0.8)';
+    }}
+    onMouseLeave={(e) => {
+      e.currentTarget.style.transform = 'translateY(0) scale(1)';
+      e.currentTarget.style.boxShadow = '0 25px 60px rgba(255, 107, 107, 0.6)';
+    }}
+  >
+    Launch Your Campaign
+    <ArrowRight className="w-6 h-6" />
+  </button>
+</a>
+
             </div>
           </div>
         </section>

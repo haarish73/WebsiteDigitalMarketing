@@ -273,26 +273,6 @@ export default function SEOServicesPage() {
                 Dominate search results and drive targeted traffic with our proven SEO strategies
               </p>
 
-              <button 
-                className="px-12 py-5 text-xl font-bold text-white rounded-full relative overflow-hidden"
-                style={{
-                  background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
-                  backgroundSize: '200% 200%',
-                  boxShadow: '0 25px 60px rgba(255, 107, 107, 0.6), 0 0 80px rgba(78, 205, 196, 0.4)',
-                  animation: 'gradientShift 4s ease infinite',
-                  transition: 'all 0.5s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-8px) scale(1.1)';
-                  e.currentTarget.style.boxShadow = '0 35px 80px rgba(255, 107, 107, 0.8), 0 0 120px rgba(78, 205, 196, 0.6)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 25px 60px rgba(255, 107, 107, 0.6), 0 0 80px rgba(78, 205, 196, 0.4)';
-                }}
-              >
-                Get Free SEO Audit
-              </button>
             </div>
           </div>
         </section>
@@ -514,6 +494,7 @@ export default function SEOServicesPage() {
                 Let our SEO experts create a custom strategy to skyrocket your search rankings and drive qualified traffic.
               </p>
               <button 
+              onClick={() => window.location.href='mailto:connect@socialcraftscircle.com'}
                 className="px-12 py-5 text-xl font-bold text-white rounded-full inline-flex items-center gap-3"
                 style={{
                   background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%)',

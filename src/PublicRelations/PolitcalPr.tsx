@@ -681,8 +681,11 @@ export default function PoliticalPRPlatform() {
 
       {/* Review */}
       <p className="text-white/80 text-lg leading-relaxed">
-        “This platform helped us reach millions of voters with clarity,
-        speed, and measurable impact. A must-have for modern campaigns.”
+        “I sincerely appreciate the efforts of the  Social Crafts Circle digital marketing team for their outstanding support during my election campaign. Their strategic planning, digital outreach, and campaign execution played an important role in strengthening our online presence and public engagement.
+
+The team was professional, dedicated, and responsive throughout the campaign period. Their understanding of political campaigning and use of modern digital tools helped us connect effectively with voters.
+
+I highly recommend their services to anyone looking for reliable and result-oriented digital”
       </p>
     </div>
   </div>
