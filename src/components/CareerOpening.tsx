@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Briefcase, MapPin, Clock, TrendingUp, Users, Zap, Award, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function AnimatedPageTemplate() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [selectedJob, setSelectedJob] = useState<string | null>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Track mouse position for dynamic glow effect
   useEffect(() => {
@@ -16,133 +16,7 @@ export default function AnimatedPageTemplate() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Animated canvas background
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
-
-    const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
-    window.addEventListener('resize', handleResize);
-
-    // Create floating particles
-    const particles: Array<{x: number, y: number, vx: number, vy: number, size: number}> = [];
-    for (let i = 0; i < 80; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 3 + 1
-      });
-    }
-
-    let time = 0;
-    let animationId: number;
-
-    const animate = () => {
-      time += 0.008;
-
-      // Dark gradient background
-      const gradient = ctx.createLinearGradient(0, 0, width, height);
-      gradient.addColorStop(0, '#0a0e27');
-      gradient.addColorStop(0.5, '#1a1f4d');
-      gradient.addColorStop(1, '#0f1729');
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, width, height);
-
-      // Animated waves (4 layers)
-      for (let layer = 0; layer < 4; layer++) {
-        ctx.beginPath();
-        const offset = time * (0.4 + layer * 0.15);
-        const amplitude = 80 + layer * 25;
-        const frequency = 0.002 - layer * 0.0003;
-
-        for (let x = 0; x <= width; x += 4) {
-          const y = height * (0.4 + layer * 0.15) +
-                    Math.sin(x * frequency + offset) * amplitude +
-                    Math.cos(x * frequency * 1.5 + offset * 1.3) * (amplitude * 0.6);
-          if (x === 0) {
-            ctx.moveTo(x, y);
-          } else {
-            ctx.lineTo(x, y);
-          }
-        }
-
-        ctx.lineTo(width, height);
-        ctx.lineTo(0, height);
-        ctx.closePath();
-
-        const colors = [
-          'rgba(102, 126, 234, 0.12)',
-          'rgba(118, 75, 162, 0.10)',
-          'rgba(78, 205, 196, 0.08)',
-          'rgba(255, 107, 107, 0.06)'
-        ];
-        ctx.fillStyle = colors[layer];
-        ctx.fill();
-      }
-
-      // Floating particles with glow
-      ctx.fillStyle = 'rgba(102, 126, 234, 0.6)';
-      particles.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x < 0 || p.x > width) p.vx *= -1;
-        if (p.y < 0 || p.y > height) p.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Glow effect
-        const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 3);
-        glow.addColorStop(0, 'rgba(102, 126, 234, 0.3)');
-        glow.addColorStop(1, 'transparent');
-        ctx.fillStyle = glow;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      // Rotating geometric shapes
-      ctx.save();
-      ctx.translate(width * 0.15, height * 0.25);
-      ctx.rotate(time * 0.3);
-      ctx.strokeStyle = 'rgba(78, 205, 196, 0.2)';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(-60, -60, 120, 120);
-      ctx.restore();
-
-      ctx.save();
-      ctx.translate(width * 0.85, height * 0.7);
-      ctx.rotate(-time * 0.4);
-      ctx.strokeStyle = 'rgba(255, 107, 107, 0.2)';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.arc(0, 0, 50, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.restore();
-
-      animationId = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationId);
-    };
-  }, []);
 
   const jobOpenings = [
     {
@@ -217,11 +91,7 @@ export default function AnimatedPageTemplate() {
   return (
     <div className="min-h-screen w-full relative overflow-hidden">
       {/* Animated Dark Background Canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full"
-        style={{ background: '#0a0e27' }}
-      />
+
 
       {/* Dynamic mouse glow */}
       <div 
@@ -450,20 +320,18 @@ export default function AnimatedPageTemplate() {
                     </div>
                   )}
 
-                  <button
-                    className="w-full mt-6 py-4 px-6 rounded-xl font-semibold transition-all duration-500 flex items-center justify-center gap-2"
-                    style={{
-                      background: isHovered 
-                        ? `linear-gradient(135deg, ${job.color}, ${job.color}dd)` 
-                        : 'rgba(255, 255, 255, 0.1)',
-                      color: isHovered ? '#fff' : job.color,
-                      border: `2px solid ${job.color}`,
-                      boxShadow: isHovered ? `0 15px 40px ${job.color}50` : 'none',
-                      transform: isHovered ? 'scale(1.02)' : 'scale(1)',
-                    }}
-                  >
+                  <Link to="/apply-job" className="w-full mt-6 py-4 px-6 rounded-xl font-semibold transition-all duration-500 flex items-center justify-center gap-2"
+                  style={{
+                    background: isHovered 
+                      ? `linear-gradient(135deg, ${job.color}, ${job.color}dd)` 
+                      : 'rgba(255, 255, 255, 0.1)',
+                    color: isHovered ? '#fff' : job.color,
+                    border: `2px solid ${job.color}`,
+                    boxShadow: isHovered ? `0 15px 40px ${job.color}50` : 'none',
+                    transform: isHovered ? 'scale(1.02)' : 'scale(1)',
+                  }}>
                     Apply Now <ArrowRight size={20} />
-                  </button>
+                  </Link>
                 </div>
               );
             })}

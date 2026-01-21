@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Video, Camera, Film, Mic, Music, Sparkles, Award, Users, Clock, CheckCircle, ArrowRight, Play, Star, TrendingUp } from 'lucide-react';
 
 export default function ProductionStudio() {
@@ -561,21 +562,23 @@ export default function ProductionStudio() {
             <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
               Let's bring your vision to life with stunning visuals that captivate and inspire
             </p>
-            <button
-              className="px-16 py-6 rounded-2xl text-white text-xl font-bold transition-all duration-500 inline-flex items-center gap-3"
-              style={{
-                background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%)',
-                boxShadow: '0 25px 60px rgba(255, 107, 107, 0.6)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-8px) scale(1.05)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-              }}
-            >
-              <Camera /> Book a Consultation
-            </button>
+            <Link to="/contact">
+  <button
+    className="px-16 py-6 rounded-2xl text-white text-xl font-bold transition-all duration-500 inline-flex items-center gap-3"
+    style={{
+      background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%)',
+      boxShadow: '0 25px 60px rgba(255, 107, 107, 0.6)',
+    }}
+    onMouseEnter={(e) => {
+      e.currentTarget.style.transform = 'translateY(-8px) scale(1.05)';
+    }}
+    onMouseLeave={(e) => {
+      e.currentTarget.style.transform = 'translateY(0) scale(1)';
+    }}
+  >
+    <Camera /> Book a Consultation
+  </button>
+</Link>
           </div>
         </div>
       </div>

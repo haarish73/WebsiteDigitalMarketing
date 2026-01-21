@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { MessageSquare, Phone, Users, Send, Volume2, BarChart3, Zap, CheckCircle, ArrowRight, Menu, X } from 'lucide-react';
 
 function ContactUsModal({ onClose }: { onClose?: () => void }) {
@@ -333,16 +334,7 @@ export default function PoliticalPRPlatform() {
         {/* Hero Section */}
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-32">
           <div className="text-center">
-            <div 
-              className="inline-block mb-6 px-6 py-2 rounded-full text-sm font-semibold"
-              style={{
-                background: 'rgba(255, 255, 255, 0.1)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-              }}
-            >
-              <span className="text-white">🚀 India's #1 Political PR Platform</span>
-            </div>
+            
 
             <h1 
               className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
@@ -365,7 +357,8 @@ export default function PoliticalPRPlatform() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <button
+              <Link
+                to="/contact"
                 className="px-10 py-5 rounded-2xl text-white text-lg font-bold transition-all duration-500 flex items-center gap-3"
                 style={{
                   background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
@@ -382,7 +375,7 @@ export default function PoliticalPRPlatform() {
                 }}
               >
                 Start Campaign <ArrowRight />
-              </button>
+              </Link>
 
              
             </div>
