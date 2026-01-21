@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Target, Users, Award, TrendingUp, Zap, Heart, Lightbulb, Rocket, BarChart3, Globe2 } from 'lucide-react';
+import "../css/About.css"
 
 export default function AboutPage() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
