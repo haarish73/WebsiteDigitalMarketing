@@ -1,9 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Zap, Target, TrendingUp, Users, BarChart3, Rocket, ChevronRight, Play, Building, Heart, Home, DollarSign, GraduationCap, ShoppingCart, Plane, Code, icons, Landmark } from 'lucide-react';
+import { Zap, Target, TrendingUp, Users, BarChart3, Rocket, Building, Heart, Home, GraduationCap, ShoppingCart, Plane, Code, Landmark } from 'lucide-react';
 import ConsultationForm from '../components/Consulation';
+// @ts-ignore
 import * as THREE from "three";
 
-const HeroGlobe = () => {
+type Planet = {
+  group: THREE.Group;
+  mesh: THREE.Mesh;
+  dist: number;
+  speed: number;
+  angle: number;
+};
+
+const HeroGalaxy = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -12,201 +21,165 @@ const HeroGlobe = () => {
     let scene: THREE.Scene;
     let camera: THREE.PerspectiveCamera;
     let renderer: THREE.WebGLRenderer;
-    let globeGroup: THREE.Group;
-    const arcs: {
-      curve: THREE.QuadraticBezierCurve3;
-      pulse: THREE.Mesh;
-      offset: number;
-    }[] = [];
+    let starField: THREE.Points;
+    const planets: Planet[] = [];
+    const ripples: any[] = [];
 
-    const init = () => {
-      scene = new THREE.Scene();
+    const clock = new THREE.Clock();
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
 
-      camera = new THREE.PerspectiveCamera(
-        45,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
+    const planetData = [
+      { dist: 3, size: 0.1, speed: 1.5, color: 0xa5a5a5 },
+      { dist: 4.5, size: 0.18, speed: 1.1, color: 0xe3bb76 },
+      { dist: 6.5, size: 0.2, speed: 0.9, color: 0x2271b3 },
+      { dist: 8.5, size: 0.15, speed: 0.7, color: 0xe27b58 },
+      { dist: 12, size: 0.5, speed: 0.4, color: 0xd39c7e },
+      { dist: 15, size: 0.42, speed: 0.3, color: 0xc5ab6e },
+      { dist: 18, size: 0.28, speed: 0.2, color: 0xbbe1e4 },
+      { dist: 21, size: 0.27, speed: 0.15, color: 0x6081ff }
+    ];
+
+    // INIT
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(
+      50,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      2000
+    );
+    camera.position.set(0, 15, 30);
+
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    containerRef.current.appendChild(renderer.domElement);
+
+    // STARS
+    const starGeom = new THREE.BufferGeometry();
+    const starPos: number[] = [];
+    for (let i = 0; i < 10000; i++) {
+      starPos.push(
+        (Math.random() - 0.5) * 1500,
+        (Math.random() - 0.5) * 1500,
+        (Math.random() - 0.5) * 1500
       );
-      camera.position.z = 9;
+    }
+    starGeom.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(starPos, 3)
+    );
+    starField = new THREE.Points(
+      starGeom,
+      new THREE.PointsMaterial({ color: 0xffffff, size: 0.7, opacity: 0.8 })
+    );
+    scene.add(starField);
 
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(window.devicePixelRatio);
+    // SUN
+    const sun = new THREE.Mesh(
+      new THREE.SphereGeometry(1.5, 32, 32),
+      new THREE.MeshBasicMaterial({ color: 0xffd700 })
+    );
+    scene.add(sun);
 
-      containerRef.current!.appendChild(renderer.domElement);
+    // PLANETS
+    planetData.forEach((p) => {
+      const group = new THREE.Group();
 
-      globeGroup = new THREE.Group();
-      scene.add(globeGroup);
+      const mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(p.size, 24, 24),
+        new THREE.MeshStandardMaterial({
+          color: p.color,
+          emissive: p.color,
+          emissiveIntensity: 0.2
+        })
+      );
 
-      createWorldMap();
-      createConnections();
+      mesh.position.x = p.dist;
+      group.add(mesh);
+      scene.add(group);
 
-      window.addEventListener("resize", onResize);
-      animate();
-    };
+      planets.push({
+        group,
+        mesh,
+        dist: p.dist,
+        speed: p.speed * 0.5,
+        angle: Math.random() * Math.PI * 2
+      });
+    });
 
-    const createWorldMap = () => {
-      const radius = 3.5;
+    scene.add(new THREE.PointLight(0xffffff, 2, 50));
+    scene.add(new THREE.AmbientLight(0x222222));
 
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d")!;
-      canvas.width = 200;
-      canvas.height = 100;
+    // INTERACTION
+    const onClick = (e: MouseEvent) => {
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
 
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      img.src =
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Earth_map_dots.svg/1000px-Earth_map_dots.svg.png";
+      const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+      const point = new THREE.Vector3();
+      raycaster.ray.intersectPlane(plane, point);
 
-      img.onload = () => {
-        ctx.drawImage(img, 0, 0, 200, 100);
-        const data = ctx.getImageData(0, 0, 200, 100).data;
-
-        const positions: number[] = [];
-
-        for (let y = 0; y < 100; y++) {
-          for (let x = 0; x < 200; x++) {
-            const alpha = data[(y * 200 + x) * 4 + 3];
-            if (alpha > 128) {
-              const phi = (1 - y / 100) * Math.PI;
-              const theta = (x / 200) * Math.PI * 2;
-
-              positions.push(
-                -radius * Math.sin(phi) * Math.cos(theta),
-                radius * Math.cos(phi),
-                radius * Math.sin(phi) * Math.sin(theta)
-              );
-            }
-          }
-        }
-
-        const geometry = new THREE.BufferGeometry();
-        geometry.setAttribute(
-          "position",
-          new THREE.Float32BufferAttribute(positions, 3)
-        );
-
-        const material = new THREE.PointsMaterial({
-          color: 0xd4af37,
-          size: 0.035,
-          transparent: true,
-          opacity: 0.7,
-          blending: THREE.AdditiveBlending,
-        });
-
-        globeGroup.add(new THREE.Points(geometry, material));
-      };
-
-      const glow = new THREE.Mesh(
-        new THREE.SphereGeometry(radius * 1.02, 32, 32),
+      const ripple = new THREE.Mesh(
+        new THREE.RingGeometry(0.1, 0.5, 64),
         new THREE.MeshBasicMaterial({
           color: 0xd4af37,
-          wireframe: true,
           transparent: true,
-          opacity: 0.05,
+          opacity: 0.6,
+          side: THREE.DoubleSide
         })
       );
 
-      globeGroup.add(glow);
+      ripple.position.copy(point);
+      ripple.rotation.x = Math.PI / 2;
+      scene.add(ripple);
+      ripples.push({ mesh: ripple, life: 1, radius: 0.1 });
     };
 
-    const createConnections = () => {
-      const radius = 3.5;
+    window.addEventListener("mousedown", onClick);
 
-      const hubs = [
-        { lat: 40.7, lon: -74 },
-        { lat: 51.5, lon: 0 },
-        { lat: 35.6, lon: 139 },
-        { lat: -33.8, lon: 151 },
-        { lat: 25.2, lon: 55 },
-        { lat: -23.5, lon: -46 },
-      ];
-
-      hubs.forEach((start, i) => {
-        const end = hubs[(i + 1) % hubs.length];
-        createArc(start, end, radius);
-      });
-    };
-
-    const latLonToVector3 = (
-      lat: number,
-      lon: number,
-      radius: number
-    ): THREE.Vector3 => {
-      const phi = (90 - lat) * (Math.PI / 180);
-      const theta = (lon + 180) * (Math.PI / 180);
-
-      return new THREE.Vector3(
-        -radius * Math.sin(phi) * Math.cos(theta),
-        radius * Math.cos(phi),
-        radius * Math.sin(phi) * Math.sin(theta)
-      );
-    };
-
-    const createArc = (
-      startHub: { lat: number; lon: number },
-      endHub: { lat: number; lon: number },
-      radius: number
-    ) => {
-      const start = latLonToVector3(startHub.lat, startHub.lon, radius);
-      const end = latLonToVector3(endHub.lat, endHub.lon, radius);
-
-      const mid = start
-        .clone()
-        .lerp(end, 0.5)
-        .normalize()
-        .multiplyScalar(radius * 1.5);
-
-      const curve = new THREE.QuadraticBezierCurve3(start, mid, end);
-      const geometry = new THREE.BufferGeometry().setFromPoints(
-        curve.getPoints(50)
-      );
-
-      const line = new THREE.Line(
-        geometry,
-        new THREE.LineBasicMaterial({
-          color: 0xd4af37,
-          transparent: true,
-          opacity: 0.2,
-        })
-      );
-
-      globeGroup.add(line);
-
-      const pulse = new THREE.Mesh(
-        new THREE.SphereGeometry(0.03, 8, 8),
-        new THREE.MeshBasicMaterial({ color: 0xffffff })
-      );
-
-      globeGroup.add(pulse);
-      arcs.push({ curve, pulse, offset: Math.random() });
-    };
-
+    // ANIMATE
     const animate = () => {
       requestAnimationFrame(animate);
+      const delta = clock.getDelta();
 
-      globeGroup.rotation.y += 0.001;
+      starField.rotation.y += 0.0001;
 
-      arcs.forEach((arc) => {
-        arc.offset += 0.005;
-        if (arc.offset > 1) arc.offset = 0;
-        arc.pulse.position.copy(arc.curve.getPointAt(arc.offset));
-        arc.pulse.scale.setScalar(Math.sin(arc.offset * Math.PI) * 2);
+      planets.forEach((p) => {
+        p.angle += p.speed * delta;
+        p.group.rotation.y = p.angle;
+        p.mesh.rotation.y += 0.01;
       });
+
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const r = ripples[i];
+        r.life -= delta * 0.7;
+        r.radius += delta * 15;
+        r.mesh.scale.setScalar(r.radius);
+        r.mesh.material.opacity = r.life;
+        if (r.life <= 0) {
+          scene.remove(r.mesh);
+          ripples.splice(i, 1);
+        }
+      }
 
       renderer.render(scene, camera);
     };
 
+    animate();
+
+    // Handle resize
     const onResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     };
 
-    init();
+    window.addEventListener("resize", onResize);
 
     return () => {
+      window.removeEventListener("mousedown", onClick);
       window.removeEventListener("resize", onResize);
       renderer.dispose();
       containerRef.current?.removeChild(renderer.domElement);
@@ -214,15 +187,15 @@ const HeroGlobe = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-screen bg-[#010409] overflow-hidden mt-40">
-      <div ref={containerRef} className="absolute inset-0 z-[1]" />
+    <div className="relative w-full h-screen overflow-hidden bg-black mt-40">
+      <div ref={containerRef} className="absolute inset-0 z-0" />
 
       <div className="relative z-20 flex items-center justify-center h-screen text-center pointer-events-none">
-        <div className="p-16 rounded-full bg-[radial-gradient(circle,rgba(1,4,9,0.9)_0%,transparent_80%)]">
-          <h1 className="text-5xl md:text-7xl font-extrabold uppercase bg-gradient-to-r from-white via-[#D4AF37] to-white bg-[length:200%] bg-clip-text text-transparent animate-[shine_6s_linear_infinite]">
+        <div>
+          <h1 className="text-5xl md:text-7xl font-extrabold uppercase bg-gradient-to-r from-white via-yellow-200 to-yellow-500 bg-clip-text text-transparent">
             Social Crafts Circle
           </h1>
-          <p className="mt-4 text-sm tracking-[0.6em] text-[#D4AF37]">
+          <p className="mt-4 text-xs tracking-[0.5em] text-yellow-300">
             CRAFTING BRANDS CREATING IMPACTS
           </p>
         </div>
@@ -235,6 +208,7 @@ export default function DigitalMarketingHomepage() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [showConsultation, setShowConsultation] = useState(false);
+  const [visibleSections, setVisibleSections] = useState<{ [key: string]: boolean }>({});
   const [quoteResult, setQuoteResult] = useState("");
   const [quoteData, setQuoteData] = useState({
     firstName: '',
@@ -245,6 +219,35 @@ export default function DigitalMarketingHomepage() {
   });
   const [isQuoteSubmitting, setIsQuoteSubmitting] = useState(false);
 
+  // Intersection Observer for scroll animations
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.getAttribute('data-section');
+          if (sectionId) {
+            setVisibleSections(prev => ({
+              ...prev,
+              [sectionId]: true
+            }));
+            observer.unobserve(entry.target);
+          }
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('[data-section]').forEach(el => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   // Track mouse position for dynamic glow effect
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -252,13 +255,6 @@ export default function DigitalMarketingHomepage() {
     };
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  // Track scroll position
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleQuoteSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -385,16 +381,17 @@ export default function DigitalMarketingHomepage() {
       {/* Content Area */}
       <div className="relative z-20">
 
-        {/* HeroGlobe Section */}
-        <HeroGlobe />
+        {/* HeroGalaxy Section */}
+        <HeroGalaxy />
 
         {/* Industries Marquee */}
-       <div className="mt-52 py-8 overflow-hidden whitespace-nowrap flex items-center"
-
+       <div className="py-8 overflow-hidden whitespace-nowrap flex items-center"
+          data-section="marquee"
           style={{
             background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
             backgroundSize: '200% 200%',
-            animation: 'gradientShift 8s ease infinite',
+            animation: visibleSections['marquee'] ? 'gradientShift 8s ease infinite, slideInDown 0.8s ease-out' : 'none',
+            opacity: visibleSections['marquee'] ? 1 : 0,
           }}>
           <div className="flex animate-marquee">
             {[...industries, ...industries].map((item, i) => {
@@ -410,10 +407,18 @@ export default function DigitalMarketingHomepage() {
           </div>
         </div>
 
-        <AboutSection />
+        <div data-section="about"
+          style={{
+            opacity: visibleSections['about'] ? 1 : 0,
+            animation: visibleSections['about'] ? 'fadeIn 0.8s ease-out' : 'none',
+            transition: 'all 0.8s ease-out',
+          }}
+        >
+          <AboutSection />
+        </div>
 
         {/* Stats Section */}
-        <section className="container mx-auto px-6 py-16">
+        <section className="container mx-auto px-6 py-16" data-section="stats">
           <div className="grid grid-cols-4 gap-8">
             {stats.map((stat, i) => (
               <div 
@@ -424,6 +429,8 @@ export default function DigitalMarketingHomepage() {
                   backdropFilter: 'blur(15px)',
                   border: '2px solid rgba(255, 255, 255, 0.1)',
                   transform: hoveredItem === `stat-${i}` ? 'translateY(-10px) scale(1.05)' : 'translateY(0)',
+                  opacity: visibleSections['stats'] ? 1 : 0,
+                  animation: visibleSections['stats'] ? `slideInUp 0.6s ease-out ${i * 0.1}s both` : 'none',
                 }}
                 onMouseEnter={() => setHoveredItem(`stat-${i}`)}
                 onMouseLeave={() => setHoveredItem(null)}
@@ -446,8 +453,14 @@ export default function DigitalMarketingHomepage() {
         </section>
 
         {/* Services Section */}
-        <section id="services" className="container mx-auto px-6 py-24">
-          <div className="text-center mb-16">
+        <section id="services" className="container mx-auto px-6 py-24" data-section="services">
+          <div className="text-center mb-16"
+            style={{
+              opacity: visibleSections['services'] ? 1 : 0,
+              transform: visibleSections['services'] ? 'translateY(0)' : 'translateY(40px)',
+              transition: 'all 0.8s ease-out',
+            }}
+          >
             <h2 
               className="text-5xl font-bold mb-4"
               style={{
@@ -477,6 +490,8 @@ export default function DigitalMarketingHomepage() {
                     border: `2px solid ${isHovered ? service.color + '80' : 'rgba(255, 255, 255, 0.1)'}`,
                     boxShadow: isHovered ? `0 20px 50px ${service.color}40` : '0 8px 25px rgba(0,0,0,0.3)',
                     transform: isHovered ? 'translateY(-15px)' : 'translateY(0)',
+                    opacity: visibleSections['services'] ? 1 : 0,
+                    animation: visibleSections['services'] ? `slideInUp 0.6s ease-out ${i * 0.1}s both` : 'none',
                   }}
                   onMouseEnter={() => setHoveredItem(`service-${i}`)}
                   onMouseLeave={() => setHoveredItem(null)}
@@ -527,9 +542,15 @@ export default function DigitalMarketingHomepage() {
         </section>
 
         {/* SERVICES SECTION */}
-        <section id="services" className="container mx-auto px-6 py-24">
+        <section id="services" className="container mx-auto px-6 py-24" data-section="services2">
           {/* Header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-12"
+            style={{
+              opacity: visibleSections['services2'] ? 1 : 0,
+              transform: visibleSections['services2'] ? 'translateY(0)' : 'translateY(40px)',
+              transition: 'all 0.8s ease-out',
+            }}
+          >
             <p className="text-lime-400 font-semibold tracking-widest mb-2">
               * OUR SERVICES
             </p>
@@ -572,6 +593,10 @@ export default function DigitalMarketingHomepage() {
               <div
                 key={i}
                 className="group rounded-3xl overflow-hidden bg-white/5 border border-white/10 hover:border-lime-400/60 transition"
+                style={{
+                  opacity: visibleSections['services2'] ? 1 : 0,
+                  animation: visibleSections['services2'] ? `slideInUp 0.6s ease-out ${i * 0.1}s both` : 'none',
+                }}
               >
                 <div className="relative h-52 overflow-hidden">
                   <img
@@ -594,12 +619,23 @@ export default function DigitalMarketingHomepage() {
         </section>
 
         {/* FREE QUOTE SECTION */}
-        <section className="container mx-auto px-6 py-24">
-          <h2 className="text-4xl font-light text-white mb-12 text-center">
+        <section className="container mx-auto px-6 py-24" data-section="quote">
+          <h2 className="text-4xl font-light text-white mb-12 text-center"
+            style={{
+              opacity: visibleSections['quote'] ? 1 : 0,
+              animation: visibleSections['quote'] ? 'slideInUp 0.8s ease-out' : 'none',
+              transition: 'all 0.8s ease-out',
+            }}
+          >
             Get a <span className="text-lime-400 font-semibold">Free Quote</span> Today!
           </h2>
 
-          <div className="max-w-5xl mx-auto bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm">
+          <div className="max-w-5xl mx-auto bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm"
+            style={{
+              opacity: visibleSections['quote'] ? 1 : 0,
+              animation: visibleSections['quote'] ? 'slideInUp 0.8s ease-out 0.2s both' : 'none',
+            }}
+          >
             <form onSubmit={handleQuoteSubmit}>
               {/* Name Fields */}
               <div className="grid md:grid-cols-2 gap-6 mb-6">
@@ -690,13 +726,16 @@ export default function DigitalMarketingHomepage() {
         </section>
 
         {/* CTA Section */}
-        <section className="container mx-auto px-6 py-24">
+        <section className="container mx-auto px-6 py-24" data-section="cta">
           <div 
             className="rounded-[40px] p-16 text-center relative overflow-hidden"
             style={{
               background: 'rgba(255, 255, 255, 0.05)',
               backdropFilter: 'blur(15px)',
               border: '2px solid rgba(255, 255, 255, 0.1)',
+              opacity: visibleSections['cta'] ? 1 : 0,
+              animation: visibleSections['cta'] ? 'slideInUp 0.8s ease-out' : 'none',
+              transition: 'all 0.8s ease-out',
             }}
           >
             <div 
@@ -748,7 +787,13 @@ export default function DigitalMarketingHomepage() {
         </section>
 
         {/* Footer */}
-        <footer className="container mx-auto px-6 py-12 border-t border-white/10">
+        <footer className="container mx-auto px-6 py-12 border-t border-white/10" data-section="footer"
+          style={{
+            opacity: visibleSections['footer'] ? 1 : 0,
+            animation: visibleSections['footer'] ? 'slideInUp 0.8s ease-out' : 'none',
+            transition: 'all 0.8s ease-out',
+          }}
+        >
           <div className="text-center text-white/50">
             <p>© 2026 DigiBoost. Elevating brands through innovation.</p>
           </div>
@@ -777,6 +822,59 @@ export default function DigitalMarketingHomepage() {
           100% { transform: scale(1.8); opacity: 0; }
         }
 
+        @keyframes slideInUp {
+          from {
+            opacity: 0;
+            transform: translateY(40px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes slideInDown {
+          from {
+            opacity: 0;
+            transform: translateY(-40px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes scaleIn {
+          from {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        @keyframes rotateIn {
+          from {
+            opacity: 0;
+            transform: rotate(-10deg) scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: rotate(0) scale(1);
+          }
+        }
+
         @keyframes glow {
           0%, 100% { box-shadow: 0 30px 80px rgba(255, 107, 107, 0.6), 0 0 100px rgba(78, 205, 196, 0.4); }
           50% { box-shadow: 0 35px 100px rgba(255, 107, 107, 0.8), 0 0 140px rgba(78, 205, 196, 0.6); }
@@ -796,6 +894,16 @@ export default function DigitalMarketingHomepage() {
         @keyframes marquee {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+
+        @keyframes shimmer {
+          0% { background-position: -1000px 0; }
+          100% { background-position: 1000px 0; }
         }
 
         .animate-marquee {
@@ -821,6 +929,39 @@ export default function DigitalMarketingHomepage() {
           100% {
             background-position: 1000px 0;
           }
+        }
+
+        /* Stagger animations for list items */
+        @keyframes staggerSlide {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* Pulse glow effect */
+        @keyframes pulseGlow {
+          0%, 100% { 
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+          }
+          50% { 
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
+          }
+        }
+
+        /* Floating animation */
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+
+        /* Slide up on scroll */
+        .scroll-animate {
+          opacity: 0;
+          animation: slideInUp 0.8s ease-out forwards;
         }
       `}</style>
     </div>
