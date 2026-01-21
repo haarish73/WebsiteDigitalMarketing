@@ -368,14 +368,35 @@ export default function DigitalMarketingHomepage() {
       {/* Content Area */}
       <div className="relative z-30">
 
-        <div className="relative z-20 flex items-center justify-center h-screen text-center pointer-events-none">
+        <div className="relative z-20 flex items-center justify-center min-h-[100svh] text-center">
             <div>
-              <h1 className="text-5xl md:text-7xl font-extrabold uppercase bg-gradient-to-r from-white via-yellow-200 to-yellow-500 bg-clip-text text-transparent">
-                Social Crafts Circle
-              </h1>
-              <p className="mt-4 text-xs tracking-[0.5em] text-yellow-300">
-                CRAFTING BRANDS CREATING IMPACTS
-              </p>
+             <h1 className="
+  text-3xl 
+  sm:text-4xl 
+  md:text-6xl 
+  lg:text-7xl 
+  font-extrabold 
+  uppercase
+  bg-gradient-to-r 
+  from-white 
+  via-yellow-200 
+  to-yellow-500 
+  bg-clip-text 
+  text-transparent
+">
+  Social Crafts Circle
+</h1>
+             
+<p className="
+  mt-4 
+  text-[10px] 
+  sm:text-xs 
+  tracking-[0.25em] 
+  sm:tracking-[0.5em] 
+  text-yellow-300
+">
+  CRAFTING BRANDS CREATING IMPACTS
+</p>
             </div>
         </div>
 

@@ -1,225 +1,44 @@
-/* ======================================
-   MOBILE & TABLET RESPONSIVENESS
-====================================== */
-
-/* Tablets & below */
-@media (max-width: 1024px) {
-
-  /* HERO SECTION */
-  h1 {
-    font-size: 3rem !important;
-    line-height: 1.1;
-  }
-
-  .tracking-\[0\.5em\] {
-    letter-spacing: 0.25em !important;
-    font-size: 0.7rem;
-  }
-
-  /* STATS GRID */
-  .grid.grid-cols-4 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-
-  /* SERVICES GRID */
-  .grid.grid-cols-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* CTA */
-  .rounded-\[40px\] {
-    padding: 3rem !important;
-  }
-}
-
-/* ===============================
-   MOBILE PHONES
-================================= */
-@media (max-width: 768px) {
-
-  /* THREE.JS BACKGROUND */
-  canvas {
-    transform: scale(1.15);
-  }
-
-  /* HERO CENTER */
-  .h-screen {
-    height: 85vh;
-  }
-
-  h1 {
-    font-size: 2.4rem !important;
-  }
-
-  /* ABOUT TEXT */
-  section p.text-\[1\.65rem\] {
-    font-size: 1.25rem !important;
-    line-height: 1.5;
-  }
-
-  /* MARQUEE */
-  .animate-marquee {
-    animation-duration: 25s;
-  }
-
-  .animate-marquee span {
-    font-size: 1rem;
-  }
-
-  .animate-marquee svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  /* STATS */
-  .text-5xl {
-    font-size: 2.5rem !important;
-  }
-
-  /* SERVICES GRID */
-  .grid.grid-cols-3,
-  .grid.md\:grid-cols-3 {
+/* Mobile */
+@media (max-width: 640px) {
+  .container .grid.grid-cols-4 {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
-  /* SERVICE CARDS */
-  .rounded-3xl {
-    padding: 1.5rem !important;
+  .container .grid.grid-cols-4 > div {
+    padding: 1.5rem;
   }
 
-  /* SERVICE ICON */
-  .w-20.h-20 {
-    width: 60px !important;
-    height: 60px !important;
-  }
-
-  /* FREE QUOTE */
-  form {
-    padding: 0 !important;
-  }
-
-  input,
-  textarea {
-    font-size: 0.9rem;
-  }
-
-  /* CTA TEXT */
-  h2.text-5xl {
-    font-size: 2rem !important;
-  }
-
-  p.text-xl {
-    font-size: 1rem !important;
-  }
-
-  /* CTA BUTTON */
-  button {
-    padding: 1rem 1.5rem !important;
-    font-size: 1rem !important;
-  }
-
-  /* FOOTER */
-  footer p {
-    font-size: 0.85rem;
+  .container .grid.grid-cols-4 .text-5xl {
+    font-size: 2.5rem;
   }
 }
 
-/* ===============================
-   SMALL PHONES
-================================= */
-@media (max-width: 480px) {
-
-  h1 {
-    font-size: 2rem !important;
+/* Tablet */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container .grid.grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
 
-  .tracking-\[0\.5em\] {
-    letter-spacing: 0.2em !important;
-  }
-
-  /* ABOUT SECTION */
-  section p {
-    font-size: 1.1rem !important;
-  }
-
-  /* STATS */
-  .grid.grid-cols-4 {
+/* Mobile */
+@media (max-width: 640px) {
+  #services .grid.grid-cols-3 {
     grid-template-columns: 1fr;
   }
 
-  /* IMAGE SERVICE CARDS */
-  .h-52 {
-    height: 160px;
+  #services h2 {
+    font-size: 2.2rem;
   }
 
-  /* QUOTE FORM */
-  input,
-  textarea {
-    padding: 0.9rem 1rem;
-  }
-
-  /* CTA */
-  .rounded-\[40px\] {
-    padding: 2rem !important;
+  #services .p-8 {
+    padding: 1.5rem;
   }
 }
 
-/* ===============================
-   PERFORMANCE OPTIMIZATION
-================================= */
-
-/* Reduce motion on low-end devices */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
-  }
-}
-
-
-/* FIX HERO HEIGHT ON MOBILE */
-@media (max-width: 768px) {
-  .h-screen {
-    height: 100svh !important; /* real mobile viewport */
-    min-height: 100svh;
-  }
-}
-
-
-
-/* FORCE HERO ABOVE THREE.JS */
-canvas {
-  position: fixed !important;
-  inset: 0;
-  z-index: 5;
-}
-
-.relative.z-20 {
-  position: relative;
-  z-index: 20 !important;
-}
-
-
-/* HERO TEXT FIX */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2rem !important;
-    line-height: 1.1;
-    padding: 0 1rem;
-    text-align: center;
-  }
-
-  .tracking-\[0\.5em\] {
-    letter-spacing: 0.2em !important;
-    font-size: 0.65rem;
-  }
-}
-
-
-@media (max-width: 768px) {
-  .pointer-events-none {
-    pointer-events: auto !important;
+/* Tablet */
+@media (min-width: 641px) and (max-width: 1024px) {
+  #services .grid.grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
