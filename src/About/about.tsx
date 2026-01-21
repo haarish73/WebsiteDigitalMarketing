@@ -39,7 +39,8 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen w-full relative overflow-hidden">
+   <div className="min-h-screen w-full relative overflow-hidden pt-24 md:pt-32">
+
 
 
       <div

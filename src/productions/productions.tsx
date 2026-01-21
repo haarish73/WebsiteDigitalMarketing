@@ -175,7 +175,8 @@ export default function ProductionStudio() {
   ];
 
   return (
-    <div className="min-h-screen w-full relative overflow-hidden">
+    <div className="min-h-screen w-full relative overflow-hidden pt-24 md:pt-32">
+
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"

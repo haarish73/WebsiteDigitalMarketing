@@ -153,7 +153,7 @@ export default function Header() {
       to="/services/marketing-pr"
       className="block font-semibold text-white hover:text-[#4ECDC4] hover:underline transition-colors"
     >
-      Marketing PR
+    Business PR
     </Link>
 
    
