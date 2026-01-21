@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { MessageSquare, Phone, Users, Send, Volume2, BarChart3, Zap, CheckCircle, ArrowRight, Menu, X } from 'lucide-react';
+import pocharam from '../image/Pocharam Srinivas Reddy.png'
 
 function ContactUsModal({ onClose }: { onClose?: () => void }) {
   return (
@@ -640,9 +641,8 @@ export default function PoliticalPRPlatform() {
     boxShadow: '0 25px 60px rgba(78,205,196,0.45)',
   }}
 >
-  <img
-    src=""   // replace with real image path
-    alt="Client Photo"
+  <img src={pocharam} 
+  alt="Client Photo"
     className="w-full h-full object-cover rounded-xl"
   />
 </div>
