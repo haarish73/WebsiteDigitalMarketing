@@ -1,5 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Mail, Phone, MapPin, Linkedin, Twitter, Instagram, Facebook, Globe, Send, MessageCircle } from 'lucide-react';
+import { FaWhatsapp } from "react-icons/fa";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Linkedin,
+ 
+  Instagram,
+  Facebook,
+  Globe,
+  Send,
+  MessageCircle
+} from 'lucide-react';
+
 
 export default function ContactSection() {
   const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
@@ -22,12 +35,13 @@ export default function ContactSection() {
     { icon: Globe, label: 'WEBSITE', value: 'www.Social Craft Circledigital.com', href: 'https://Social Craft Circledigital.com', color: '#A8E6CF' },
   ];
 
-  const socialMedia = [
-    { icon: Linkedin, label: 'LinkedIn', href: '#', color: '#0077B5' },
-    { icon: Facebook, label: 'Facebook', href: '#', color: '#1877F2' },
-    { icon: Twitter, label: 'Twitter', href: '#', color: '#1DA1F2' },
-    { icon: Instagram, label: 'Instagram', href: '#', color: '#E4405F' },
-  ];
+const socialMedia = [
+  { icon: Linkedin, label: 'LinkedIn', href: '#', color: '#0077B5' },
+  { icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/share/14UEwCejdcF/', color: '#1877F2' },
+  { icon: FaWhatsapp, label: 'WhatsApp', href: 'https://wa.me/919030492596', color: '#25D366' },
+  { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/socialcrafts.india?igsh=amJxY28yNnc0ZjJh', color: '#E4405F' },
+];
+
 
   const services = [
     'SEO Marketing',
