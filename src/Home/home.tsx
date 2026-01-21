@@ -137,6 +137,11 @@ export default function DigitalMarketingHomepage() {
 
           <div className="flex gap-6 justify-center items-center">
             <button 
+            onClick={() =>     window.open(
+      "https://wa.me/919030492596?text=Hello%2C%20Thanks%20for%20connecting%20with%20Social%20Craft%20Circle.%0AWe%20would%20love%20to%20understand%20your%20requirements%20and%20help%20you%20grow.",
+      '_blank',
+      'noopener,noreferrer'
+    )}
               className="px-10 py-4 rounded-full text-white font-bold text-lg flex items-center gap-3"
               style={{
                 background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
@@ -158,26 +163,6 @@ export default function DigitalMarketingHomepage() {
               <ChevronRight size={20} />
             </button>
 
-            <button 
-              className="px-10 py-4 rounded-full text-white font-bold text-lg flex items-center gap-3"
-              style={{
-                background: 'rgba(255, 255, 255, 0.08)',
-                backdropFilter: 'blur(15px)',
-                border: '2px solid rgba(255, 255, 255, 0.15)',
-                transition: 'all 0.3s',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.15)';
-                e.currentTarget.style.transform = 'translateY(-3px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
-            >
-              <Play size={20} fill="white" />
-              Watch Demo
-            </button>
           </div>
         </section>
 
