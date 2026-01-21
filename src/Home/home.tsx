@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Zap, Target, TrendingUp, Users, BarChart3, Rocket, Building, Heart, Home, GraduationCap, ShoppingCart, Plane, Code, Landmark } from 'lucide-react';
 import ConsultationForm from '../components/Consulation';
-import InteractiveGlobe from '../components/InteractiveGlobe';
 // @ts-ignore
 import * as THREE from "three";
 import "../css/Home.css"
@@ -303,10 +302,10 @@ export default function DigitalMarketingHomepage() {
   ];
 
   const stats = [
-    { value: '50+', label: 'Clients Served' },
+    { value: '500+', label: 'Clients Served' },
     { value: '250%', label: 'Avg ROI Increase' },
-    { value: '90K+', label: 'Leads Generated' },
-    { value: '99.9%', label: 'Client Satisfaction' },
+    { value: '50M+', label: 'Leads Generated' },
+    { value: '98%', label: 'Client Satisfaction' },
   ];
 
   const services = [
@@ -349,7 +348,7 @@ export default function DigitalMarketingHomepage() {
   ];
 
   return (
-    <div className="min-h-screen w-full relative overflow-hidden bg-black">
+    <div className="min-h-screen w-full relative overflow-hidden bg-transparent">
         <GalaxyBackground />
       
       {/* Mouse glow effect */}
@@ -369,8 +368,37 @@ export default function DigitalMarketingHomepage() {
       {/* Content Area */}
       <div className="relative z-30">
 
-        {/* Interactive Globe Section */}
-        <InteractiveGlobe />
+        <div className="relative z-20 flex items-center justify-center min-h-[100svh] text-center">
+            <div>
+             <h1 className="
+  text-3xl 
+  sm:text-4xl 
+  md:text-6xl 
+  lg:text-7xl 
+  font-extrabold 
+  uppercase
+  bg-gradient-to-r 
+  from-white 
+  via-yellow-200 
+  to-yellow-500 
+  bg-clip-text 
+  text-transparent
+">
+  Social Crafts Circle
+</h1>
+             
+<p className="
+  mt-4 
+  text-[10px] 
+  sm:text-xs 
+  tracking-[0.25em] 
+  sm:tracking-[0.5em] 
+  text-yellow-300
+">
+  CRAFTING BRANDS CREATING IMPACTS
+</p>
+            </div>
+        </div>
 
         {/* Industries Marquee */}
        <div className="py-4 overflow-hidden whitespace-nowrap flex items-center"
@@ -402,14 +430,13 @@ export default function DigitalMarketingHomepage() {
             opacity: visibleSections['about'] ? 1 : 0,
             animation: visibleSections['about'] ? 'fadeIn 0.8s ease-out' : 'none',
             transition: 'all 0.8s ease-out',
-            backgroundColor: '#000000'
           }}
         >
           <AboutSection />
         </div>
 
         {/* Stats Section */}
-        <section className="container mx-auto px-6 py-16 bg-black" data-section="stats">
+        <section className="container mx-auto px-6 py-16" data-section="stats">
           <div className="grid grid-cols-4 gap-8">
             {stats.map((stat, i) => (
               <div 
@@ -444,7 +471,7 @@ export default function DigitalMarketingHomepage() {
         </section>
 
         {/* Services Section */}
-        <section id="services" className="container mx-auto px-6 py-24 bg-black" data-section="services">
+        <section id="services" className="container mx-auto px-6 py-24" data-section="services">
           <div className="text-center mb-16"
             style={{
               opacity: visibleSections['services'] ? 1 : 0,
@@ -533,7 +560,7 @@ export default function DigitalMarketingHomepage() {
         </section>
 
         {/* SERVICES SECTION */}
-        <section id="services" className="container mx-auto px-6 py-24 bg-black" data-section="services2">
+        <section id="services" className="container mx-auto px-6 py-24" data-section="services2">
           {/* Header */}
           <div className="text-center mb-12"
             style={{
@@ -610,7 +637,7 @@ export default function DigitalMarketingHomepage() {
         </section>
 
         {/* FREE QUOTE SECTION */}
-        <section className="container mx-auto px-6 py-24 bg-black" data-section="quote">
+        <section className="container mx-auto px-6 py-24" data-section="quote">
           <h2 className="text-4xl font-light text-white mb-12 text-center"
             style={{
               opacity: visibleSections['quote'] ? 1 : 0,
@@ -717,7 +744,7 @@ export default function DigitalMarketingHomepage() {
         </section>
 
         {/* CTA Section */}
-        <section className="container mx-auto px-6 py-24 bg-black" data-section="cta">
+        <section className="container mx-auto px-6 py-24" data-section="cta">
           <div 
             className="rounded-[40px] p-16 text-center relative overflow-hidden"
             style={{
@@ -778,7 +805,7 @@ export default function DigitalMarketingHomepage() {
         </section>
 
         {/* Footer */}
-        <footer className="container mx-auto px-6 py-12 border-t border-white/10 bg-black" data-section="footer"
+        <footer className="container mx-auto px-6 py-12 border-t border-white/10" data-section="footer"
           style={{
             opacity: visibleSections['footer'] ? 1 : 0,
             animation: visibleSections['footer'] ? 'slideInUp 0.8s ease-out' : 'none',
@@ -799,6 +826,11 @@ export default function DigitalMarketingHomepage() {
 
       {/* CSS Animations */}
       <style>{`
+        @keyframes shine {
+          0% { transform: translateX(-100%) skew(-20deg); }
+          100% { transform: translateX(200%) skew(-20deg); }
+        }
+        
         @keyframes pulse {
           0%, 100% { transform: scale(1); opacity: 0.3; }
           50% { transform: scale(1.15); opacity: 0.15; }
@@ -909,6 +941,15 @@ export default function DigitalMarketingHomepage() {
           }
         }
 
+        @keyframes shine {
+          0% {
+            background-position: -1000px 0;
+          }
+          100% {
+            background-position: 1000px 0;
+          }
+        }
+
         /* Stagger animations for list items */
         @keyframes staggerSlide {
           from {
@@ -935,8 +976,8 @@ export default function DigitalMarketingHomepage() {
         .animate-float {
           animation: float 3s ease-in-out infinite;
         }
-        
-        /* Scroll up on scroll */
+
+        /* Slide up on scroll */
         .scroll-animate {
           opacity: 0;
           animation: slideInUp 0.8s ease-out forwards;
@@ -958,7 +999,7 @@ function AboutSection() {
     <p className="text-[1.65rem] md:text-[2.75rem] font-normal leading-[1.25] text-white/90">
       We are{" "}
       <span className="text-cyan-400 font-semibold">
-        Social Crafts Circle
+        Smart Crafts Circle
       </span>
       , a creative digital marketing studio focused on building brands,
       driving growth, and shaping powerful online identities. From{" "}
