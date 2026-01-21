@@ -572,7 +572,7 @@ export default function DigitalMarketingHomepage() {
               },
               {
                 title: "E-Commerce Website Development Services",
-                img: new URL('../image/E-Commerce Website.png', import.meta.url).href,
+                img: new URL('../image/E-commerce website.png', import.meta.url).href,
               },
               {
                 title: "Website Redesign & Revamp",
@@ -966,12 +966,14 @@ export default function DigitalMarketingHomepage() {
   );
 }
 
+
 function AboutSection() {
   return (
   <section className="relative w-full pb-28 px-6 md:px-16 bg-transparent">
 
   <div className="max-w-6xl mx-auto">
-
+<br/>
+<br/>
     {/* Main Text */}
     <p className="text-[1.65rem] md:text-[2.75rem] font-normal leading-[1.25] text-white/90">
       We are{" "}
