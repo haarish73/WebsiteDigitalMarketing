@@ -362,6 +362,7 @@ export default function AnimatedPageTemplate() {
             We're always looking for talented individuals to join our team. Send us your resume and let's talk about future opportunities.
           </p>
           <button
+          onClick={() => window.location.href= "mailto:connect@socialcraftscirde.com"}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-8px) scale(1.05)';
               e.currentTarget.style.boxShadow = '0 35px 80px rgba(102, 126, 234, 0.5), 0 0 100px rgba(78, 205, 196, 0.4)';

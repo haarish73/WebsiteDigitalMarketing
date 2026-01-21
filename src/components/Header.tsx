@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown, Circle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import companylogo from "../image/CompanyLogo.webp"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,17 +40,16 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-500
-        ${scrolled
-          ? 'bg-[#0a0e27]/90 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'}
-      `}
+            ${scrolled
+              ? 'bg-[#0a0e27]/90 backdrop-blur-md shadow-lg'
+              : 'bg-[#0a0e27]/90 backdrop-blur-md shadow-lg'}      `}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
 
           {/* LOGO */}
           <Link to="/">
-            <img src="../image/CompanyLogo.png" alt="Company Logo" className="h-10" loading="lazy" />
+            <img src={companylogo} alt="Company Logo" className="h-16 w-auto" loading="lazy" />
           </Link>
 
           {/* DESKTOP NAV */}
