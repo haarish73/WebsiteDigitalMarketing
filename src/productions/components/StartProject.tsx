@@ -10,6 +10,8 @@ export default function PremiumInquiryPage() {
     timeline: 'Flexible',
     message: ''
   });
+  const [result, setResult] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -118,9 +120,49 @@ export default function PremiumInquiryPage() {
     { id: 'not-sure', label: 'Not sure (help me decide)', icon: '❓' },
   ];
 
-  const handleSubmit = () => {
-    console.log('Form submitted:', { ...formData, projectType: selectedType });
-    alert('Thank you! We\'ll be in touch within 24 hours.');
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setResult('Sending....');
+
+    const submitFormData = new FormData();
+    submitFormData.append('name', formData.name);
+    submitFormData.append('email', formData.email);
+    submitFormData.append('company', formData.company);
+    submitFormData.append('projectType', selectedType || 'Not specified');
+    submitFormData.append('timeline', formData.timeline);
+    submitFormData.append('message', formData.message);
+    submitFormData.append('access_key', import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: submitFormData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult('Form Submitted Successfully! We\'ll be in touch within 24 hours.');
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          timeline: 'Flexible',
+          message: ''
+        });
+        setSelectedType('');
+        setTimeout(() => setResult(''), 4000);
+      } else {
+        console.log('Error', data);
+        setResult(data.message || 'Error submitting form');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setResult('Error submitting form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -173,22 +215,26 @@ export default function PremiumInquiryPage() {
         <div className="p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl"
              style={{ background: 'rgba(10, 14, 39, 0.6)', backdropFilter: 'blur(20px)' }}>
           
-          <div className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <input 
                 type="text" 
+                name="name"
                 placeholder="Full Name" 
                 value={formData.name}
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
-                className="bg-white/5 border border-white/10 rounded-xl p-4 focus:border-[#FF6B6B] outline-none transition-all" 
+                required
+                className="bg-white/5 border border-white/10 rounded-xl p-4 focus:border-[#FF6B6B] outline-none transition-all text-white placeholder-white/50" 
               />
               <div className="relative">
                 <input 
                   type="email" 
+                  name="email"
                   placeholder="Email" 
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-4 focus:border-[#FF6B6B] outline-none transition-all" 
+                  required
+                  className="w-full bg-white/5 border border-white/10 rounded-xl p-4 focus:border-[#FF6B6B] outline-none transition-all text-white placeholder-white/50" 
                 />
                 <p className="text-[10px] text-gray-600 mt-1 ml-1">Your information stays private. Always.</p>
               </div>
@@ -196,10 +242,12 @@ export default function PremiumInquiryPage() {
 
             <input 
               type="text" 
+              name="company"
               placeholder="Company / Brand Name" 
               value={formData.company}
               onChange={(e) => setFormData({...formData, company: e.target.value})}
-              className="w-full bg-white/5 border border-white/10 rounded-xl p-4 focus:border-[#4ECDC4] outline-none transition-all" 
+              required
+              className="w-full bg-white/5 border border-white/10 rounded-xl p-4 focus:border-[#4ECDC4] outline-none transition-all text-white placeholder-white/50" 
             />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -216,9 +264,10 @@ export default function PremiumInquiryPage() {
               <div className="space-y-2">
                 <label className="text-xs text-gray-500 uppercase tracking-widest ml-1">Timeline</label>
                 <select 
+                  name="timeline"
                   value={formData.timeline}
                   onChange={(e) => setFormData({...formData, timeline: e.target.value})}
-                  className="w-full bg-[#0a0e27] border border-white/10 rounded-xl p-4 outline-none cursor-pointer"
+                  className="w-full bg-[#0a0e27] border border-white/10 rounded-xl p-4 outline-none cursor-pointer text-white"
                 >
                   <option>Flexible</option>
                   <option>Urgent (within 2 weeks)</option>
@@ -229,31 +278,45 @@ export default function PremiumInquiryPage() {
             </div>
 
             <textarea 
+              name="message"
               placeholder="Tell us about your idea, challenge, or vision" 
               rows={4} 
               value={formData.message}
               onChange={(e) => setFormData({...formData, message: e.target.value})}
-              className="w-full bg-white/5 border border-white/10 rounded-xl p-4 focus:border-[#FFE66D] outline-none transition-all resize-none" 
+              required
+              className="w-full bg-white/5 border border-white/10 rounded-xl p-4 focus:border-[#FFE66D] outline-none transition-all resize-none text-white placeholder-white/50" 
             />
 
             {/* CTA Button */}
             <button 
-              onClick={handleSubmit}
-              className="group relative w-full py-5 rounded-xl text-lg font-bold overflow-hidden transition-all duration-500 hover:scale-[1.02]"
+              type="submit"
+              disabled={isSubmitting}
+              className="group relative w-full py-5 rounded-xl text-lg font-bold overflow-hidden transition-all duration-500 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
                 background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%)',
                 boxShadow: '0 20px 40px rgba(255, 107, 107, 0.3)'
               }}
             >
-              <span className="relative z-10">Let's Create Together</span>
+              <span className="relative z-10">{isSubmitting ? 'Sending...' : 'Let\'s Create Together'}</span>
               <div className="absolute inset-0 bg-white/20 translate-x-[-100%] skew-x-[-20deg] group-hover:translate-x-[200%] transition-transform duration-1000" />
             </button>
+
+            {/* Result Message */}
+            {result && (
+              <div className={`mt-4 p-4 rounded-lg text-center font-semibold ${
+                result.includes('Successfully') 
+                  ? 'bg-green-500/20 text-green-300' 
+                  : 'bg-red-500/20 text-red-300'
+              }`}>
+                {result}
+              </div>
+            )}
 
             {/* Reassurance Line */}
             <p className="text-center text-sm text-gray-500 mt-4">
               No pressure. No sales calls. Just a genuine conversation about what's possible.
             </p>
-          </div>
+          </form>
 
           {/* Trust Signals */}
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 pt-10 border-t border-white/10 text-center text-xs tracking-widest uppercase">
