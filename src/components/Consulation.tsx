@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 
 const steps = ['Info', 'Business', 'Budget', 'Goal'];
@@ -134,10 +135,10 @@ export default function ConsultationForm({ onClose }: { onClose?: () => void }) 
             <Select
               label="Monthly Budget"
               options={[
-                '$500 – $1,000',
-                '$1,000 – $3,000',
-                '$3,000 – $10,000',
-                '$10,000+',
+               '₹5,000 – ₹10,000',
+               '₹10,000 – ₹20,000',
+                '₹20,000 – ₹50,000',
+              '₹50,000+',
               ]}
               onSelect={(v) => setForm({ ...form, budget: v })}
             />
@@ -153,6 +154,7 @@ export default function ConsultationForm({ onClose }: { onClose?: () => void }) 
                 'Paid Ads',
                 'Branding',
                 'Website / Funnel',
+                'Other'
               ]}
               onSelect={(v) => setForm({ ...form, goal: v })}
             />

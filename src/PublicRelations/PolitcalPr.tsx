@@ -662,7 +662,7 @@ export default function PoliticalPRPlatform() {
         Pocharam Srinivas Reddy
       </h4>
       <p className="text-sm text-white/60 mb-4">
-        State Campaign Committee
+        Advisory To Government of Telangana
       </p>
 
       {/* Rating */}
