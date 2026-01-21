@@ -40,16 +40,17 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-500
-            ${scrolled
-              ? 'bg-[#0a0e27]/90 backdrop-blur-md shadow-lg'
-              : 'bg-[#0a0e27]/90 backdrop-blur-md shadow-lg'}      `}
+        ${scrolled
+          ? 'bg-[#0a0e27]/90 backdrop-blur-md shadow-lg'
+          : 'bg-transparent'}
+      `}
     >
-      <div className="px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-20">
 
           {/* LOGO */}
           <Link to="/">
-            <img src={companylogo} alt="Company Logo" className="h-16 w-auto" loading="lazy" />
+            <img src={companylogo} alt="Company Logo" className="h-10" />
           </Link>
 
           {/* DESKTOP NAV */}
@@ -72,22 +73,6 @@ export default function Header() {
                   className="absolute left-0 mt-6 w-80 rounded-3xl bg-[#0a0e27]/95 backdrop-blur-xl p-6 shadow-2xl space-y-4 border border-white/10"
                   onClick={(e) => e.stopPropagation()}
                 >
-
-                  {/* DIGITAL MARKETING */}
-                  <Link
-                    to="/services/digital-marketing"
-                    className="block font-semibold text-white hover:text-[#4ECDC4] hover:underline transition-colors"
-                  >
-                    Digital Marketing Services
-                  </Link>
-
-                  {/* SEO */}
-                  <Link
-                    to="/services/seo"
-                    className="block font-semibold text-white hover:text-[#4ECDC4] hover:underline transition-colors"
-                  >
-                    SEO Services
-                  </Link>
 
                   {/* WEBSITE DEVELOPMENT */}
                   <div>
@@ -122,6 +107,22 @@ export default function Header() {
                       </div>
                     )}
                   </div>
+
+                  {/* SEO */}
+                  <Link
+                    to="/services/seo"
+                    className="block font-semibold text-white hover:text-[#4ECDC4] hover:underline transition-colors"
+                  >
+                    SEO Services
+                  </Link>
+
+                  {/* DIGITAL MARKETING */}
+                  <Link
+                    to="/services/digital-marketing"
+                    className="block font-semibold text-white hover:text-[#4ECDC4] hover:underline transition-colors"
+                  >
+                    Digital Marketing Services
+                  </Link>
                 </div>
               )}
             </div>
@@ -143,20 +144,19 @@ export default function Header() {
     className="absolute left-0 mt-6 w-64 rounded-3xl bg-[#0a0e27]/95 backdrop-blur-xl p-6 shadow-2xl space-y-4 border border-white/10"
     onClick={(e) => e.stopPropagation()}
   >
-   <Link
+    <Link
+      to="/services/marketing-pr"
+      className="block font-semibold text-white hover:text-[#4ECDC4] hover:underline transition-colors"
+    >
+      Business PR
+    </Link>
+
+    <Link
       to="/services/political-pr"
       className="block font-semibold text-white hover:text-[#4ECDC4] hover:underline transition-colors"
     >
       Political PR
     </Link>
-    <Link
-      to="/services/marketing-pr"
-      className="block font-semibold text-white hover:text-[#4ECDC4] hover:underline transition-colors"
-    >
-    Business PR
-    </Link>
-
-   
   </div>
 )}
 
@@ -239,20 +239,6 @@ export default function Header() {
                 </button>
                 {mobileServicesOpen && (
                   <div className="mt-6 space-y-4">
-                    <Link
-                      to="/services/digital-marketing"
-                      onClick={() => setIsMenuOpen(false)}
-                      className="block text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition"
-                    >
-                      Digital Marketing
-                    </Link>
-                    <Link
-                      to="/services/seo"
-                      onClick={() => setIsMenuOpen(false)}
-                      className="block text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition"
-                    >
-                      SEO Services
-                    </Link>
                     <div>
                       <button
                         onClick={() => setMobileWebOpen(!mobileWebOpen)}
@@ -290,6 +276,20 @@ export default function Header() {
                         </div>
                       )}
                     </div>
+                    <Link
+                      to="/services/seo"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition"
+                    >
+                      SEO Services
+                    </Link>
+                    <Link
+                      to="/services/digital-marketing"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition"
+                    >
+                      Digital Marketing
+                    </Link>
                   </div>
                 )}
               </div>
@@ -329,20 +329,21 @@ export default function Header() {
                 </button>
                 {mobilePublicRelationsOpen && (
                   <div className="mt-4 space-y-3">
-                    <Link
-                      to="/services/marketing-pr"
-                      onClick={() => setIsMenuOpen(false)}
-                      className="block text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition"
-                    >
-                      Marketing PR
-                    </Link>
-                    <Link
+                   <Link
                       to="/services/political-pr"
                       onClick={() => setIsMenuOpen(false)}
                       className="block text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition"
                     >
                       Political PR
                     </Link>
+                    <Link
+                      to="/services/marketing-pr"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition"
+                    >
+                      Business PR
+                    </Link>
+                   
                   </div>
                 )}
               </div>
