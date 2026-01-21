@@ -25,10 +25,10 @@ export default function AboutPage() {
   ];
 
   const stats = [
-    { number: '500+', label: 'Clients Served', icon: Users, color: '#FF6B6B' },
+    { number: '50+', label: 'Clients Served', icon: Users, color: '#FF6B6B' },
     { number: '250%', label: 'Avg ROI Increase', icon: TrendingUp, color: '#4ECDC4' },
-    { number: '15+', label: 'Years Experience', icon: Award, color: '#FFE66D' },
-    { number: '98%', label: 'Client Satisfaction', icon: Heart, color: '#A8E6CF' },
+    { number: '2+', label: 'Years Experience', icon: Award, color: '#FFE66D' },
+    { number: '99.9%', label: 'Client Satisfaction', icon: Heart, color: '#A8E6CF' },
   ];
 
   const whyChooseUs = [
@@ -39,8 +39,7 @@ export default function AboutPage() {
   ];
 
   return (
-   <div className="min-h-screen w-full relative overflow-hidden pt-24 md:pt-32">
-
+    <div className="min-h-screen w-full relative overflow-hidden">
 
 
       <div
@@ -138,7 +137,7 @@ export default function AboutPage() {
 </p>
 
 <p className="text-xl text-gray-300 leading-relaxed">
-  Founded by Muppavaram Phani Kumar—Managing Director and Political Consultant—Social Crafts Circle was born from a deep observation of gaps in perception strategy, narrative control, and public trust. While others chased short-term promotions, we focused on public psychology, long-term credibility, and responsible communication. Today, we operate as a strategy-first consultancy, helping businesses and political leaders build influence that lasts—not hype that fades.
+  Social Crafts Circle was born from a deep observation of gaps in perception strategy, narrative control, and public trust. While others chased short-term promotions, we focused on public psychology, long-term credibility, and responsible communication. Today, we operate as a strategy-first consultancy, helping businesses and political leaders build influence that lasts—not hype that fades.
 </p>
           </div>
         </div>
