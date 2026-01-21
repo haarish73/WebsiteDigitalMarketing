@@ -6,6 +6,15 @@ export default function DigitalMarketingHomepage() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [showConsultation, setShowConsultation] = useState(false);
+  const [quoteResult, setQuoteResult] = useState("");
+  const [quoteData, setQuoteData] = useState({
+    firstName: '',
+    lastName: '',
+    phone: '',
+    email: '',
+    message: ''
+  });
+  const [isQuoteSubmitting, setIsQuoteSubmitting] = useState(false);
 
   // Track mouse position for dynamic glow effect
   useEffect(() => {
@@ -22,6 +31,49 @@ export default function DigitalMarketingHomepage() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleQuoteSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsQuoteSubmitting(true);
+    setQuoteResult("Sending....");
+
+    const formData = new FormData();
+    formData.append('firstName', quoteData.firstName);
+    formData.append('lastName', quoteData.lastName);
+    formData.append('phone', quoteData.phone);
+    formData.append('email', quoteData.email);
+    formData.append('message', quoteData.message);
+    formData.append('access_key', import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setQuoteResult('Quote Request Submitted Successfully!');
+        setQuoteData({
+          firstName: '',
+          lastName: '',
+          phone: '',
+          email: '',
+          message: ''
+        });
+        setTimeout(() => setQuoteResult(''), 3000);
+      } else {
+        console.log('Error', data);
+        setQuoteResult(data.message || 'Error submitting form');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setQuoteResult('Error submitting form. Please try again.');
+    } finally {
+      setIsQuoteSubmitting(false);
+    }
+  };
 
 
 
@@ -378,17 +430,25 @@ export default function DigitalMarketingHomepage() {
           </h2>
 
           <div className="max-w-5xl mx-auto bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm">
-            <form>
+            <form onSubmit={handleQuoteSubmit}>
               {/* Name Fields */}
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <input
                   type="text"
+                  name="firstName"
                   placeholder="First Name"
+                  value={quoteData.firstName}
+                  onChange={(e) => setQuoteData({...quoteData, firstName: e.target.value})}
+                  required
                   className="w-full px-5 py-4 rounded-xl bg-transparent border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-lime-400 transition font-bold"
                 />
                 <input
                   type="text"
+                  name="lastName"
                   placeholder="Last Name"
+                  value={quoteData.lastName}
+                  onChange={(e) => setQuoteData({...quoteData, lastName: e.target.value})}
+                  required
                   className="w-full px-5 py-4 rounded-xl bg-transparent border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-lime-400 transition font-bold"
                 />
               </div>
@@ -397,7 +457,11 @@ export default function DigitalMarketingHomepage() {
               <div className="mb-6">
                 <input
                   type="tel"
+                  name="phone"
                   placeholder="Phone No"
+                  value={quoteData.phone}
+                  onChange={(e) => setQuoteData({...quoteData, phone: e.target.value})}
+                  required
                   className="w-full px-5 py-4 rounded-xl bg-transparent border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-lime-400 transition font-bold"
                 />
               </div>
@@ -406,7 +470,11 @@ export default function DigitalMarketingHomepage() {
               <div className="mb-6">
                 <input
                   type="email"
+                  name="email"
                   placeholder="E-mail"
+                  value={quoteData.email}
+                  onChange={(e) => setQuoteData({...quoteData, email: e.target.value})}
+                  required
                   className="w-full px-5 py-4 rounded-xl bg-transparent border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-lime-400 transition font-bold"
                 />
               </div>
@@ -414,8 +482,12 @@ export default function DigitalMarketingHomepage() {
               {/* Message */}
               <div className="mb-10">
                 <textarea
+                  name="message"
                   rows={5}
                   placeholder="Message"
+                  value={quoteData.message}
+                  onChange={(e) => setQuoteData({...quoteData, message: e.target.value})}
+                  required
                   className="w-full px-5 py-4 rounded-xl bg-transparent border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-lime-400 transition resize-none font-bold"
                 />
               </div>
@@ -423,10 +495,21 @@ export default function DigitalMarketingHomepage() {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-4 rounded-xl bg-lime-400 text-black font-semibold tracking-wide hover:brightness-110 transition"
+                disabled={isQuoteSubmitting}
+                className="w-full py-4 rounded-xl bg-lime-400 text-black font-semibold tracking-wide hover:brightness-110 transition disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Submit Message
+                {isQuoteSubmitting ? 'Sending...' : 'Submit Message'}
               </button>
+              
+              {quoteResult && (
+                <div className={`mt-4 p-4 rounded-lg text-center font-semibold ${
+                  quoteResult.includes('Successfully') 
+                    ? 'bg-green-500/20 text-green-300' 
+                    : 'bg-red-500/20 text-red-300'
+                }`}>
+                  {quoteResult}
+                </div>
+              )}
 
               {/* Small Dot Indicator */}
               <div className="flex justify-center mt-6">

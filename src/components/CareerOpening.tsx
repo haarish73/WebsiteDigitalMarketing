@@ -23,11 +23,11 @@ export default function AnimatedPageTemplate() {
       id: 'seo-specialist',
       title: 'SEO Specialist',
       department: 'Digital Marketing',
-      location: 'Mumbai, India',
+      location: 'Hyderabad, India',
       type: 'Full-time',
       color: '#4ECDC4',
       description: 'Drive organic growth through strategic SEO initiatives and data-driven optimization.',
-      requirements: ['3+ years SEO experience', 'Google Analytics certified', 'Technical SEO expertise', 'Content strategy skills']
+      requirements: ['0 to 1+ years SEO experience', 'Google Analytics certified', 'Technical SEO expertise', 'Content strategy skills']
     },
     {
       id: 'social-media-manager',
@@ -37,7 +37,7 @@ export default function AnimatedPageTemplate() {
       type: 'Full-time',
       color: '#FF6B6B',
       description: 'Build and engage our community across all social platforms with creative campaigns.',
-      requirements: ['5+ years social media experience', 'Strong copywriting skills', 'Analytics proficiency', 'Brand storytelling expertise']
+      requirements: ['1 to 2+ years social media management experience', 'Strong copywriting skills', 'Analytics proficiency', 'Brand storytelling expertise']
     },
     {
       id: 'ppc-specialist',
@@ -47,21 +47,21 @@ export default function AnimatedPageTemplate() {
       type: 'Full-time',
       color: '#FFE66D',
       description: 'Manage and optimize high-performance paid advertising campaigns across multiple platforms.',
-      requirements: ['Google Ads certified', '4+ years PPC experience', 'Budget management skills', 'A/B testing expertise']
+      requirements: ['Google Ads certified', '0 to 1+ years PPC experience', 'Budget management skills', 'A/B testing expertise']
     },
     {
       id: 'content-strategist',
       title: 'Content Strategist',
       department: 'Content Marketing',
-      location: 'Mumbai, India',
+      location: 'Hyderabad, India',
       type: 'Full-time',
       color: '#A8E6CF',
       description: 'Develop compelling content strategies that drive engagement and conversions.',
       requirements: ['Content marketing experience', 'SEO knowledge', 'Editorial skills', 'Strategic thinking']
     },
     {
-      id: 'email-marketing',
-      title: 'Email Marketing Specialist',
+      id: 'Email & WhatsApp-marketing',
+      title: 'Email & WhatsApp-marketing',
       department: 'Marketing Automation',
       location: 'Remote',
       type: 'Contract',

@@ -2,6 +2,21 @@ import React, { useState, useEffect, useRef } from 'react';
 
 export default function AnimatedPageTemplate() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    city: '',
+    linkedIn: '',
+    portfolio: '',
+    experience: '',
+    message: '',
+    noticePeriod: '',
+    salary: '',
+    resume: ''
+  });
+  const [result, setResult] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Mouse glow
@@ -73,6 +88,60 @@ export default function AnimatedPageTemplate() {
     };
   }, []);
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setResult('Sending....');
+
+    const submitFormData = new FormData();
+    submitFormData.append('fullName', formData.fullName);
+    submitFormData.append('email', formData.email);
+    submitFormData.append('phone', formData.phone);
+    submitFormData.append('city', formData.city);
+    submitFormData.append('linkedIn', formData.linkedIn);
+    submitFormData.append('portfolio', formData.portfolio);
+    submitFormData.append('experience', formData.experience);
+    submitFormData.append('message', formData.message);
+    submitFormData.append('noticePeriod', formData.noticePeriod);
+    submitFormData.append('salary', formData.salary);
+    submitFormData.append('access_key', import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: submitFormData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult('Application Submitted Successfully! We\'ll review your profile and get back to you soon.');
+        setFormData({
+          fullName: '',
+          email: '',
+          phone: '',
+          city: '',
+          linkedIn: '',
+          portfolio: '',
+          experience: '',
+          message: '',
+          noticePeriod: '',
+          salary: '',
+          resume: ''
+        });
+        setTimeout(() => setResult(''), 4000);
+      } else {
+        console.log('Error', data);
+        setResult(data.message || 'Error submitting form');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setResult('Error submitting form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen w-full relative overflow-hidden">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
@@ -126,16 +195,61 @@ export default function AnimatedPageTemplate() {
             Apply Now
           </h2>
 
-          <form className="grid md:grid-cols-2 gap-6">
-            <input required placeholder="Full Name *" style={inputStyle} />
-            <input required type="email" placeholder="Email Address *" style={inputStyle} />
-            <input required placeholder="Phone Number *" style={inputStyle} />
-            <input placeholder="Current City / Location" style={inputStyle} />
-            <input placeholder="LinkedIn Profile URL" style={inputStyle} />
-            <input type="file" required accept=".pdf,.doc,.docx" style={inputStyle} />
+          <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-6">
+            <input 
+              required 
+              name="fullName"
+              value={formData.fullName}
+              onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+              placeholder="Full Name *" 
+              style={inputStyle} 
+            />
+            <input 
+              required 
+              type="email" 
+              name="email"
+              value={formData.email}
+              onChange={(e) => setFormData({...formData, email: e.target.value})}
+              placeholder="Email Address *" 
+              style={inputStyle} 
+            />
+            <input 
+              required 
+              name="phone"
+              value={formData.phone}
+              onChange={(e) => setFormData({...formData, phone: e.target.value})}
+              placeholder="Phone Number *" 
+              style={inputStyle} 
+            />
+            <input 
+              name="city"
+              value={formData.city}
+              onChange={(e) => setFormData({...formData, city: e.target.value})}
+              placeholder="Current City / Location" 
+              style={inputStyle} 
+            />
+            <input 
+              name="linkedIn"
+              value={formData.linkedIn}
+              onChange={(e) => setFormData({...formData, linkedIn: e.target.value})}
+              placeholder="LinkedIn Profile URL" 
+              style={inputStyle} 
+            />
+            <input 
+              name="portfolio"
+              value={formData.portfolio}
+              onChange={(e) => setFormData({...formData, portfolio: e.target.value})}
+              placeholder="Portfolio / Website URL" 
+              style={inputStyle} 
+            />
 
-            <input placeholder="Portfolio / Website URL" style={inputStyle} />
-            <select required style={inputStyle}>
+            <select 
+              required 
+              name="experience"
+              value={formData.experience}
+              onChange={(e) => setFormData({...formData, experience: e.target.value})}
+              style={inputStyle}
+            >
               <option value="">Total Experience</option>
               <option>Fresher</option>
               <option>0–1 Years</option>
@@ -143,17 +257,12 @@ export default function AnimatedPageTemplate() {
               <option>3+ Years</option>
             </select>
 
-            <textarea
-              required
-              minLength={300}
-              maxLength={500}
-              placeholder="Why should we hire you? (300–500 characters)"
-              rows={5}
-              className="md:col-span-2"
+            <select 
+              name="noticePeriod"
+              value={formData.noticePeriod}
+              onChange={(e) => setFormData({...formData, noticePeriod: e.target.value})}
               style={inputStyle}
-            />
-
-            <select style={inputStyle}>
+            >
               <option value="">Notice Period</option>
               <option>Immediate</option>
               <option>15 Days</option>
@@ -161,7 +270,26 @@ export default function AnimatedPageTemplate() {
               <option>60 Days</option>
             </select>
 
-            <input placeholder="Expected Salary" style={inputStyle} />
+            <input 
+              name="salary"
+              value={formData.salary}
+              onChange={(e) => setFormData({...formData, salary: e.target.value})}
+              placeholder="Expected Salary" 
+              style={inputStyle} 
+            />
+
+            <textarea
+              required
+              name="message"
+              minLength={300}
+              maxLength={500}
+              value={formData.message}
+              onChange={(e) => setFormData({...formData, message: e.target.value})}
+              placeholder="Why should we hire you? (300–500 characters)"
+              rows={5}
+              className="md:col-span-2"
+              style={inputStyle}
+            />
 
             <label className="md:col-span-2 text-gray-200 flex gap-3">
               <input type="checkbox" required />
@@ -170,7 +298,8 @@ export default function AnimatedPageTemplate() {
 
             <button
               type="submit"
-              className="md:col-span-2 py-5 rounded-xl text-xl font-semibold"
+              disabled={isSubmitting}
+              className="md:col-span-2 py-5 rounded-xl text-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               style={{
                 background: 'linear-gradient(135deg,#FF6B6B,#4ECDC4,#FFE66D)',
                 backgroundSize: '200% 200%',
@@ -178,8 +307,18 @@ export default function AnimatedPageTemplate() {
                 animation: 'gradientShift 4s ease infinite',
               }}
             >
-              Submit Application
+              {isSubmitting ? 'Submitting...' : 'Submit Application'}
             </button>
+
+            {result && (
+              <div className={`md:col-span-2 mt-4 p-4 rounded-lg text-center font-semibold ${
+                result.includes('Successfully') 
+                  ? 'bg-green-500/20 text-green-300' 
+                  : 'bg-red-500/20 text-red-300'
+              }`}>
+                {result}
+              </div>
+            )}
           </form>
         </div>
       </div>
