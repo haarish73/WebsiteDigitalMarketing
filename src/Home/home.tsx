@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Zap, Target, TrendingUp, Users, BarChart3, Rocket, ChevronRight, Play, Building, Heart, Home, DollarSign, GraduationCap, ShoppingCart, Plane, Code, icons } from 'lucide-react';
+import { Zap, Target, TrendingUp, Users, BarChart3, Rocket, ChevronRight, Play, Building, Heart, Home, DollarSign, GraduationCap, ShoppingCart, Plane, Code, icons, Landmark } from 'lucide-react';
 import ConsultationForm from '../components/Consulation';
 
 export default function DigitalMarketingHomepage() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [scrollY, setScrollY] = useState(0);
   const [showConsultation, setShowConsultation] = useState(false);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Track mouse position for dynamic glow effect
   useEffect(() => {
@@ -25,73 +23,11 @@ export default function DigitalMarketingHomepage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Animated canvas background
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
 
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
-
-    const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
-    window.addEventListener('resize', handleResize);
-
-    let time = 0;
-    let animationId: number;
-
-    const animate = () => {
-      time += 0.004;
-      
-      const gradient = ctx.createLinearGradient(0, 0, width, height);
-      gradient.addColorStop(0, '#18181b');
-      gradient.addColorStop(0.5, '#27272a');
-      gradient.addColorStop(1, '#18181b');
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, width, height);
-
-      // Dotted pattern
-      ctx.fillStyle = 'rgba(161, 161, 170, 0.1)';
-      for (let x = 0; x < width; x += 30) {
-        for (let y = 0; y < height; y += 30) {
-          ctx.beginPath();
-          ctx.arc(x, y, 1, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
-
-      // Animated gradient bands
-      for (let i = 0; i < 3; i++) {
-        const y = (height / 4) * (i + 1) + Math.sin(time + i) * 20;
-        const bandGradient = ctx.createLinearGradient(0, y - 40, 0, y + 40);
-        bandGradient.addColorStop(0, 'rgba(161, 161, 170, 0)');
-        bandGradient.addColorStop(0.5, 'rgba(161, 161, 170, 0.08)');
-        bandGradient.addColorStop(1, 'rgba(161, 161, 170, 0)');
-        ctx.fillStyle = bandGradient;
-        ctx.fillRect(0, y - 40, width, 80);
-      }
-
-      // Corner accent
-      ctx.strokeStyle = 'rgba(212, 212, 216, 0.15)';
-      ctx.lineWidth = 3;
-      ctx.strokeRect(60, 60, 100, 100);
-
-      animationId = requestAnimationFrame(animate);
-    };
-    animate();
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationId);
-    };
-  }, []);
 
   const industries = [
-    {name: "Small Crafts Circle", icon: Code },
+    {name: "Social Crafts Circle", icon: Code },
+    { name: "Political PR", icon: Landmark },
     { name: "Local Small Businesses", icon: Building },
     { name: "Healthcare & Medical", icon: Heart },
     { name: "Real Estate & Property", icon: Home },
@@ -149,7 +85,7 @@ export default function DigitalMarketingHomepage() {
 
   return (
     <div className="min-h-screen w-full relative overflow-hidden">
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" style={{ background: '#18181b' }} />
+
       
       {/* Mouse glow effect */}
       <div 
@@ -435,6 +371,7 @@ export default function DigitalMarketingHomepage() {
                     src={service.img}
                     alt={service.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition" />
                 </div>

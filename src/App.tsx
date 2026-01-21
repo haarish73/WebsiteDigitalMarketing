@@ -11,10 +11,12 @@ import Seo from './components/Seo';
 import DigitalMarketing from './components/DigitalMarketing';
 import Career from './components/Career';
 import CareerOpening from './components/CareerOpening';
+import ApplyJob from './components/ApplyJob';
 import StartProject from './productions/components/StartProject';
 import MarketingPr from './PublicRelations/MarketingPr';
 import PoliticalPr from './PublicRelations/PolitcalPr';
 import ProductionsPage from './productions/productions';
+import StartCampaign from './components/StartCampaign';
 
 function App() {
   return (
@@ -33,8 +35,10 @@ function App() {
           <Route path="/services/digital-marketing" element={<DigitalMarketing />} />
           <Route path="/productions" element={<ProductionsPage />} />
           <Route path="/start-project" element={<StartProject />} />
+          <Route path="/start-campaign" element={<StartCampaign />} />
           <Route path="/careers" element={<Career />} />
           <Route path="/career-openings" element={<CareerOpening />} />
+          <Route path="/apply-job" element={<ApplyJob />} />
           <Route path="/services/marketing-pr" element={<MarketingPr />} />
           <Route path="/services/political-pr" element={<PoliticalPr />} />
         </Routes>
