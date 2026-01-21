@@ -3,7 +3,7 @@ import { Zap, Target, TrendingUp, Users, BarChart3, Rocket, Building, Heart, Hom
 import ConsultationForm from '../components/Consulation';
 // @ts-ignore
 import * as THREE from "three";
-
+import "../css/Home.css"
 type Planet = {
   group: THREE.Group;
   mesh: THREE.Mesh;
