@@ -122,12 +122,13 @@ export default function Header() {
 
               {publicRelationsOpen && (
                 <div className="absolute left-0 mt-6 w-64 rounded-3xl bg-[#0a0e27] p-6 shadow-2xl space-y-4 border border-white/10">
+                <Link to="/services/political-pr" className="block text-white hover:text-[#4ECDC4]">
+                    Political PR
+                  </Link>
                   <Link to="/services/marketing-pr" className="block text-white hover:text-[#4ECDC4]">
                     Marketing PR
                   </Link>
-                  <Link to="/services/political-pr" className="block text-white hover:text-[#4ECDC4]">
-                    Political PR
-                  </Link>
+                  
                 </div>
               )}
             </div>
