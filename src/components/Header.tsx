@@ -73,6 +73,22 @@ export default function Header() {
                   onClick={(e) => e.stopPropagation()}
                 >
 
+                  {/* DIGITAL MARKETING */}
+                  <Link
+                    to="/services/digital-marketing"
+                    className="block font-semibold text-white hover:text-[#4ECDC4] hover:underline transition-colors"
+                  >
+                    Digital Marketing Services
+                  </Link>
+
+                  {/* SEO */}
+                  <Link
+                    to="/services/seo"
+                    className="block font-semibold text-white hover:text-[#4ECDC4] hover:underline transition-colors"
+                  >
+                    SEO Services
+                  </Link>
+
                   {/* WEBSITE DEVELOPMENT */}
                   <div>
                     <button
@@ -106,22 +122,6 @@ export default function Header() {
                       </div>
                     )}
                   </div>
-
-                  {/* SEO */}
-                  <Link
-                    to="/services/seo"
-                    className="block font-semibold text-white hover:text-[#4ECDC4] hover:underline transition-colors"
-                  >
-                    SEO Services
-                  </Link>
-
-                  {/* DIGITAL MARKETING */}
-                  <Link
-                    to="/services/digital-marketing"
-                    className="block font-semibold text-white hover:text-[#4ECDC4] hover:underline transition-colors"
-                  >
-                    Digital Marketing Services
-                  </Link>
                 </div>
               )}
             </div>
@@ -238,6 +238,20 @@ export default function Header() {
                 </button>
                 {mobileServicesOpen && (
                   <div className="mt-6 space-y-4">
+                    <Link
+                      to="/services/digital-marketing"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition"
+                    >
+                      Digital Marketing
+                    </Link>
+                    <Link
+                      to="/services/seo"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition"
+                    >
+                      SEO Services
+                    </Link>
                     <div>
                       <button
                         onClick={() => setMobileWebOpen(!mobileWebOpen)}
@@ -275,20 +289,6 @@ export default function Header() {
                         </div>
                       )}
                     </div>
-                    <Link
-                      to="/services/seo"
-                      onClick={() => setIsMenuOpen(false)}
-                      className="block text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition"
-                    >
-                      SEO Services
-                    </Link>
-                    <Link
-                      to="/services/digital-marketing"
-                      onClick={() => setIsMenuOpen(false)}
-                      className="block text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition"
-                    >
-                      Digital Marketing
-                    </Link>
                   </div>
                 )}
               </div>
