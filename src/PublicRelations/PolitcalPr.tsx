@@ -612,6 +612,82 @@ export default function PoliticalPRPlatform() {
             ))}
           </div>
         </div>
+        {/* Reviews Section */}
+<div className="max-w-4xl mx-auto px-6 py-20">
+  <div className="text-center mb-14">
+  <h2
+  className="text-4xl md:text-5xl font-bold mb-4"
+  style={{
+    color: 'rgba(255, 255, 255, 0.85)', // dark white
+  }}
+>
+  Client Review
+</h2>
+
+    <p className="text-xl text-white/70">
+      Trusted by political leaders across India
+    </p>
+  </div>
+
+  <div className="text-center">
+{/* Big Passport Photo */}
+<div
+  className="mx-auto mb-6 w-72 h-56 rounded-2xl p-2 flex items-center justify-center"
+  style={{
+    background: 'rgba(255,255,255,0.08)',
+    border: '3px solid rgba(78,205,196,0.8)',
+    backdropFilter: 'blur(10px)',
+    boxShadow: '0 25px 60px rgba(78,205,196,0.45)',
+  }}
+>
+  <img
+    src=""   // replace with real image path
+    alt="Client Photo"
+    className="w-full h-full object-cover rounded-xl"
+  />
+</div>
+
+
+    {/* Details Card */}
+    <div
+      className="p-10 rounded-3xl max-w-2xl mx-auto transition-all duration-500"
+      style={{
+        background: 'rgba(255,255,255,0.06)',
+        backdropFilter: 'blur(18px)',
+        border: '2px solid rgba(255,255,255,0.15)',
+        boxShadow: '0 30px 80px rgba(0,0,0,0.4)',
+      }}
+    >
+      <h4 className="text-2xl font-bold text-white mb-1">
+        Pocharam Srinivas Reddy
+      </h4>
+      <p className="text-sm text-white/60 mb-4">
+        State Campaign Committee
+      </p>
+
+      {/* Rating */}
+      <div className="flex justify-center gap-1 mb-6">
+        {[...Array(5)].map((_, i) => (
+          <span
+            key={i}
+            className={`text-2xl ${
+              i < 5 ? 'text-yellow-400' : 'text-white/20'
+            }`}
+          >
+            ★
+          </span>
+        ))}
+      </div>
+
+      {/* Review */}
+      <p className="text-white/80 text-lg leading-relaxed">
+        “This platform helped us reach millions of voters with clarity,
+        speed, and measurable impact. A must-have for modern campaigns.”
+      </p>
+    </div>
+  </div>
+</div>
+
 
         {/* CTA Section */}
         <div className="max-w-7xl mx-auto px-6 py-20">
@@ -627,24 +703,25 @@ export default function PoliticalPRPlatform() {
               Ready to Win Your Campaign?
             </h2>
             <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
-              Join thousands of political leaders using Smart Craft Circle to connect with voters
+              Join thousands of political leaders using Social Craft Circle to connect with voters
             </p>
-            <button
-              className="px-12 py-5 rounded-2xl text-white text-lg font-bold transition-all duration-500 inline-flex items-center gap-3"
-              style={{
-                background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%)',
-                boxShadow: '0 25px 60px rgba(255, 107, 107, 0.6)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-5px) scale(1.05)';
-                e.currentTarget.style.boxShadow = '0 35px 80px rgba(255, 107, 107, 0.8)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-              }}
-            >
-              Start Free Trial <Zap />
-            </button>
+           <Link
+  to="/contact"
+  className="px-12 py-5 rounded-2xl text-white text-lg font-bold transition-all duration-500 inline-flex items-center gap-3"
+  style={{
+    background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%)',
+    boxShadow: '0 25px 60px rgba(255, 107, 107, 0.6)',
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.transform = 'translateY(-5px) scale(1.05)';
+    e.currentTarget.style.boxShadow = '0 35px 80px rgba(255, 107, 107, 0.8)';
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform = 'translateY(0) scale(1)';
+  }}
+>
+  Start Free Trial <Zap />
+</Link>
           </div>
         </div>
 

@@ -131,12 +131,13 @@ export default function AboutPage() {
             >
               Our Story
             </h2>
-            <p className="text-xl text-gray-300 leading-relaxed mb-4">
-              Founded in 2026, Social Crafts Circle Digital emerged from a simple vision: to help businesses harness the power of digital marketing to achieve extraordinary growth. What started as a small team of three passionate marketers has evolved into a full-service agency serving clients across the globe.
-            </p>
-            <p className="text-xl text-gray-300 leading-relaxed">
-              Today, we combine cutting-edge technology with creative excellence to deliver campaigns that don't just meet expectations—they shatter them. Our approach is built on collaboration, innovation, and an unwavering commitment to our clients' success.
-            </p>
+        <p className="text-xl text-gray-300 leading-relaxed mb-4">
+  Social Crafts Circle is a strategy-driven communication and political branding consultancy built on a simple belief: visibility without trust has no value. In a world where attention is easy to gain but credibility is hard to earn, we help brands, leaders, and institutions shape perception, build strong narratives, and establish lasting trust through clarity, consistency, and intelligent communication.
+</p>
+
+<p className="text-xl text-gray-300 leading-relaxed">
+  Founded by Muppavaram Phani Kumar—Managing Director and Political Consultant—Social Crafts Circle was born from a deep observation of gaps in perception strategy, narrative control, and public trust. While others chased short-term promotions, we focused on public psychology, long-term credibility, and responsible communication. Today, we operate as a strategy-first consultancy, helping businesses and political leaders build influence that lasts—not hype that fades.
+</p>
           </div>
         </div>
 
