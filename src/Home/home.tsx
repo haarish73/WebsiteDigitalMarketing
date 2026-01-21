@@ -999,7 +999,7 @@ function AboutSection() {
     <p className="text-[1.65rem] md:text-[2.75rem] font-normal leading-[1.25] text-white/90">
       We are{" "}
       <span className="text-cyan-400 font-semibold">
-      
+        Social Crafts Circle
       </span>
       , a creative digital marketing studio focused on building brands,
       driving growth, and shaping powerful online identities. From{" "}
