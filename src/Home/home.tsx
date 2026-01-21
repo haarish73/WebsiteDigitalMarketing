@@ -396,26 +396,7 @@ export default function DigitalMarketingHomepage() {
             </h2>
           </div>
 
-          {/* Tabs */}
-          <div className="flex gap-4 flex-wrap mb-12">
-            {[
-              "Website Development Services",
-              
-              "Digital Marketing",
-            ].map((tab, i) => (
-              <button
-                key={i}
-                className={`px-6 py-3 rounded-full text-sm font-semibold transition
-                  ${
-                    i === 0
-                      ? "bg-lime-400 text-black"
-                      : "bg-white/10 text-white hover:bg-white/20"
-                  }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
+       
 
           {/* Cards Grid */}
           <div className="grid md:grid-cols-3 gap-8">
