@@ -12,197 +12,184 @@ type Planet = {
   angle: number;
 };
 
-const HeroGalaxy = () => {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    let scene: THREE.Scene;
-    let camera: THREE.PerspectiveCamera;
-    let renderer: THREE.WebGLRenderer;
-    let starField: THREE.Points;
-    const planets: Planet[] = [];
-    const ripples: any[] = [];
-
-    const clock = new THREE.Clock();
-    const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
-
-    const planetData = [
-      { dist: 3, size: 0.1, speed: 1.5, color: 0xa5a5a5 },
-      { dist: 4.5, size: 0.18, speed: 1.1, color: 0xe3bb76 },
-      { dist: 6.5, size: 0.2, speed: 0.9, color: 0x2271b3 },
-      { dist: 8.5, size: 0.15, speed: 0.7, color: 0xe27b58 },
-      { dist: 12, size: 0.5, speed: 0.4, color: 0xd39c7e },
-      { dist: 15, size: 0.42, speed: 0.3, color: 0xc5ab6e },
-      { dist: 18, size: 0.28, speed: 0.2, color: 0xbbe1e4 },
-      { dist: 21, size: 0.27, speed: 0.15, color: 0x6081ff }
-    ];
-
-    // INIT
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(
-      50,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      2000
-    );
-    camera.position.set(0, 15, 30);
-
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    containerRef.current.appendChild(renderer.domElement);
-
-    // STARS
-    const starGeom = new THREE.BufferGeometry();
-    const starPos: number[] = [];
-    for (let i = 0; i < 10000; i++) {
-      starPos.push(
-        (Math.random() - 0.5) * 1500,
-        (Math.random() - 0.5) * 1500,
-        (Math.random() - 0.5) * 1500
+const GalaxyBackground = () => {
+    const containerRef = useRef<HTMLDivElement | null>(null);
+  
+    useEffect(() => {
+      if (!containerRef.current) return;
+  
+      let scene: THREE.Scene;
+      let camera: THREE.PerspectiveCamera;
+      let renderer: THREE.WebGLRenderer;
+      let starField: THREE.Points;
+      const planets: Planet[] = [];
+      const ripples: any[] = [];
+  
+      const clock = new THREE.Clock();
+      const raycaster = new THREE.Raycaster();
+      const mouse = new THREE.Vector2();
+  
+      const planetData = [
+        { dist: 3, size: 0.1, speed: 1.5, color: 0xa5a5a5 },
+        { dist: 4.5, size: 0.18, speed: 1.1, color: 0xe3bb76 },
+        { dist: 6.5, size: 0.2, speed: 0.9, color: 0x2271b3 },
+        { dist: 8.5, size: 0.15, speed: 0.7, color: 0xe27b58 },
+        { dist: 12, size: 0.5, speed: 0.4, color: 0xd39c7e },
+        { dist: 15, size: 0.42, speed: 0.3, color: 0xc5ab6e },
+        { dist: 18, size: 0.28, speed: 0.2, color: 0xbbe1e4 },
+        { dist: 21, size: 0.27, speed: 0.15, color: 0x6081ff }
+      ];
+  
+      // INIT
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(
+        50,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        2000
       );
-    }
-    starGeom.setAttribute(
-      "position",
-      new THREE.Float32BufferAttribute(starPos, 3)
-    );
-    starField = new THREE.Points(
-      starGeom,
-      new THREE.PointsMaterial({ color: 0xffffff, size: 0.7, opacity: 0.8 })
-    );
-    scene.add(starField);
-
-    // SUN
-    const sun = new THREE.Mesh(
-      new THREE.SphereGeometry(1.5, 32, 32),
-      new THREE.MeshBasicMaterial({ color: 0xffd700 })
-    );
-    scene.add(sun);
-
-    // PLANETS
-    planetData.forEach((p) => {
-      const group = new THREE.Group();
-
-      const mesh = new THREE.Mesh(
-        new THREE.SphereGeometry(p.size, 24, 24),
-        new THREE.MeshStandardMaterial({
-          color: p.color,
-          emissive: p.color,
-          emissiveIntensity: 0.2
-        })
-      );
-
-      mesh.position.x = p.dist;
-      group.add(mesh);
-      scene.add(group);
-
-      planets.push({
-        group,
-        mesh,
-        dist: p.dist,
-        speed: p.speed * 0.5,
-        angle: Math.random() * Math.PI * 2
-      });
-    });
-
-    scene.add(new THREE.PointLight(0xffffff, 2, 50));
-    scene.add(new THREE.AmbientLight(0x222222));
-
-    // INTERACTION
-    const onClick = (e: MouseEvent) => {
-      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-      raycaster.setFromCamera(mouse, camera);
-
-      const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
-      const point = new THREE.Vector3();
-      raycaster.ray.intersectPlane(plane, point);
-
-      const ripple = new THREE.Mesh(
-        new THREE.RingGeometry(0.1, 0.5, 64),
-        new THREE.MeshBasicMaterial({
-          color: 0xd4af37,
-          transparent: true,
-          opacity: 0.6,
-          side: THREE.DoubleSide
-        })
-      );
-
-      ripple.position.copy(point);
-      ripple.rotation.x = Math.PI / 2;
-      scene.add(ripple);
-      ripples.push({ mesh: ripple, life: 1, radius: 0.1 });
-    };
-
-    window.addEventListener("mousedown", onClick);
-
-    // ANIMATE
-    const animate = () => {
-      requestAnimationFrame(animate);
-      const delta = clock.getDelta();
-
-      starField.rotation.y += 0.0001;
-
-      planets.forEach((p) => {
-        p.angle += p.speed * delta;
-        p.group.rotation.y = p.angle;
-        p.mesh.rotation.y += 0.01;
-      });
-
-      for (let i = ripples.length - 1; i >= 0; i--) {
-        const r = ripples[i];
-        r.life -= delta * 0.7;
-        r.radius += delta * 15;
-        r.mesh.scale.setScalar(r.radius);
-        r.mesh.material.opacity = r.life;
-        if (r.life <= 0) {
-          scene.remove(r.mesh);
-          ripples.splice(i, 1);
-        }
-      }
-
-      renderer.render(scene, camera);
-    };
-
-    animate();
-
-    // Handle resize
-    const onResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
+      camera.position.set(0, 15, 30);
+  
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
-    };
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      containerRef.current.appendChild(renderer.domElement);
+  
+      // STARS
+      const starGeom = new THREE.BufferGeometry();
+      const starPos: number[] = [];
+      for (let i = 0; i < 10000; i++) {
+        starPos.push(
+          (Math.random() - 0.5) * 1500,
+          (Math.random() - 0.5) * 1500,
+          (Math.random() - 0.5) * 1500
+        );
+      }
+      starGeom.setAttribute(
+        "position",
+        new THREE.Float32BufferAttribute(starPos, 3)
+      );
+      starField = new THREE.Points(
+        starGeom,
+        new THREE.PointsMaterial({ color: 0xffffff, size: 0.7, opacity: 0.8 })
+      );
+      scene.add(starField);
+  
+      // PLANETS
+      planetData.forEach((p) => {
+        const group = new THREE.Group();
+  
+        const mesh = new THREE.Mesh(
+          new THREE.SphereGeometry(p.size, 24, 24),
+          new THREE.MeshStandardMaterial({
+            color: p.color,
+            emissive: p.color,
+            emissiveIntensity: 0.2
+          })
+        );
+  
+        mesh.position.x = p.dist;
+        group.add(mesh);
+        scene.add(group);
+  
+        planets.push({
+          group,
+          mesh,
+          dist: p.dist,
+          speed: p.speed * 0.5,
+          angle: Math.random() * Math.PI * 2
+        });
+      });
+  
+      scene.add(new THREE.PointLight(0xffffff, 2, 50));
+      scene.add(new THREE.AmbientLight(0x222222));
+  
+      // INTERACTION
+      const onClick = (e: MouseEvent) => {
+        mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+        raycaster.setFromCamera(mouse, camera);
+  
+        const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+        const point = new THREE.Vector3();
+        raycaster.ray.intersectPlane(plane, point);
+  
+        const ripple = new THREE.Mesh(
+          new THREE.RingGeometry(0.1, 0.5, 64),
+          new THREE.MeshBasicMaterial({
+            color: 0xd4af37,
+            transparent: true,
+            opacity: 0.6,
+            side: THREE.DoubleSide
+          })
+        );
+  
+        ripple.position.copy(point);
+        ripple.rotation.x = Math.PI / 2;
+        scene.add(ripple);
+        ripples.push({ mesh: ripple, life: 1, radius: 0.1 });
+      };
+  
+      window.addEventListener("mousedown", onClick);
+  
+      // ANIMATE
+      const animate = () => {
+        requestAnimationFrame(animate);
+        const delta = clock.getDelta();
+        const elapsedTime = clock.getElapsedTime();
+  
+        starField.rotation.y += 0.0001;
+  
+        planets.forEach((p) => {
+          p.angle += p.speed * delta;
+          p.group.rotation.y = p.angle;
+          p.mesh.rotation.y += 0.01;
+        });
 
-    window.addEventListener("resize", onResize);
+        // Camera movement
+        camera.position.x = Math.sin(elapsedTime * 0.1) * 5;
+        camera.position.z = Math.cos(elapsedTime * 0.1) * 30;
+        camera.lookAt(scene.position);
+  
+        for (let i = ripples.length - 1; i >= 0; i--) {
+          const r = ripples[i];
+          r.life -= delta * 0.7;
+          r.radius += delta * 15;
+          r.mesh.scale.setScalar(r.radius);
+          r.mesh.material.opacity = r.life;
+          if (r.life <= 0) {
+            scene.remove(r.mesh);
+            ripples.splice(i, 1);
+          }
+        }
+  
+        renderer.render(scene, camera);
+      };
+  
+      animate();
+  
+      // Handle resize
+      const onResize = () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      };
+  
+      window.addEventListener("resize", onResize);
+  
+      return () => {
+        window.removeEventListener("mousedown", onClick);
+        window.removeEventListener("resize", onResize);
+        renderer.dispose();
+        if (containerRef.current && renderer.domElement) {
+          containerRef.current.removeChild(renderer.domElement);
+        }
+      };
+    }, []);
 
-    return () => {
-      window.removeEventListener("mousedown", onClick);
-      window.removeEventListener("resize", onResize);
-      renderer.dispose();
-      containerRef.current?.removeChild(renderer.domElement);
-    };
-  }, []);
-
-  return (
-    <div className="relative w-full h-screen overflow-hidden bg-black mt-40">
-      <div ref={containerRef} className="absolute inset-0 z-0" />
-
-      <div className="relative z-20 flex items-center justify-center h-screen text-center pointer-events-none">
-        <div>
-          <h1 className="text-5xl md:text-7xl font-extrabold uppercase bg-gradient-to-r from-white via-yellow-200 to-yellow-500 bg-clip-text text-transparent">
-            Social Crafts Circle
-          </h1>
-          <p className="mt-4 text-xs tracking-[0.5em] text-yellow-300">
-            CRAFTING BRANDS CREATING IMPACTS
-          </p>
-        </div>
-      </div>
-    </div>
-  );
+    return <div ref={containerRef} className="fixed top-0 left-0 w-full h-full z-10" />;
 };
+
 
 export default function DigitalMarketingHomepage() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
@@ -361,12 +348,12 @@ export default function DigitalMarketingHomepage() {
   ];
 
   return (
-    <div className="min-h-screen w-full relative overflow-hidden bg-[#010409]">
-
+    <div className="min-h-screen w-full relative overflow-hidden bg-transparent">
+        <GalaxyBackground />
       
       {/* Mouse glow effect */}
       <div 
-        className="absolute pointer-events-none transition-all duration-700 z-10"
+        className="fixed pointer-events-none transition-all duration-700 z-20"
         style={{
           left: mousePosition.x,
           top: mousePosition.y,
@@ -379,18 +366,28 @@ export default function DigitalMarketingHomepage() {
       />
       
       {/* Content Area */}
-      <div className="relative z-20">
+      <div className="relative z-30">
 
-        {/* HeroGalaxy Section */}
-        <HeroGalaxy />
+        <div className="relative z-20 flex items-center justify-center h-screen text-center pointer-events-none">
+            <div>
+              <h1 className="text-5xl md:text-7xl font-extrabold uppercase bg-gradient-to-r from-white via-yellow-200 to-yellow-500 bg-clip-text text-transparent">
+                Social Crafts Circle
+              </h1>
+              <p className="mt-4 text-xs tracking-[0.5em] text-yellow-300">
+                CRAFTING BRANDS CREATING IMPACTS
+              </p>
+            </div>
+        </div>
 
         {/* Industries Marquee */}
-       <div className="py-8 overflow-hidden whitespace-nowrap flex items-center"
+       <div className="py-4 overflow-hidden whitespace-nowrap flex items-center"
           data-section="marquee"
           style={{
-            background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
-            backgroundSize: '200% 200%',
-            animation: visibleSections['marquee'] ? 'gradientShift 8s ease infinite, slideInDown 0.8s ease-out' : 'none',
+            background: 'rgba(255, 255, 255, 0.05)',
+            backdropFilter: 'blur(15px)',
+            borderTop: '2px solid rgba(255, 255, 255, 0.1)',
+            borderBottom: '2px solid rgba(255, 255, 255, 0.1)',
+            animation: visibleSections['marquee'] ? 'slideInDown 0.8s ease-out' : 'none',
             opacity: visibleSections['marquee'] ? 1 : 0,
           }}>
           <div className="flex animate-marquee">
@@ -971,7 +968,7 @@ export default function DigitalMarketingHomepage() {
 
 function AboutSection() {
   return (
-  <section className="relative w-full pt-52 pb-28 px-6 md:px-16 bg-transparent">
+  <section className="relative w-full pb-28 px-6 md:px-16 bg-transparent">
 
   <div className="max-w-6xl mx-auto">
 
