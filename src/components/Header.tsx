@@ -50,7 +50,7 @@ export default function Header() {
 
           {/* LOGO */}
           <Link to="/">
-            <img src={companylogo} alt="Company Logo" className="h-10" />
+            <img src={companylogo} alt="Company Logo" className="h-20 w-19" />
           </Link>
 
           {/* DESKTOP NAV */}

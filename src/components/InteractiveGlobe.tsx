@@ -222,7 +222,6 @@ const InteractiveGlobe: React.FC = () => {
         body {
           margin: 0;
           background-color: black;
-          overflow: hidden;
         }
       `}</style>
     </div>
