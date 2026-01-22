@@ -224,7 +224,7 @@ const InteractiveGlobe: React.FC = () => {
               letterSpacing: '0.4em',
             }}
           >
-            Crafting Brands • Creating Impacts
+            Crafting Brands Creating Impacts
           </p>
 
           <div className="flex justify-center mt-4">

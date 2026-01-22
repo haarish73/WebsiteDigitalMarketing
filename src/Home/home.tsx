@@ -117,7 +117,7 @@ export default function DigitalMarketingHomepage() {
   const stats = [
     { value: '50+', label: 'Clients Served' },
     { value: '250%', label: 'Avg ROI Increase' },
-    { value: '1M+', label: 'Leads Generated' },
+    { value: '100k+', label: 'Leads Generated' },
     { value: '99%', label: 'Client Satisfaction' },
   ];
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Target, Users, Award, TrendingUp, Zap, Heart, Lightbulb, Rocket, BarChart3, Globe2 } from 'lucide-react';
-import "../css/About.css"
+import sai from  "../image/Sai Ram Mucharla.jpeg";
+import Subhas from "../image/Subhash Reddy Panyala.jpg"
+import pahni from "../image/Phani Kumar.png"
 
 export default function AboutPage() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
@@ -14,8 +16,6 @@ export default function AboutPage() {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
-
-
 
   const values = [
     { icon: Target, title: 'Strategic Focus', description: 'Data-driven strategies tailored to your unique business goals', color: '#FF6B6B' },
@@ -39,9 +39,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen w-full relative overflow-hidden">
-
-
+    <div className="min-h-screen w-full relative overflow-hidden" style={{ background: '#0a0a0a' }}>
       <div
         className="absolute pointer-events-none transition-all duration-500 z-10"
         style={{
@@ -132,14 +130,210 @@ export default function AboutPage() {
             >
               Our Story
             </h2>
-        <p className="text-xl text-gray-300 leading-relaxed mb-4">
-  Social Crafts Circle is a strategy-driven communication and political branding consultancy built on a simple belief: visibility without trust has no value. In a world where attention is easy to gain but credibility is hard to earn, we help brands, leaders, and institutions shape perception, build strong narratives, and establish lasting trust through clarity, consistency, and intelligent communication.
-</p>
-
-<p className="text-xl text-gray-300 leading-relaxed">
-  Social Crafts Circle was born from a deep observation of gaps in perception strategy, narrative control, and public trust. While others chased short-term promotions, we focused on public psychology, long-term credibility, and responsible communication. Today, we operate as a strategy-first consultancy, helping businesses and political leaders build influence that lasts—not hype that fades.
-</p>
+            <p className="text-xl text-gray-300 leading-relaxed mb-4">
+              Social Crafts Circle is a strategy-driven communication and political branding consultancy built on a simple belief: visibility without trust has no value. In a world where attention is easy to gain but credibility is hard to earn, we help brands, leaders, and institutions shape perception, build strong narratives, and establish lasting trust through clarity, consistency, and intelligent communication.
+            </p>
+            <p className="text-xl text-gray-300 leading-relaxed">
+              Social Crafts Circle was born from a deep observation of gaps in perception strategy, narrative control, and public trust. While others chased short-term promotions, we focused on public psychology, long-term credibility, and responsible communication. Today, we operate as a strategy-first consultancy, helping businesses and political leaders build influence that lasts—not hype that fades.
+            </p>
           </div>
+        </div>
+
+        {/* Meet Our Team Section */}
+        <div className="mb-20">
+          <h2
+            className="text-5xl font-bold mb-12 text-center"
+            style={{
+              background: 'linear-gradient(135deg, #FFE66D, #4ECDC4)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
+            Meet Our Team
+          </h2>
+
+          {/* Team Member 1 - Aashrith */}
+          <div className="max-w-6xl mx-auto mb-12">
+            <div
+              className="flex flex-col md:flex-row items-center gap-8 p-8 rounded-3xl"
+              style={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                backdropFilter: 'blur(15px)',
+                border: '2px solid rgba(255, 255, 255, 0.15)',
+                boxShadow: '0 8px 25px rgba(0,0,0,0.3)',
+              }}
+            >
+              <div className="flex-shrink-0">
+                <div
+                  className="w-64 h-64 rounded-3xl overflow-hidden relative"
+                  style={{
+                    boxShadow: '0 20px 50px rgba(78, 205, 196, 0.4)',
+                  }}
+                >
+                  <img
+                    src={sai}
+                    alt="Sai Ram Mucharla"
+                    className="w-full h-full object-cover"
+                    
+                  />
+                </div>
+              </div>
+              <div className="flex-1 text-center md:text-left">
+                <div
+                  className="inline-block px-4 py-1 rounded-full mb-3"
+                  style={{
+                    background: 'rgba(78, 205, 196, 0.2)',
+                    border: '1px solid rgba(78, 205, 196, 0.4)',
+                  }}
+                >
+                  <span className="text-sm font-semibold" style={{ color: '#4ECDC4' }}>
+                    THE VISIONARY
+                  </span>
+                </div>
+                <h3
+                  className="text-4xl md:text-5xl font-bold mb-2"
+                  style={{
+                    background: 'linear-gradient(135deg, #FF6B6B, #4ECDC4)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  Sai Ram 
+                  <br />
+                  <span style={{ letterSpacing: '0.05em' }}>Mucharla</span>
+                </h3>
+                <p className="text-xl text-gray-400 mb-4">Co Founder</p>
+                <p className="text-lg text-gray-300 leading-relaxed italic">
+                  "We believe in a digital future where technology enhances human connection. SmartSpheres is built on the foundation of pushing boundaries and redefining what's possible in the digital realm."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Team Member 2 - Pudari Shiva */}
+          <div className="max-w-6xl mx-auto">
+            <div
+              className="flex flex-col md:flex-row-reverse items-center gap-8 p-8 rounded-3xl"
+              style={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                backdropFilter: 'blur(15px)',
+                border: '2px solid rgba(255, 255, 255, 0.15)',
+                boxShadow: '0 8px 25px rgba(0,0,0,0.3)',
+              }}
+            >
+              <div className="flex-shrink-0">
+                <div
+                  className="w-64 h-64 rounded-3xl overflow-hidden relative"
+                  style={{
+                    boxShadow: '0 20px 50px rgba(255, 107, 107, 0.4)',
+                  }}
+                >
+                  <img
+                    src={Subhas}
+                    alt="Pudari Shiva Rama Krishna"
+                    className="w-full h-full object-cover"
+                   
+                  />
+                </div>
+              </div>
+              
+              <div className="flex-1 text-center md:text-right">
+                <div
+                  className="inline-block px-4 py-1 rounded-full mb-3"
+                  style={{
+                    background: 'rgba(255, 107, 107, 0.2)',
+                    border: '1px solid rgba(255, 107, 107, 0.4)',
+                  }}
+                >
+                  <span className="text-sm font-semibold" style={{ color: '#FF6B6B' }}>
+                    THE STRATEGIST
+                  </span>
+                </div>
+                <h3
+                  className="text-4xl md:text-5xl font-bold mb-2"
+                  style={{
+                    background: 'linear-gradient(135deg, #4ECDC4, #FFE66D)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  Subhash Reddy 
+                  <br />
+                  <span style={{ letterSpacing: '0.05em' }}>Panyala</span>
+                </h3>
+                <p className="text-xl text-gray-400 mb-4">Managing Director</p>
+                <p className="text-lg text-gray-300 leading-relaxed italic">
+                  "Spearheading strategic initiatives and ensuring operational excellence across all project verticals."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <br/>
+
+          {/* Team Member 3 - New Member */}
+          <div className="max-w-6xl mx-auto">
+            <div
+              className="flex flex-col md:flex-row items-center gap-8 p-8 rounded-3xl"
+              style={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                backdropFilter: 'blur(15px)',
+                border: '2px solid rgba(255, 255, 255, 0.15)',
+                boxShadow: '0 8px 25px rgba(0,0,0,0.3)',
+              }}
+            >
+              <div className="flex-shrink-0">
+                <div
+                  className="w-64 h-64 rounded-3xl overflow-hidden relative"
+                  style={{
+                    boxShadow: '0 20px 50px rgba(255, 230, 109, 0.4)',
+                  }}
+                >
+                  <img
+                    src={pahni}
+                    alt="Team Member Name"
+                    className="w-full h-full object-cover"
+                   
+                  />
+                </div>
+              </div>
+              <div className="flex-1 text-center md:text-left">
+                <div
+                  className="inline-block px-4 py-1 rounded-full mb-3"
+                  style={{
+                    background: 'rgba(255, 230, 109, 0.2)',
+                    border: '1px solid rgba(255, 230, 109, 0.4)',
+                  }}
+                >
+                  <span className="text-sm font-semibold" style={{ color: '#FFE66D' }}>
+                    THE INNOVATOR
+                  </span>
+                </div>
+                <h3
+                  className="text-4xl md:text-5xl font-bold mb-2"
+                  style={{
+                    background: 'linear-gradient(135deg, #FFE66D, #A8E6CF)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  Phani Kumar
+                  <br />
+                  <span style={{ letterSpacing: '0.05em' }}>Muppavaram</span>
+                </h3>
+                <p className="text-xl text-gray-400 mb-4">Chief Creative Officer</p>
+                <p className="text-lg text-gray-300 leading-relaxed italic">
+                  "Driving innovation through creative excellence and transforming ideas into impactful digital experiences that resonate with audiences."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          
         </div>
 
         {/* Stats Section */}
@@ -315,8 +509,6 @@ export default function AboutPage() {
             })}
           </div>
         </div>
-
-       
       </div>
 
       <style>{`
