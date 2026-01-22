@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown, Circle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
 import companylogo from "../image/companylogo.png"
+
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -46,13 +48,9 @@ export default function Header() {
       `}
     >
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-end h-20">
 
-          {/* LOGO */}
-          <Link to="/">
-            <img src={companylogo} alt="Company Logo" className="h-20 w-19" />
-          </Link>
-
+         
           {/* DESKTOP NAV */}
           <nav className="hidden lg:flex items-center space-x-10 relative">
 

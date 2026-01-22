@@ -29,10 +29,10 @@ export default function ContactSection() {
 
 
   const contactDetails = [
-    { icon: Mail, label: 'EMAIL', value: 'connect@socialcraftscircle.com', href: 'mailto:contact@Social Craft Circledigital.com', color: '#FF6B6B' },
+    { icon: Mail, label: 'EMAIL', value: 'connect@socialcraftscircle.com', href: 'mailto:connect@socialcraftscircle.com', color: '#FF6B6B' },
     { icon: Phone, label: 'PHONE', value: '+91 9030492596', href: 'tel:9030492596', color: '#4ECDC4' },
     { icon: MapPin, label: 'LOCATION', value: 'Hyderabad, Telangana, India', href: '#', color: '#FFE66D' },
-    { icon: Globe, label: 'WEBSITE', value: 'www.Social Craft Circledigital.com', href: 'https://Social Craft Circledigital.com', color: '#A8E6CF' },
+    { icon: Globe, label: 'WEBSITE', value: 'www.socialcraftcircle.com', href: 'https://Social Craft Circledigital.com', color: '#A8E6CF' },
   ];
 
 const socialMedia = [
