@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown, Circle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import companylogo from "../image/companylogo.png"
+
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -201,11 +203,11 @@ export default function Header() {
 
         {/* MOBILE MENU */}
         {isMenuOpen && (
-          <div className="fixed inset-0 lg:hidden bg-white/95 backdrop-blur-md z-40 flex flex-col items-center justify-center p-6">
+          <div className="fixed inset-0 bg-white backdrop-blur-md z-[60] flex flex-col items-center justify-center p-6">
             {/* Close Button */}
             <button
               onClick={() => setIsMenuOpen(false)}
-              className="absolute top-8 right-6 text-black hover:text-gray-600 transition"
+              className="absolute top-8 right-6 text-black hover:text-[#4ECDC4] transition"
             >
               <X size={32} />
             </button>
@@ -291,7 +293,13 @@ export default function Header() {
               </div>
 
               {/* WORK */}
-             
+              <Link
+                to="/productions"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-5xl font-bold text-black hover:text-[#4ECDC4] transition duration-300"
+              >
+                PRODUCTIONS
+              </Link>
 
               {/* ABOUT */}
               <Link
