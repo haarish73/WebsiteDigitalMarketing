@@ -161,11 +161,30 @@ export default function ProductionStudio() {
     { title: 'Music Video Production', category: 'Music', views: '5.1M', image: '🎵' }
   ];
 
-  const testimonials = [
-    { name: 'Suyansh Reddy', role: 'CEO, Hillock Resort', text: 'We partnered with them for our resort’s marketing and sales growth, and the results were impressive. Their approach is strategic, transparent, and focused on real business outcomes. A reliable digital marketing partner.', rating: 5 },
-    { name: 'Pocharaam  Srinivas Reddy', role: 'Marketing Director', text: 'Professional team, creative approach, and timely delivery. Highly recommended!', rating: 5 },
-    { name: 'Amit Patel', role: 'Startup Founder', text: 'Best investment for our brand. The videos boosted our engagement by 300%.', rating: 5 }
-  ];
+ const testimonials = [
+  {
+    name: 'Sudhamsh Reddy',
+    role: 'CEO, Hillock Resort',
+    text: 'We partnered with them for our resort's marketing and sales growth, and the results were impressive. Their approach is strategic, transparent, and focused on real business outcomes. A reliable digital marketing partner.',
+    rating: 5,
+    image: '../image/Hillock.png'
+  },
+  {
+    name: 'Pocharaam Srinivas Reddy',
+    role: 'Marketing Director',
+    text: 'Professional team, creative approach, and timely delivery. Highly recommended!',
+    rating: 5,
+    image: '/images/testimonials/srinivas.jpg'
+  },
+  {
+    name: 'Amit Patel',
+    role: 'Startup Founder',
+    text: 'Best investment for our brand. The videos boosted our engagement by 300%.',
+    rating: 5,
+    image: '/images/testimonials/amit.jpg'
+  }
+];
+
 
   const stats = [
     { icon: Video, value: '500+', label: 'Projects Completed' },
@@ -513,14 +532,26 @@ export default function ProductionStudio() {
                 border: '2px solid rgba(255, 255, 255, 0.15)',
               }}
             >
-              <div className="flex gap-2 mb-6">
-                {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                  <Star key={i} size={28} fill="#FFE66D" style={{ color: '#FFE66D' }} />
-                ))}
+              <div className="flex items-center gap-6 mb-6">
+                <img 
+                  src={testimonials[activeTestimonial].image} 
+                  alt={testimonials[activeTestimonial].name}
+                  className="w-20 h-20 rounded-full object-cover border-4"
+                  style={{
+                    borderColor: '#4ECDC4',
+                    boxShadow: '0 0 20px rgba(78, 205, 196, 0.5)'
+                  }}
+                />
+                <div className="flex gap-2">
+                  {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
+                    <Star key={i} size={28} fill="#FFE66D" style={{ color: '#FFE66D' }} />
+                  ))}
+                </div>
               </div>
               <p className="text-2xl text-white/90 mb-8 leading-relaxed">
                 "{testimonials[activeTestimonial].text}"
               </p>
+              
               <div>
                 <div className="text-xl font-bold text-white">
                   {testimonials[activeTestimonial].name}
