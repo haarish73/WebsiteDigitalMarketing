@@ -142,7 +142,7 @@ export default function EcommerceDevelopmentPage() {
   ];
 
   const stats = [
-    { number: '200+', label: 'Stores Launched', icon: Zap },
+    { number: '5+', label: 'Stores Launched', icon: Zap },
     { number: '99.9%', label: 'Uptime Record', icon: Award },
     { number: '150%', label: 'Avg Conversion Lift', icon: BarChartHorizontal },
   ];

@@ -577,7 +577,7 @@ export default function WordPressDevelopmentPage() {
             <div className="grid md:grid-cols-2 gap-8 text-left">
               {[
                 { icon: Award, text: '50+ Websites Delivered' },
-                { icon: Users, text: '10+ Years Experience' },
+                { icon: Users, text: '2+ Years Experience' },
                 { icon: Zap, text: 'Fast Support' },
                 { icon: DollarSign, text: 'Cost-Effective Packages' },
               ].map((item, idx) => {
