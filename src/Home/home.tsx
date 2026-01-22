@@ -161,7 +161,7 @@ export default function DigitalMarketingHomepage() {
   ];
 
   return (
-    <div className="relative w-full bg-black">
+    <div className="w-full bg-black">
       <InteractiveGlobe />
       
       {/* Mouse glow effect */}
@@ -179,7 +179,7 @@ export default function DigitalMarketingHomepage() {
       />
       
       {/* Content Area */}
-      <div className="relative z-30 bg-black w-full">
+      <div className="relative w-full bg-black">
 
         {/* Industries Marquee */}
        <div className="w-full py-4 overflow-hidden whitespace-nowrap flex items-center"
