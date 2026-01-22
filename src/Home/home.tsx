@@ -380,7 +380,7 @@ export default function DigitalMarketingHomepage() {
                 },
                 {
                   title: "E-Commerce Website Development Services",
-                  img: new URL('../image/E-commerce website.png', import.meta.url).href,
+                  img: new URL('../image/E-commerce Website.png', import.meta.url).href,
                 },
                 {
                   title: "Website Redesign & Revamp",

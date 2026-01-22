@@ -176,10 +176,10 @@ export default function ProductionStudio() {
 
 
   const stats = [
-    { icon: Video, value: '500+', label: 'Projects Completed' },
-    { icon: Users, value: '200+', label: 'Happy Clients' },
-    { icon: Award, value: '50+', label: 'Awards Won' },
-    { icon: Clock, value: '10+', label: 'Years Experience' }
+    { icon: Video, value: '10+', label: 'Projects Completed' },
+    { icon: Users, value: '20+', label: 'Happy Clients' },
+    { icon: Award, value: '10+', label: 'Awards Won' },
+    { icon: Clock, value: '2+', label: 'Years Experience' }
   ];
 
   return (
