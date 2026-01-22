@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, ChevronDown, Circle } from 'lucide-react';
+import { Menu, X, ChevronDown, Circle, Home } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import companylogo from "../image/companylogo.png"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -41,8 +40,8 @@ export default function Header() {
     <>
       <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#1a1a1a]/95 backdrop-blur-md shadow-lg' : 'bg-transparent'}`}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link to="/">
-            <img src={companylogo} alt="Company Logo" className="h-12 md:h-14" />
+          <Link to="/" className="flex items-center gap-2">
+            <Home className="w-6 h-6 text-[#4ECDC4]" />
           </Link>
 
           {/* DESKTOP NAV */}
@@ -72,11 +71,11 @@ export default function Header() {
                     </button>
                     {webOpen && (
                       <div className="pl-4 mt-2 space-y-2 border-l-2 border-[#4ECDC4]/30">
-                        <Link to="/services/wordpress" className="flex items-center gap-2 text-sm text-white/70 hover:text-[#4ECDC4] transition">
+                        <Link to="/wordpress" className="flex items-center gap-2 text-sm text-white/70 hover:text-[#4ECDC4] transition">
                           <Circle className="w-2 h-2 fill-current" />
                           WordPress Website Development
                         </Link>
-                        <Link to="/services/ecommerce" className="flex items-center gap-2 text-sm text-white/70 hover:text-[#4ECDC4] transition">
+                        <Link to="/EcommerceDevelopmentPage" className="flex items-center gap-2 text-sm text-white/70 hover:text-[#4ECDC4] transition">
                           <Circle className="w-2 h-2 fill-current" />
                           Ecommerce Website Development
                         </Link>
@@ -115,10 +114,10 @@ export default function Header() {
                   onClick={(e) => e.stopPropagation()}
                   className="absolute top-full mt-2 left-0 bg-[#1a1a1a] rounded-lg shadow-2xl p-4 min-w-[200px] space-y-3"
                 >
-                  <Link to="/pr/business" className="block font-semibold text-white hover:text-[#4ECDC4] transition-colors">
+                  <Link to="/services/marketing-pr" className="block font-semibold text-white hover:text-[#4ECDC4] transition-colors">
                     Business PR
                   </Link>
-                  <Link to="/pr/political" className="block font-semibold text-white hover:text-[#4ECDC4] transition-colors">
+                  <Link to="/services/political-pr" className="block font-semibold text-white hover:text-[#4ECDC4] transition-colors">
                     Political PR
                   </Link>
                 </div>
@@ -203,14 +202,14 @@ export default function Header() {
                     {mobileWebOpen && (
                       <div className="ml-4 mt-3 space-y-2">
                         <Link
-                          to="/services/wordpress"
+                          to="/wordpress"
                           onClick={() => setIsMenuOpen(false)}
                           className="block text-base text-gray-600 hover:text-[#4ECDC4] transition-colors duration-300"
                         >
                           WordPress
                         </Link>
                         <Link
-                          to="/services/ecommerce"
+                          to="/EcommerceDevelopmentPage"
                           onClick={() => setIsMenuOpen(false)}
                           className="block text-base text-gray-600 hover:text-[#4ECDC4] transition-colors duration-300"
                         >
@@ -285,14 +284,14 @@ export default function Header() {
               {mobilePublicRelationsOpen && (
                 <div className="ml-6 mt-4 space-y-4">
                   <Link
-                    to="/pr/political"
+                    to="/services/political-pr"
                     onClick={() => setIsMenuOpen(false)}
                     className="block text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition-colors duration-300"
                   >
                     Political PR
                   </Link>
                   <Link
-                    to="/pr/business"
+                    to="/services/marketing-pr"
                     onClick={() => setIsMenuOpen(false)}
                     className="block text-lg font-semibold text-gray-700 hover:text-[#4ECDC4] transition-colors duration-300"
                   >

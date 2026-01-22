@@ -206,7 +206,7 @@ export default function DigitalMarketingHomepage() {
           </div>
         </div>
 
-        <div data-section="about"
+        <div data-section="about" className="hidden md:block"
           style={{
             opacity: visibleSections['about'] ? 1 : 0,
             animation: visibleSections['about'] ? 'fadeIn 0.8s ease-out' : 'none',
