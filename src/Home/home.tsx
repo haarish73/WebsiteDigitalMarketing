@@ -115,10 +115,10 @@ export default function DigitalMarketingHomepage() {
   ];
 
   const stats = [
-    { value: '500+', label: 'Clients Served' },
+    { value: '50+', label: 'Clients Served' },
     { value: '250%', label: 'Avg ROI Increase' },
-    { value: '50M+', label: 'Leads Generated' },
-    { value: '98%', label: 'Client Satisfaction' },
+    { value: '1M+', label: 'Leads Generated' },
+    { value: '99%', label: 'Client Satisfaction' },
   ];
 
   const services = [
@@ -360,8 +360,8 @@ export default function DigitalMarketingHomepage() {
                 * OUR SERVICES
               </p>
               <h2 className="text-5xl font-bold text-white leading-tight">
-                <span className="text-lime-400">Digital Marketing</span> Services <br />
-                We Offer
+                <span className="text-lime-400">Website</span> Services <br />
+                
               </h2>
             </div>
 
@@ -779,7 +779,7 @@ function AboutSection() {
     <p className="text-[1.65rem] md:text-[2.75rem] font-normal leading-[1.25] text-white/90">
       We are{" "}
       <span className="text-cyan-400 font-semibold">
-        Smart Crafts Circle
+        Social Crafts Circle
       </span>
       , a creative digital marketing studio focused on building brands,
       driving growth, and shaping powerful online identities. From{" "}
