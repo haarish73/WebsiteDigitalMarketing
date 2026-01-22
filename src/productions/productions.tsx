@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Video, Camera, Film, Mic, Music, Sparkles, Award, Users, Clock, CheckCircle, ArrowRight, Play, Star, TrendingUp } from 'lucide-react';
+import HillockImage from '../image/Hillock.png';
+import PocharamImage from '../image/Pocharam Srinivas Reddy.png';
 
 export default function ProductionStudio() {
   const navigate = useNavigate();
@@ -161,11 +163,30 @@ export default function ProductionStudio() {
     { title: 'Music Video Production', category: 'Music', views: '5.1M', image: '🎵' }
   ];
 
-  const testimonials = [
-    { name: 'Suyansh Reddy', role: 'CEO, Hillock Resort', text: 'We partnered with them for our resort’s marketing and sales growth, and the results were impressive. Their approach is strategic, transparent, and focused on real business outcomes. A reliable digital marketing partner.', rating: 5 },
-    { name: 'Pocharaam  Srinivas Reddy', role: 'Marketing Director', text: 'Professional team, creative approach, and timely delivery. Highly recommended!', rating: 5 },
-    { name: 'Amit Patel', role: 'Startup Founder', text: 'Best investment for our brand. The videos boosted our engagement by 300%.', rating: 5 }
-  ];
+ const testimonials = [
+  {
+    name: 'Sudhamsh Reddy',
+    role: 'CEO, Hillock Resort',
+    text: "We partnered with them for our resort's marketing and sales growth, and the results were impressive. Their approach is strategic, transparent, and focused on real business outcomes. A reliable digital marketing partner.",
+    rating: 5,
+    image: HillockImage
+  },
+  {
+    name: 'Pocharaam Srinivas Reddy',
+    role: 'Marketing Director',
+    text: 'Professional team, creative approach, and timely delivery. Highly recommended!',
+    rating: 5,
+    image: PocharamImage
+  },
+  {
+    name: 'Amit Patel',
+    role: 'Startup Founder',
+    text: 'Best investment for our brand. The videos boosted our engagement by 300%.',
+    rating: 5,
+    image: HillockImage
+  }
+];
+
 
   const stats = [
     { icon: Video, value: '500+', label: 'Projects Completed' },
@@ -183,7 +204,7 @@ export default function ProductionStudio() {
         style={{ background: '#0a0e27' }}
       />
 
-      <div 
+      <div
         className="absolute pointer-events-none transition-all duration-500 z-10"
         style={{
           left: mousePosition.x,
@@ -200,7 +221,7 @@ export default function ProductionStudio() {
         {/* Hero Section */}
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-32">
           <div className="text-center">
-            <div 
+            <div
               className="inline-block mb-8 px-8 py-3 rounded-full"
               style={{
                 background: 'rgba(255, 255, 255, 0.1)',
@@ -208,7 +229,7 @@ export default function ProductionStudio() {
                 border: '2px solid rgba(255, 255, 255, 0.2)',
               }}
             >
-              <h2 
+              <h2
                 className="text-6xl md:text-8xl font-black mb-2"
                 style={{
                   background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
@@ -225,7 +246,7 @@ export default function ProductionStudio() {
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
               Cinematic Excellence
               <br />
-              <span 
+              <span
                 style={{
                   background: 'linear-gradient(135deg, #4ECDC4 0%, #FFE66D 100%)',
                   WebkitBackgroundClip: 'text',
@@ -311,7 +332,7 @@ export default function ProductionStudio() {
         {/* Our Offerings Section */}
         <div className="max-w-7xl mx-auto px-6 py-20">
           <div className="mb-16">
-            <div 
+            <div
               className="inline-block px-10 py-6 rounded-3xl mb-8"
               style={{
                 background: 'linear-gradient(135deg, rgba(78, 205, 196, 0.3), rgba(102, 126, 234, 0.3))',
@@ -320,7 +341,7 @@ export default function ProductionStudio() {
                 transform: 'rotate(-2deg)',
               }}
             >
-              <h2 
+              <h2
                 className="text-5xl md:text-6xl font-black"
                 style={{
                   background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%)',
@@ -349,14 +370,14 @@ export default function ProductionStudio() {
                       : 'rgba(255, 255, 255, 0.05)',
                     backdropFilter: 'blur(15px)',
                     border: `3px solid ${isHovered ? offering.color : 'rgba(255, 255, 255, 0.15)'}`,
-                    boxShadow: isHovered 
-                      ? `0 25px 70px ${offering.color}60, 0 0 100px ${offering.color}40` 
+                    boxShadow: isHovered
+                      ? `0 25px 70px ${offering.color}60, 0 0 100px ${offering.color}40`
                       : '0 10px 30px rgba(0,0,0,0.3)',
                     transform: isHovered ? 'translateX(10px) scale(1.02)' : 'translateX(0)',
                   }}
                 >
                   {/* Background Icon */}
-                  <div 
+                  <div
                     className="absolute -right-8 -top-8 text-9xl transition-all duration-500"
                     style={{
                       opacity: isHovered ? 0.2 : 0.05,
@@ -369,7 +390,7 @@ export default function ProductionStudio() {
 
                   <div className="relative p-8 flex items-center justify-between">
                     <div className="flex items-center gap-6">
-                      <div 
+                      <div
                         className="text-5xl font-black transition-all duration-300"
                         style={{
                           color: isHovered ? offering.color : 'rgba(255, 255, 255, 0.3)',
@@ -382,7 +403,7 @@ export default function ProductionStudio() {
                         <h3 className="text-2xl md:text-3xl font-bold text-white mb-1">
                           {offering.title}
                         </h3>
-                        <div 
+                        <div
                           className="h-1 rounded-full transition-all duration-500"
                           style={{
                             width: isHovered ? '100px' : '0px',
@@ -392,8 +413,8 @@ export default function ProductionStudio() {
                       </div>
                     </div>
 
-                    <ArrowRight 
-                      size={32} 
+                    <ArrowRight
+                      size={32}
                       className="transition-all duration-300"
                       style={{
                         color: offering.color,
@@ -405,7 +426,7 @@ export default function ProductionStudio() {
 
                   {/* Animated shine effect */}
                   {isHovered && (
-                    <div 
+                    <div
                       className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
                       style={{
                         animation: 'shine 2s infinite',
@@ -421,7 +442,7 @@ export default function ProductionStudio() {
         {/* Portfolio Showcase */}
         <div className="max-w-7xl mx-auto px-6 py-20">
           <div className="text-center mb-16">
-            <h2 
+            <h2
               className="text-4xl md:text-5xl font-bold mb-4"
               style={{
                 background: 'linear-gradient(135deg, #FFE66D 0%, #FF6B6B 100%)',
@@ -454,7 +475,7 @@ export default function ProductionStudio() {
                   e.currentTarget.style.boxShadow = 'none';
                 }}
               >
-                <div 
+                <div
                   className="h-64 flex items-center justify-center text-9xl relative overflow-hidden"
                   style={{
                     background: 'linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(78, 205, 196, 0.2))',
@@ -467,7 +488,7 @@ export default function ProductionStudio() {
                 </div>
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-2">
-                    <span 
+                    <span
                       className="px-4 py-1 rounded-full text-sm font-semibold"
                       style={{
                         background: 'rgba(78, 205, 196, 0.2)',
@@ -491,7 +512,7 @@ export default function ProductionStudio() {
         {/* Testimonials */}
         <div className="max-w-7xl mx-auto px-6 py-20">
           <div className="text-center mb-16">
-            <h2 
+            <h2
               className="text-4xl md:text-5xl font-bold mb-4"
               style={{
                 background: 'linear-gradient(135deg, #4ECDC4 0%, #667EEA 100%)',
@@ -505,7 +526,7 @@ export default function ProductionStudio() {
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <div 
+            <div
               className="p-12 rounded-3xl"
               style={{
                 background: 'rgba(255, 255, 255, 0.08)',
@@ -513,14 +534,26 @@ export default function ProductionStudio() {
                 border: '2px solid rgba(255, 255, 255, 0.15)',
               }}
             >
-              <div className="flex gap-2 mb-6">
-                {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                  <Star key={i} size={28} fill="#FFE66D" style={{ color: '#FFE66D' }} />
-                ))}
+              <div className="flex items-center gap-6 mb-6">
+                <img
+                  src={testimonials[activeTestimonial].image}
+                  alt={testimonials[activeTestimonial].name}
+                  className="w-48 h-20 rounded-md object-cover border-4"
+                  style={{
+                    borderColor: '#4ECDC4',
+                    boxShadow: '0 0 20px rgba(78, 205, 196, 0.5)'
+                  }}
+                />
+                <div className="flex gap-2">
+                  {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
+                    <Star key={i} size={28} fill="#FFE66D" style={{ color: '#FFE66D' }} />
+                  ))}
+                </div>
               </div>
               <p className="text-2xl text-white/90 mb-8 leading-relaxed">
                 "{testimonials[activeTestimonial].text}"
               </p>
+
               <div>
                 <div className="text-xl font-bold text-white">
                   {testimonials[activeTestimonial].name}
@@ -549,7 +582,7 @@ export default function ProductionStudio() {
 
         {/* CTA */}
         <div className="max-w-7xl mx-auto px-6 py-20">
-          <div 
+          <div
             className="p-16 rounded-3xl text-center relative overflow-hidden"
             style={{
               background: 'linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(78, 205, 196, 0.2))',
@@ -589,7 +622,7 @@ export default function ProductionStudio() {
           0% { transform: translateX(-100%) skew(-20deg); }
           100% { transform: translateX(200%) skew(-20deg); }
         }
-        
+
         @keyframes pulse {
           0%, 100% { transform: scale(1); opacity: 0.3; }
           50% { transform: scale(1.15); opacity: 0.15; }

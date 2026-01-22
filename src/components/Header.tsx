@@ -312,7 +312,7 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
                 className="text-5xl font-bold text-black hover:text-[#4ECDC4] transition duration-300"
               >
-                TEAM
+                Careers
               </Link>
 
               {/* PUBLIC RELATIONS */}

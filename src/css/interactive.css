@@ -1,0 +1,92 @@
+/* ================================
+   MOBILE GLOBE OPTIMIZATION
+   Applies below 768px
+================================ */
+
+@media (max-width: 768px) {
+
+  /* Three.js container */
+  .globe-container,
+  [data-globe="true"] {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100svh; /* mobile-safe viewport */
+    pointer-events: none;
+
+    /* Visual tuning */
+    opacity: 0.75;
+    filter:
+      blur(0.25px)
+      brightness(0.9)
+      saturate(1.1);
+
+    /* GPU stability */
+    transform: translateZ(0);
+    will-change: transform;
+    contain: strict;
+  }
+
+  /* Canvas element inside globe */
+  .globe-container canvas,
+  [data-globe="true"] canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+
+    /* Reduce GPU strain */
+    image-rendering: auto;
+    touch-action: none;
+  }
+
+  /* Push globe slightly back in Z-space */
+  .globe-container canvas {
+    opacity: 0.85;
+  }
+
+  /* Prevent globe from covering text */
+  .hero-content,
+  .brand-container {
+    position: relative;
+    z-index: 5;
+    isolation: isolate;
+  }
+
+  /* Reduce glow + bloom on mobile */
+  .animate-shine {
+    filter: drop-shadow(0 0 6px rgba(0, 242, 255, 0.25));
+  }
+
+  /* Slightly scale globe illusion smaller */
+  body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at center,
+      rgba(0, 242, 255, 0.06) 0%,
+      transparent 65%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+/* ================================
+   EXTRA SAFETY FOR iOS DEVICES
+================================ */
+
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 768px) {
+
+    .globe-container canvas {
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+
+    /* Fix text disappearing bug on Safari */
+    .hero-content {
+      transform: translateZ(1px);
+    }
+  }
+}
