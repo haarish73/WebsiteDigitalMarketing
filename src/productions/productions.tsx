@@ -172,20 +172,6 @@ export default function ProductionStudio() {
     image: HillockImage
 
   },
-  {
-    name: 'Pocharaam Srinivas Reddy',
-    role: 'Marketing Director',
-    text: 'Professional team, creative approach, and timely delivery. Highly recommended!',
-    rating: 5,
-    image: PocharamImage
-  },
-  {
-    name: 'Amit Patel',
-    role: 'Startup Founder',
-    text: 'Best investment for our brand. The videos boosted our engagement by 300%.',
-    rating: 5,
-    image: HillockImage
-  }
 ];
 
 
