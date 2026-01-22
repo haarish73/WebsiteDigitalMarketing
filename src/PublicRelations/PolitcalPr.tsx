@@ -384,9 +384,9 @@ export default function PoliticalPRPlatform() {
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 max-w-4xl mx-auto">
               {[
-                { value: '500M+', label: 'Messages Sent' },
-                { value: '2000+', label: 'Campaigns' },
-                { value: '150+', label: 'Political Parties' },
+                { value: '1M+', label: 'Messages Sent' },
+                { value: '100+', label: 'Campaigns' },
+                { value: '10+', label: 'Political Parties' },
                 { value: '99.9%', label: 'Delivery Rate' }
               ].map((stat, idx) => (
                 <div 
