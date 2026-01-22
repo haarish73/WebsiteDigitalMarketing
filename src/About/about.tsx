@@ -150,7 +150,7 @@ export default function AboutPage() {
               backgroundClip: 'text',
             }}
           >
-            Meet Our Team
+           Meet Our Visionary Leadership
           </h2>
 
           {/* Team Member 1 - Aashrith */}
@@ -172,7 +172,7 @@ export default function AboutPage() {
                   }}
                 >
                   <img
-                    src={sai}
+                    src={Subhas}
                     alt="Sai Ram Mucharla"
                     className="w-full h-full object-cover"
                     
@@ -200,11 +200,11 @@ export default function AboutPage() {
                     backgroundClip: 'text',
                   }}
                 >
-                  Sai Ram 
+                  Subhash Reddy Panyala
                   <br />
-                  <span style={{ letterSpacing: '0.05em' }}>Mucharla</span>
+                  <span style={{ letterSpacing: '0.05em' }}></span>
                 </h3>
-                <p className="text-xl text-gray-400 mb-4">Co Founder</p>
+                <p className="text-xl text-gray-400 mb-4">Founder & CEO</p>
                 <p className="text-lg text-gray-300 leading-relaxed italic">
                   "We believe in a digital future where technology enhances human connection. SmartSpheres is built on the foundation of pushing boundaries and redefining what's possible in the digital realm."
                 </p>
@@ -212,7 +212,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Team Member 2 - Pudari Shiva */}
+          {/* Team Member 2 - Sai Ram Mucharla */}
           <div className="max-w-6xl mx-auto">
             <div
               className="flex flex-col md:flex-row-reverse items-center gap-8 p-8 rounded-3xl"
@@ -231,7 +231,7 @@ export default function AboutPage() {
                   }}
                 >
                   <img
-                    src={Subhas}
+                    src={sai}
                     alt="Pudari Shiva Rama Krishna"
                     className="w-full h-full object-cover"
                    
@@ -260,11 +260,11 @@ export default function AboutPage() {
                     backgroundClip: 'text',
                   }}
                 >
-                  Subhash Reddy 
+                  Sai Ram Mucharla
                   <br />
-                  <span style={{ letterSpacing: '0.05em' }}>Panyala</span>
+                  <span style={{ letterSpacing: '0.05em' }}></span>
                 </h3>
-                <p className="text-xl text-gray-400 mb-4">Managing Director</p>
+                <p className="text-xl text-gray-400 mb-4">Co Founder </p>
                 <p className="text-lg text-gray-300 leading-relaxed italic">
                   "Spearheading strategic initiatives and ensuring operational excellence across all project verticals."
                 </p>
@@ -325,7 +325,7 @@ export default function AboutPage() {
                   <br />
                   <span style={{ letterSpacing: '0.05em' }}>Muppavaram</span>
                 </h3>
-                <p className="text-xl text-gray-400 mb-4">Chief Creative Officer</p>
+                <p className="text-xl text-gray-400 mb-4">Managing Director</p>
                 <p className="text-lg text-gray-300 leading-relaxed italic">
                   "Driving innovation through creative excellence and transforming ideas into impactful digital experiences that resonate with audiences."
                 </p>
