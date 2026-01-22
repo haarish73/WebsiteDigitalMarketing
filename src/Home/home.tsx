@@ -716,7 +716,7 @@ export default function DigitalMarketingHomepage() {
 
         .animate-marquee {
           display: flex;
-          animation: marquee 40s linear infinite;
+          animation: marquee 5s linear infinite;
         }
         
         @keyframes fadeInWord {
