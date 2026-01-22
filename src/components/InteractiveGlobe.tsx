@@ -144,18 +144,18 @@ const InteractiveGlobe: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-black select-none">
+    <div className="relative w-full min-h-screen bg-black select-none">
       {/* Three.js Background Layer */}
       <div 
         ref={containerRef} 
-        className="absolute inset-0 z-0 pointer-events-none" 
+        className="absolute inset-0 z-0 pointer-events-none w-full h-full" 
         style={{
           background: 'radial-gradient(circle at center, #050505 0%, #000000 100%)'
         }}
       />
 
       {/* Hero Content Layer */}
-      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-4 text-center pointer-events-none">
+      <div className="relative z-10 flex flex-col items-center justify-center w-full min-h-screen px-4 text-center pointer-events-none">
         <div className="p-6 transition-all duration-700 rounded-full brand-container" 
              style={{ background: 'radial-gradient(circle at center, rgba(0, 242, 255, 0.03) 0%, transparent 70%)' }}>
           
