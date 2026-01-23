@@ -166,7 +166,7 @@ export default function ProductionStudio() {
 const testimonials = [
   {
     name: 'Sudhamsh Reddy',
-    role: 'CEO, Hillock Resort',
+    role: 'MD,Hillock Resort',
     text: "We partnered with them for our resort's marketing and sales growth, and the results were impressive. Their approach is strategic, transparent, and focused on real business outcomes. A reliable digital marketing partner.",
     rating: 5,
     image: HillockImage
