@@ -1,10 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Megaphone, Users, TrendingUp, Mail, Share2, Video, Target, Zap, CheckCircle, ArrowRight, BarChart3, Award } from 'lucide-react';
+import { Megaphone, Users, TrendingUp, Mail, Share2, Video, Target, Zap, CheckCircle, ArrowRight, BarChart3, Award, Star } from 'lucide-react';
+
+import HillockImage from '../image/Hillock.png';
+
+const testimonials = [
+  {
+    name: 'Sudhamsh Reddy',
+    role: 'CEO, Hillock Resort',
+    text: "We partnered with them for our resort's marketing and sales growth, and the results were impressive. Their approach is strategic, transparent, and focused on real business outcomes. A reliable digital marketing partner.",
+    rating: 5,
+    image: HillockImage
+  },
+];
+
+
 
 export default function DigitalMarketingServicesPage() {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -585,6 +601,88 @@ export default function DigitalMarketingServicesPage() {
             </div>
           </div>
         </section>
+        {/* Client Love Section */}
+<div className="max-w-7xl mx-auto px-6 py-20">
+  <div className="text-center mb-16">
+    <h2
+      className="text-4xl md:text-5xl font-bold mb-4"
+      style={{
+        background: 'linear-gradient(135deg, #4ECDC4 0%, #667EEA 100%)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        backgroundClip: 'text',
+      }}
+    >
+      Client Love
+    </h2>
+  </div>
+
+  <div className="max-w-4xl mx-auto">
+    <div
+      className="p-12 rounded-3xl"
+      style={{
+        background: 'rgba(255, 255, 255, 0.08)',
+        backdropFilter: 'blur(20px)',
+        border: '2px solid rgba(255, 255, 255, 0.15)',
+      }}
+    >
+      <div className="flex items-center gap-6 mb-6">
+        <img
+          src={testimonials[activeTestimonial].image}
+          alt={testimonials[activeTestimonial].name}
+          className="w-48 h-20 rounded-md object-cover border-4"
+          style={{
+            borderColor: '#4ECDC4',
+            boxShadow: '0 0 20px rgba(78, 205, 196, 0.5)',
+          }}
+        />
+
+        <div className="flex gap-2">
+          {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
+            <Star
+              key={i}
+              size={28}
+              fill="#FFE66D"
+              style={{ color: '#FFE66D' }}
+            />
+          ))}
+        </div>
+      </div>
+
+      <p className="text-2xl text-white/90 mb-8 leading-relaxed">
+        "{testimonials[activeTestimonial].text}"
+      </p>
+
+      <div>
+        <div className="text-xl font-bold text-white">
+          {testimonials[activeTestimonial].name}
+        </div>
+        <div className="text-white/60">
+          {testimonials[activeTestimonial].role}
+        </div>
+      </div>
+    </div>
+
+    {/* Dots Navigation */}
+    <div className="flex justify-center gap-3 mt-8">
+      {testimonials.map((_, idx) => (
+        <button
+          key={idx}
+          onClick={() => setActiveTestimonial(idx)}
+          className="h-3 rounded-full transition-all duration-300"
+          style={{
+            background:
+              activeTestimonial === idx
+                ? '#4ECDC4'
+                : 'rgba(255, 255, 255, 0.3)',
+            width: activeTestimonial === idx ? '40px' : '12px',
+          }}
+        />
+      ))}
+    </div>
+  </div>
+</div>
+
       </div>
 
       <style>{`

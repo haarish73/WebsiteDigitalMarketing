@@ -348,9 +348,9 @@ export default function PoliticalPRPlatform() {
                 animation: 'textGlow 3s ease-in-out infinite',
               }}
             >
-              Connect with Voters
+              Bringing Leaders 
               <br />
-              Like Never Before
+              Closer to the people
             </h1>
 
             <p className="text-xl md:text-2xl text-white/70 mb-12 max-w-3xl mx-auto">
@@ -384,7 +384,7 @@ export default function PoliticalPRPlatform() {
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 max-w-4xl mx-auto">
               {[
-                { value: '1M+', label: 'Messages Sent' },
+                { value: '100k+', label: 'Messages Sent' },
                 { value: '100+', label: 'Campaigns' },
                 { value: '10+', label: 'Political Parties' },
                 { value: '99.9%', label: 'Delivery Rate' }

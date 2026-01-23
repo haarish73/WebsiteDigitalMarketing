@@ -206,7 +206,7 @@ export default function AboutPage() {
                 </h3>
                 <p className="text-xl text-gray-400 mb-4">Founder & CEO</p>
                 <p className="text-lg text-gray-300 leading-relaxed italic">
-                  "We believe in a digital future where technology enhances human connection. SmartSpheres is built on the foundation of pushing boundaries and redefining what's possible in the digital realm."
+                 "Social Crafts Circle is driven by a belief that technology should empower connection. Through innovation and forward thinking, we continue to redefine what’s achievable in the evolving digital landscape.”
                 </p>
               </div>
             </div>
@@ -248,7 +248,7 @@ export default function AboutPage() {
                   }}
                 >
                   <span className="text-sm font-semibold" style={{ color: '#FF6B6B' }}>
-                    THE STRATEGIST
+                    MASTERMIND
                   </span>
                 </div>
                 <h3

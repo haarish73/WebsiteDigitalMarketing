@@ -163,14 +163,13 @@ export default function ProductionStudio() {
     { title: 'Music Video Production', category: 'Music', views: '5.1M', image: '🎵' }
   ];
 
- const testimonials = [
+const testimonials = [
   {
     name: 'Sudhamsh Reddy',
     role: 'CEO, Hillock Resort',
     text: "We partnered with them for our resort's marketing and sales growth, and the results were impressive. Their approach is strategic, transparent, and focused on real business outcomes. A reliable digital marketing partner.",
     rating: 5,
     image: HillockImage
-
   },
 ];
 

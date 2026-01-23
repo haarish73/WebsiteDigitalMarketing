@@ -182,29 +182,37 @@ export default function DigitalMarketingHomepage() {
       <div className="relative w-full bg-black">
 
         {/* Industries Marquee */}
-       <div className="w-full py-4 overflow-hidden whitespace-nowrap flex items-center"
-          data-section="marquee"
-          style={{
-            background: 'rgba(255, 255, 255, 0.05)',
-            backdropFilter: 'blur(15px)',
-            borderTop: '2px solid rgba(255, 255, 255, 0.1)',
-            borderBottom: '2px solid rgba(255, 255, 255, 0.1)',
-            animation: visibleSections['marquee'] ? 'slideInDown 0.8s ease-out' : 'none',
-            opacity: visibleSections['marquee'] ? 1 : 0,
-          }}>
-          <div className="flex animate-marquee">
-            {[...industries, ...industries].map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <div key={i} className="flex items-center mx-12">
-                  <Icon className="w-8 h-8 text-white mr-4" />
-                  <span className="text-white text-xl font-bold uppercase tracking-wide">{item.name}</span>
-                  <span className="text-white mx-8 text-2xl">✱</span>
-                </div>
-              );
-            })}
+       <div
+  className="w-full py-4 overflow-hidden"
+  data-section="marquee"
+  style={{
+    background: 'rgba(255, 255, 255, 0.05)',
+    backdropFilter: 'blur(15px)',
+    borderTop: '2px solid rgba(255, 255, 255, 0.1)',
+    borderBottom: '2px solid rgba(255, 255, 255, 0.1)',
+  }}
+>
+  <div className="relative w-full overflow-hidden">
+    <div className="marquee-track">
+      {[...industries, ...industries].map((item, i) => {
+        const Icon = item.icon;
+        return (
+          <div
+            key={i}
+            className="flex items-center mx-12 whitespace-nowrap"
+          >
+            <Icon className="w-8 h-8 text-white mr-4" />
+            <span className="text-white text-xl font-bold uppercase tracking-wide">
+              {item.name}
+            </span>
+            <span className="text-white mx-8 text-2xl">✱</span>
           </div>
-        </div>
+        );
+      })}
+    </div>
+  </div>
+</div>
+
 
         <div data-section="about" className="hidden md:block"
           style={{
@@ -620,6 +628,22 @@ export default function DigitalMarketingHomepage() {
 
       {/* CSS Animations */}
       <style>{`
+
+      .marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 20s linear infinite;
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
         @keyframes pulse {
           0%, 100% { transform: scale(1); opacity: 0.3; }
           50% { transform: scale(1.15); opacity: 0.15; }

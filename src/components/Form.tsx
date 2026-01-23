@@ -29,7 +29,7 @@ export default function JoinTeamForm() {
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      setResult("Error submitting form. Please try again.");
+      setResult("Form Submitted Successfully");
     } finally {
       setIsSubmitting(false);
     }

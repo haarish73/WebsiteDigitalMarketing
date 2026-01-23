@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef, ReactNode } from 'react';
 import {Link} from 'react-router-dom';
+import HillockImage from "../image/Hillock.png"
+
 
 // --- ICONS (Inline SVGs to avoid dependencies) ---
 const Icons = {
@@ -32,12 +34,15 @@ const GradientText = ({ children, className = "" }: { children: ReactNode, class
 interface NeonButtonProps {
   children: ReactNode;
   variant?: 'primary' | 'secondary';
+  to?: string;
 }
-const NeonButton = ({ children, variant = 'primary' }: NeonButtonProps) => {
+const NeonButton = ({ children, variant = 'primary', to }: NeonButtonProps) => {
     const baseStyle = {
         transition: 'all 0.5s',
         position: 'relative' as const,
         overflow: 'hidden',
+        display: 'inline-block',
+        textAlign: 'center' as const,
     };
 
     const primaryStyle = {
@@ -60,29 +65,57 @@ const NeonButton = ({ children, variant = 'primary' }: NeonButtonProps) => {
 
     const combinedStyle = variant === 'primary' ? {...baseStyle, ...primaryStyle} : {...baseStyle, ...secondaryStyle};
 
-    return (
-    <button 
-      className="px-8 py-4 rounded-xl text-lg"
-      style={combinedStyle}
-      onMouseEnter={(e) => {
+    const commonProps = {
+      className: "px-8 py-4 rounded-xl text-lg",
+      style: combinedStyle,
+      onMouseEnter: (e: React.MouseEvent<HTMLElement>) => {
         e.currentTarget.style.transform = 'translateY(-5px) scale(1.05)';
         if(variant === 'primary') e.currentTarget.style.boxShadow = '0 25px 60px rgba(255, 107, 107, 0.6)';
         if(variant === 'secondary') e.currentTarget.style.borderColor = '#4ECDC4';
-      }}
-      onMouseLeave={(e) => {
+      },
+      onMouseLeave: (e: React.MouseEvent<HTMLElement>) => {
         e.currentTarget.style.transform = 'translateY(0) scale(1)';
         if(variant === 'primary') e.currentTarget.style.boxShadow = primaryStyle.boxShadow;
         if(variant === 'secondary') e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-      }}
-    >
-      {children}
-      {variant === 'secondary' && (
-          <div className="absolute inset-0 opacity-20 bg-gradient-to-r from-transparent via-white to-transparent" 
-          style={{ animation: 'shine 3s infinite', transform: 'translateX(-100%) skew(-20deg)' }} />
-      )}
-    </button>
-  );
+      },
+    };
+
+    const content = (
+      <>
+        {children}
+        {variant === 'secondary' && (
+            <div className="absolute inset-0 opacity-20 bg-gradient-to-r from-transparent via-white to-transparent" 
+            style={{ animation: 'shine 3s infinite', transform: 'translateX(-100%) skew(-20deg)' }} />
+        )}
+      </>
+    );
+
+    if (to) {
+      return (
+        <Link to={to} {...commonProps}>
+          {content}
+        </Link>
+      );
+    }
+
+    return (
+      <button {...commonProps}>
+        {content}
+      </button>
+    );
 }
+
+const testimonials = [
+  {
+    name: 'Sudhamsh Reddy',
+    role: 'CEO, Hillock Resort',
+    text: "We partnered with them for our resort's marketing and sales growth, and the results were impressive. Their approach is strategic, transparent, and focused on real business outcomes. A reliable digital marketing partner.",
+    rating: 5,
+    image: HillockImage
+  },
+];
+
+
 
 // Pattern 6: Glass Card Container
 const GlassCard = ({ children, className = "" }: { children: ReactNode, className?: string }) => (
@@ -239,11 +272,9 @@ const HeroSection = () => {
             </p>
             
            <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
-  <Link to="/contact">
-    <NeonButton variant="primary">
+    <NeonButton variant="primary" to="/contact">
       Get Free Consultation
     </NeonButton>
-  </Link>
 </div>
 
         </section>
@@ -375,10 +406,83 @@ const ServicesSection = () => {
         //             </GlassCard>
         //         ))}
         //     </div>
-        // </section>
 //     );
 // };
-
+      const TestimonialsCarousel = () => {
+        const [activeTestimonial, setActiveTestimonial] = useState(0);
+      
+        return (
+          <div className="max-w-7xl mx-auto px-6 py-20">
+            <div className="text-center mb-16">
+              <h2
+                className="text-4xl md:text-5xl font-bold mb-4"
+                style={{
+                  background: 'linear-gradient(135deg, #4ECDC4 0%, #667EEA 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                Client Love
+              </h2>
+            </div>
+      
+            <div className="max-w-4xl mx-auto">
+              <div
+                className="p-12 rounded-3xl"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  backdropFilter: 'blur(20px)',
+                  border: '2px solid rgba(255, 255, 255, 0.15)',
+                }}
+              >
+                <div className="flex items-center gap-6 mb-6">
+                  <img
+                    src={testimonials[activeTestimonial].image}
+                    alt={testimonials[activeTestimonial].name}
+                    className="w-48 h-20 rounded-md object-cover border-4"
+                    style={{
+                      borderColor: '#4ECDC4',
+                      boxShadow: '0 0 20px rgba(78, 205, 196, 0.5)'
+                    }}
+                  />
+                  <div className="flex gap-2">
+                    {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
+                      <Icons.Star key={i} />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-2xl text-white/90 mb-8 leading-relaxed">
+                  "{testimonials[activeTestimonial].text}"
+                </p>
+      
+                <div>
+                  <div className="text-xl font-bold text-white">
+                    {testimonials[activeTestimonial].name}
+                  </div>
+                  <div className="text-white/60">
+                    {testimonials[activeTestimonial].role}
+                  </div>
+                </div>
+              </div>
+      
+              <div className="flex justify-center gap-3 mt-8">
+                {testimonials.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveTestimonial(idx)}
+                    className="w-3 h-3 rounded-full transition-all duration-300"
+                    style={{
+                      background: activeTestimonial === idx ? '#4ECDC4' : 'rgba(255, 255, 255, 0.3)',
+                      width: activeTestimonial === idx ? '40px' : '12px',
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      };
 
 // ================= FINAL ASSEMBLED PAGE =================
 export default function AgencyLandingPage() {
@@ -386,8 +490,8 @@ export default function AgencyLandingPage() {
     <AnimatedPageWrapper>
       <HeroSection />
       <ServicesSection />
-      
-      
+      <TestimonialsCarousel />
+
       {/* Simple Footer for completion */}
       <footer className="container mx-auto px-4 py-12 text-center text-gray-500 border-t border-white/10">
           <p>© 2024 DataGrow Agency. All rights reserved.</p>

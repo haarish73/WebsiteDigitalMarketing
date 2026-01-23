@@ -38,7 +38,7 @@ export default function ContactSection() {
   ];
 
 const socialMedia = [
-  { icon: Linkedin, label: 'LinkedIn', href: '#', color: '#0077B5' },
+  { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/company/social-crafts-circle/', color: '#0077B5' },
   { icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/share/14UEwCejdcF/', color: '#1877F2' },
   { icon: FaWhatsapp, label: 'WhatsApp', href: 'https://wa.me/919030492596', color: '#25D366' },
   { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/socialcrafts.india?igsh=amJxY28yNnc0ZjJh', color: '#E4405F' },
@@ -51,7 +51,9 @@ const socialMedia = [
     'Content Creation',
     'PPC Advertising',
     'Whatsapp Marketing',
-    'Analytics & Reporting'
+    'Analytics & Reporting',
+    'Public Relations (PR)',
+    'Web & UI UX Design & Development'
   ];
 
   return (

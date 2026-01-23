@@ -19,8 +19,8 @@ const SocialCraftsLoader: React.FC = () => {
             // Redirect to home page after fade out animation
             setTimeout(() => {
               window.location.href = '/home';
-            }, 1000);
-          }, 500);
+            }, 500);
+          }, 100);
           return 100;
         }
         return prev + 1;
