@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { MessageSquare, Phone, Users, Send, Volume2, BarChart3, Zap, CheckCircle, ArrowRight, Menu, X } from 'lucide-react';
 import pocharam from '../image/Pocharam Srinivas Reddy.png'
+import "../css/Poltical.css"
 
 function ContactUsModal({ onClose }: { onClose?: () => void }) {
   return (
@@ -319,7 +320,7 @@ export default function PoliticalPRPlatform() {
       />
 
       <div 
-        className="absolute pointer-events-none transition-all duration-500 z-10"
+  className="absolute mouse-glow transition-all duration-500 z-10"
         style={{
           left: mousePosition.x,
           top: mousePosition.y,
@@ -407,7 +408,7 @@ export default function PoliticalPRPlatform() {
         </div>
 
         {/* Features Section */}
-        <div className="max-w-7xl mx-auto px-6 py-20">
+        <div className="max-w-7xl mx-auto px-6 py-20 pricing-section">
           <div className="text-center mb-16">
             <h2 
               className="text-4xl md:text-5xl font-bold mb-4"
@@ -543,7 +544,9 @@ export default function PoliticalPRPlatform() {
             {plans.map((plan, idx) => (
               <div
                 key={idx}
-                className="p-8 rounded-3xl transition-all duration-500 relative"
+                  className={`p-8 rounded-3xl pricing-card ${
+    plan.popular ? 'popular' : ''
+  }`}
                 style={{
                   background: plan.popular 
                     ? 'linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(78, 205, 196, 0.15))' 
@@ -588,6 +591,7 @@ export default function PoliticalPRPlatform() {
                 </div>
 
                 <button
+                onClick={() => window.location.href = 'tel:+919030492596'}
                   className="w-full py-4 rounded-xl font-semibold transition-all duration-300"
                   style={{
                     background: plan.popular 

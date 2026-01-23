@@ -1,0 +1,39 @@
+/* Ensure pricing section is above canvas & glow */
+.pricing-section {
+  position: relative;
+  z-index: 30;
+}
+
+/* Each pricing card */
+.pricing-card {
+  position: relative;
+  z-index: 40;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Hover animation */
+.pricing-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 25px 60px rgba(78, 205, 196, 0.35);
+}
+
+/* Popular plan on top */
+.pricing-card.popular {
+  z-index: 50;
+  transform: scale(1.05);
+}
+
+/* Button must always be clickable */
+.pricing-card button {
+  position: relative;
+  z-index: 60;
+  pointer-events: auto;
+}
+
+/* Disable pointer events on decorative layers */
+canvas,
+.mouse-glow {
+  pointer-events: none !important;
+}

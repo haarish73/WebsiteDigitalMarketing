@@ -247,57 +247,67 @@ export default function DigitalMarketingServicesPage() {
       />
 
       <div className="relative z-20">
-        {/* Hero Section */}
-        <section className="min-h-screen flex items-center justify-center px-4">
-          <div className="container mx-auto text-center">
-            <div 
-              style={{
-                opacity: Math.max(0, 1 - scrollY / 400),
-                transform: `translateY(${scrollY * 0.5}px)`,
-                transition: 'all 0.3s',
-              }}
-            >
-              <div className="mb-8 inline-block">
-                <div 
-                  className="w-32 h-32 mx-auto rounded-3xl overflow-hidden relative"
-                  style={{
-                    background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
-                    boxShadow: '0 30px 80px rgba(255, 107, 107, 0.6), 0 0 100px rgba(78, 205, 196, 0.4)',
-                    animation: 'glow 3s ease-in-out infinite',
-                  }}
-                >
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Megaphone className="w-16 h-16 text-white" />
-                  </div>
-                  <div 
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                    style={{
-                      animation: 'shine 4s infinite',
-                    }}
-                  />
-                </div>
-              </div>
+<section className="min-h-screen flex items-center justify-center px-4">
+  <div className="container mx-auto text-center">
 
-              <h1 
-                className="text-7xl md:text-8xl font-bold mb-6"
-                style={{
-                  background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  animation: 'textGlow 3s ease-in-out infinite',
-                }}
-              >
-                Digital Marketing Services
-              </h1>
-              
-              <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
-                Transform your online presence with comprehensive digital marketing strategies that drive real results
-              </p>
+    {/* LOGO BLOCK */}
+    <div
+      className="mb-10"
+      style={{
+        opacity: Math.max(0, 1 - scrollY / 400),
+        transform: `translateY(${scrollY * 0.4}px)`,
+        transition: 'all 0.3s',
+      }}
+    >
+      <div className="w-32 h-32 mx-auto rounded-3xl overflow-hidden relative"
+        style={{
+          background: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
+          boxShadow:
+            '0 30px 80px rgba(255, 107, 107, 0.6), 0 0 100px rgba(78, 205, 196, 0.4)',
+          animation: 'glow 3s ease-in-out infinite',
+        }}
+      >
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Megaphone className="w-16 h-16 text-white" />
+        </div>
 
-                         </div>
-          </div>
-        </section>
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+          style={{ animation: 'shine 4s infinite' }}
+        />
+      </div>
+    </div>
+
+    {/* TEXT BLOCK */}
+    <div
+      style={{
+        opacity: Math.max(0, 1 - scrollY / 400),
+        transform: `translateY(${scrollY * 0.6}px)`,
+        transition: 'all 0.3s',
+      }}
+    >
+      <h1
+        className="text-6xl md:text-7xl font-bold mb-6 inline-block leading-[1.2] pb-3"
+        style={{
+          background:
+            'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #FFE66D 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          animation: 'textGlow 3s ease-in-out infinite',
+        }}
+      >
+        Digital Marketing Services
+      </h1>
+
+      <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
+        Transform your online presence with comprehensive digital marketing strategies that drive real results
+      </p>
+    </div>
+
+  </div>
+</section>
+
 
         {/* Services Section */}
         <section className="py-24 px-4">

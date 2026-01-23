@@ -167,43 +167,74 @@ export default function EcommerceDevelopmentPage() {
 
       <div className="relative z-20">
         {/* Hero Section */}
-        <section className="min-h-screen flex items-center justify-center px-4">
-          <div className="container mx-auto text-center">
-            <div style={{
-                opacity: Math.max(0, 1 - scrollY / 400),
-                transform: `translateY(${scrollY * 0.5}px)`,
-                transition: 'all 0.3s',
-              }}>
-              <div className="mb-8 inline-block">
-                <div className="w-32 h-32 mx-auto rounded-3xl overflow-hidden relative"
-                  style={{
-                    background: 'linear-gradient(135deg, #4ECDC4 0%, #667eea 50%, #FF6B6B 100%)',
-                    boxShadow: '0 30px 80px rgba(78, 205, 196, 0.6)',
-                    animation: 'glow 3s ease-in-out infinite',
-                  }}>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <ShoppingBag className="w-16 h-16 text-white" />
-                  </div>
-                </div>
-              </div>
+       <section className="min-h-screen px-4 relative overflow-hidden flex items-center justify-center">
+  {/* BACKGROUND stays clipped */}
+  
+  {/* FOREGROUND CONTENT LAYER */}
+  <div className="container mx-auto text-center relative z-20 overflow-visible">
 
-              <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight"
-                style={{
-                  background: 'linear-gradient(135deg, #4ECDC4 0%, #667eea 50%, #FF6B6B 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  animation: 'textGlow 3s ease-in-out infinite',
-                }}>
-                Ecommerce <br/> Engineering
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
-                Building high-performance digital storefronts that scale from first sale to global dominance.
-              </p>
-             
-            </div>
-          </div>
-        </section>
+    {/* LOGO BLOCK */}
+    <div
+      className="mb-10"
+      style={{
+        opacity: Math.max(0, 1 - scrollY / 400),
+        transform: `translateY(${scrollY * 0.35}px)`,
+        transition: 'all 0.3s',
+      }}
+    >
+      <div
+        className="w-32 h-32 mx-auto rounded-3xl overflow-hidden relative"
+        style={{
+          background:
+            'linear-gradient(135deg, #4ECDC4 0%, #667eea 50%, #FF6B6B 100%)',
+          boxShadow: '0 30px 80px rgba(78, 205, 196, 0.6)',
+          animation: 'glow 3s ease-in-out infinite',
+        }}
+      >
+        <div className="absolute inset-0 flex items-center justify-center">
+          <ShoppingBag className="w-16 h-16 text-white" />
+        </div>
+      </div>
+    </div>
+
+    {/* TEXT BLOCK (SEPARATE TRANSFORM CONTEXT) */}
+    <div
+      style={{
+        opacity: Math.max(0, 1 - scrollY / 400),
+        transform: `translateY(${scrollY * 0.55}px)`,
+        transition: 'all 0.3s',
+      }}
+    >
+      <h1
+        className="
+          text-6xl md:text-8xl
+          font-bold
+          mb-6
+          inline-block
+          leading-[1.25]
+          pb-4
+          overflow-visible
+        "
+        style={{
+          background:
+            'linear-gradient(135deg, #4ECDC4 0%, #667eea 50%, #FF6B6B 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          animation: 'textGlow 3s ease-in-out infinite',
+        }}
+      >
+        Ecommerce <br /> Engineering
+      </h1>
+
+      <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
+        Building high-performance digital storefronts that scale from first sale to global dominance.
+      </p>
+    </div>
+
+  </div>
+</section>
+
 
         {/* Features Grid */}
         <section className="py-24 px-4">

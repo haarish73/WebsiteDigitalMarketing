@@ -483,7 +483,7 @@ export default function WordPressDevelopmentPage() {
                   </ul>
 
                  <button 
-                  onclick={() => window.location.href = 'tel:9030492596'}
+                  onClick={() => window.location.href = 'tel:9030492596'}
                     className="w-full py-4 rounded-xl font-semibold transition-all duration-300"
                     style={{
                       background: plan.popular || isHovered ? '#00ff7f' : 'rgba(0, 255, 127, 0.2)',
