@@ -34,9 +34,9 @@ To run this project locally on your system:
 
 ## Tech Stack
 
-- HTML5
-- CSS3
-- JavaScript
+- React
+- Tailwind CSS
+- TypeScript
 
 These technologies ensure the website is lightweight, fast, and easy to maintain or extend.
 
