@@ -61,18 +61,6 @@ This website exists to:
 
 The website exists to create awareness about digital branding and marketing, showcase the services offered by the agency, provide an easy way for businesses to get in touch, and act as a strong digital identity for SocialCraftsCircle.
 
-## Getting Started
-
-To run this project locally on your system:
-
-1. Clone the repository:
-
-   `git clone https://github.com/your-username/SocialCraftsCircle.git`
-
-2. Open the project folder.
-
-3. Open `index.html` in your browser or use a local server extension like Live Server in VS Code.
-
 ## Tech Stack
 
 - React
