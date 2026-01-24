@@ -61,18 +61,25 @@ This website exists to:
 
 The website exists to create awareness about digital branding and marketing, showcase the services offered by the agency, provide an easy way for businesses to get in touch, and act as a strong digital identity for SocialCraftsCircle.
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-- React
-- Tailwind CSS
-- TypeScript
+The website is built using modern, reliable technologies that ensure performance, scalability, and maintainability:
 
-These technologies ensure the website is lightweight, fast, and easy to maintain or extend.
+- ⚛️ **React** – Component-based UI for a fast and dynamic user experience
+- 🎨 **Tailwind CSS** – Utility-first styling for clean, responsive design
+- 🟦 **TypeScript** – Strong typing for better code quality and maintainability
 
-## Live Website
+These technologies ensure the website remains **lightweight, fast, scalable, and easy to extend** in the future.
 
-https://socialcraftscircle.com/
+---
 
-## License
+## 🌍 Live Website
 
-This project is open-source and available under the MIT License.
+Visit the live website here:  
+🔗 https://socialcraftscircle.com/
+
+---
+
+## 📜 License
+
+This project is **open-source** and available under the **MIT License**.
